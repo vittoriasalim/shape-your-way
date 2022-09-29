@@ -1,0 +1,12 @@
+{
+    "levels":[
+        {
+            "path":"level1.txt",
+            "pattern":"pattern1.txt"
+        },
+        {
+            "path":"level2.txt",
+            "pattern":"pattern2.txt"
+        }
+    ]
+}
