@@ -98,7 +98,8 @@ class Map:
             self.surface.blit (self.dice , ((j*62)+315-(i*27),(i*34)+85))
             
         elif symbol == 'M':
-            sprite = pygame.image.load("./images/Vector 36.png")
+            sprite = pygame.image.load("./images/floor.png")
+                                  
             self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
         # elif symbol == ''
         elif symbol == 'H':

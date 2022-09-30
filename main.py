@@ -14,7 +14,7 @@ surface = pygame.display.set_mode((990,660))
 pygame.display.set_caption("shape-your-way")
 
 # set the background color
-color =(196, 211, 249)
+color =(62, 61, 100)
 rect_color = (233,226,246)
 
 print("Creating a new window")
