@@ -19,12 +19,6 @@ rect_color = (233,226,246)
 
 print("Creating a new window")
 
-# pygame.draw.rect(surface, rect_color, pygame.Rect(99, 66, 792, 528))
-# rect_border = (233,233,255)
-# pygame.draw.rect(surface, rect_border, pygame.Rect(99-10, 66-10, 792+20, 528+20),  10)
-
-
-
 # get the data (level and data)
 levels = parse.parse_json()
 data = parse.read_map(levels[0]['path'])
@@ -34,11 +28,11 @@ print("Successfully parsing data for level 1")
 # draw the map
 my_map = draw.Map(data, surface)
 
-
 print("Successfully created the map")
 
 # get the starting position of the player
 current_position = my_map.get_starting_position()
+current_symbol = my_map.get_starting_symbol()
 
 print(f"The player's current position: {current_position}")
 
@@ -46,6 +40,7 @@ print(f"The player's current position: {current_position}")
 run = True
 while run:
 
+    pygame.time.delay(50)
 
     # map game
     for event in pygame.event.get():
@@ -66,22 +61,35 @@ while run:
             print("WARNING: out of bounds")
             continue
 
-        # check if the tile is valid
-
-        # not out of bounds
-        # assign the new map after the user's moved
+        # x-coor and y-coor of current position
         x = current_position[0]
         y = current_position[1]
 
+        # check if the next tile is valid
+        next_path_symbol = my_map.map[x][y - 1]
+        if (current_symbol == 'R' and next_path_symbol != 'G'):
+            print("WARNING: move not allowed")
+            continue
+
+        if (current_symbol == 'G' and next_path_symbol != 'R'):
+            print("WARNING: move not allowed")
+            continue
+
+        # not out of bounds
+        # assign the new map after the user's moved
         print(f"\tPlayer's previous position: {current_position}")
         print(f"\t previous: {my_map.map[x]}")
 
-        my_map.map[x] = my_map.map[x][:y-1] + "P" + "T" + my_map.map[x][y+1:]
+        my_map.map[x] = my_map.map[x][:y-1] + "P" + current_symbol + my_map.map[x][y+1:]
 
         # do some animation of the dice
 
-        # update current position
+        # update current position and current symbol
         current_position = (current_position[0], current_position[1] - 1)
+        if (current_symbol == 'G'):
+            current_symbol = 'R'
+        else:
+            current_symbol = 'G'
         
         print(f"\t next:     {my_map.map[x]}")
         print(f"\tPlayer's current position: {current_position}")
@@ -100,24 +108,37 @@ while run:
             print("WARNING: out of bounds")
             continue
         
-        # check if tile is valid
-
-        # not out of bounds
+        # x-coor and y-coor of current position
         x = current_position[0]
         y = current_position[1]
+
+        # check if the next tile is valid
+        next_path_symbol = my_map.map[x][y + 1]
+        if (current_symbol == 'R' and next_path_symbol != 'G'):
+            print("WARNING: move not allowed")
+            continue
+
+        if (current_symbol == 'G' and next_path_symbol != 'R'):
+            print("WARNING: move not allowed")
+            continue
 
         print(f"\tPlayer's previous position: {current_position}")
         print(f"\t previous: {my_map.map[x]}")
         
-        my_map.map[x] = my_map.map[x][:y] + "T" + "P" + my_map.map[x][y+2:]
+        # not out of bounds
+        # assign the new map after the user's moved
+        my_map.map[x] = my_map.map[x][:y] + current_symbol + "P" + my_map.map[x][y+2:]
 
         # do some animation of the dice
 
         # update current position
         current_position = (current_position[0], current_position[1] + 1)
+        if (current_symbol == 'G'):
+            current_symbol = 'R'
+        else:
+            current_symbol = 'G'
 
         print(f"\t next:     {my_map.map[x]}")
-
         print(f"\tPlayer's current position:  {current_position}")
 
         # update the map's UI
@@ -134,18 +155,34 @@ while run:
             print("WARNING: out of bounds")
             continue
         
+        # x-coor and y-coor of current position
+        x = current_position[0]
+        y = current_position[1]
+
+        # check if the next tile is valid
+        next_path_symbol = my_map.map[x - 1][y]
+        if (current_symbol == 'R' and next_path_symbol != 'G'):
+            print("WARNING: move not allowed")
+            continue
+
+        if (current_symbol == 'G' and next_path_symbol != 'R'):
+            print("WARNING: move not allowed")
+            continue
+
         # check if tile is valid
 
         # not out of bounds
-        x = current_position[0]
-        y = current_position[1]
         my_map.map[x - 1] = my_map.map[x-1][:y] + "P" + my_map.map[x-1][y+1:]
-        my_map.map[x] = my_map.map[x][:y] + "T" + my_map.map[x][y+1:]
+        my_map.map[x] = my_map.map[x][:y] + current_symbol + my_map.map[x][y+1:]
 
         # do some animation of the dice
 
         # update current position
         current_position = (current_position[0] - 1, current_position[1])
+        if (current_symbol == 'G'):
+            current_symbol = 'R'
+        else:
+            current_symbol = 'G'
 
         print(f"\tPlayer's current position: {current_position}")
 
@@ -163,30 +200,43 @@ while run:
             print("WARNING: out of bounds")
             continue
         
-        # check if tile is valid
+        # x-coor and y-coor of current position
+        x = current_position[0]
+        y = current_position[1]
+
+        # check if the next tile is valid
+        next_path_symbol = my_map.map[x + 1][y]
+        if (current_symbol == 'R' and next_path_symbol != 'G'):
+            print("WARNING: move not allowed")
+            continue
+
+        if (current_symbol == 'G' and next_path_symbol != 'R'):
+            print("WARNING: move not allowed")
+            continue
 
         # not out of bounds
         x = current_position[0]
         y = current_position[1]
         my_map.map[x + 1] = my_map.map[x+1][:y] + "P" + my_map.map[x+1][y+1:]
-        my_map.map[x] = my_map.map[x][:y] + "T" + my_map.map[x][y+1:]
+        my_map.map[x] = my_map.map[x][:y] + current_symbol + my_map.map[x][y+1:]
 
         # do some animation of the dice
 
         # update current position
         current_position = (current_position[0] + 1, current_position[1])
+        if (current_symbol == 'G'):
+            current_symbol = 'R'
+        else:
+            current_symbol = 'G'
 
         print(f"\tPlayer's current position: {current_position}")
 
         # update the map's UI
         surface.fill(color)
 
-    
-
     my_map.read_data()
     pygame.display.update()
     # delay for user interaction
-    pygame.time.delay(100)
-
+    
 # quit
 pygame.quit()
