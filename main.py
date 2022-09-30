@@ -24,9 +24,19 @@ pygame.display.flip()
 levels = parse.parse_json()
 data = parse.read_map(levels[0]['path'])
 
+print(data)
+print(type(surface))
+
 # draw the map
-my_map = draw.Map(data,surface)
-# my_map.draw()
+my_map = draw.Map(data, surface)
+my_map.draw()
+
+print(my_map.map)
+
+# get the starting position of the player
+current_position = my_map.get_starting_position()
+
+print(current_position)
 
 # main loop
 run = True
@@ -45,7 +55,24 @@ while run:
     
     # user interaction with user input
     if keys[pygame.K_LEFT]:
-        pass
+        
+        # make a new string
+        result = ""
+        for j in range(len(my_map.map[current_position[0]])):
+            string = my_map.map[current_position[0]][j]
+            if (j == current_position[1] - 1):
+                result += "P"
+            elif (j == current_position[1]):
+                result += " "
+            else:
+                result += string
+        
+        # assign to the current map data
+        my_map.map[current_position[0]] = result
+
+        # update the map's UI
+        my_map.read_data()
+
     if keys[pygame.K_RIGHT]:
         pass
     if keys[pygame.K_UP]:
@@ -59,4 +86,3 @@ while run:
 
 # quit
 pygame.quit()
-    
