@@ -142,7 +142,7 @@ while run:
         x = current_position[0]
         y = current_position[1]
         my_map.map[x - 1] = my_map.map[x-1][:y] + "P" + my_map.map[x-1][y+1:]
-        my_map.map[x] = my_map.map[x][:y] + " " + my_map.map[x][y+1:]
+        my_map.map[x] = my_map.map[x][:y] + "T" + my_map.map[x][y+1:]
 
         # do some animation of the dice
 
@@ -171,7 +171,7 @@ while run:
         x = current_position[0]
         y = current_position[1]
         my_map.map[x + 1] = my_map.map[x+1][:y] + "P" + my_map.map[x+1][y+1:]
-        my_map.map[x] = my_map.map[x][:y] + " " + my_map.map[x][y+1:]
+        my_map.map[x] = my_map.map[x][:y] + "T" + my_map.map[x][y+1:]
 
         # do some animation of the dice
 
