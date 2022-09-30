@@ -45,6 +45,7 @@ class Map:
         self.dice_frame = 1
         self.map = data
         self.surface = surface
+        self.dice = pygame.image.load("./dice/dice.png")
         for i in range(ROW):
             for j in range(COLUMN):
                 if (self.map[i][j] == 'P'):
@@ -108,12 +109,24 @@ class Map:
             self.surface.blit (tile , ((j*62)+315-(i*27),(i*34)+150))
             
         elif symbol == 'P':
-            dice = pygame.image.load("./dice/dice.png")
-            self.surface.blit (dice , ((j*62)+315-(i*27),(i*34)+85))
+
+            
+            self.surface.blit (self.dice , ((j*62)+315-(i*27),(i*34)+85))
+        
+
 
         elif symbol == 'M':
             sprite = pygame.image.load("./images/Vector 36.png")
             self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
+    def move_right(self):
+        self.dice = pygame.image.load("./dice/right.png")
+    def move_left(self):
+        self.dice = pygame.image.load("./dice/left.png")
+    def move_up(self):
+        self.dice = pygame.image.load("./dice/up.png")
+        
+    def move_down(self):
+        self.dice = pygame.image.load("./dice/down.png")
             
     def get_starting_position(self):
         """

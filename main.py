@@ -91,6 +91,7 @@ while run:
         my_map.map[x] = my_map.map[x][:y-1] + "P" + current_symbol + my_map.map[x][y+1:]
 
         # do some animation of the dice
+        my_map.move_left()
 
         # update current position and current symbol
         current_position = (current_position[0], current_position[1] - 1)
@@ -149,6 +150,7 @@ while run:
         my_map.map[x] = my_map.map[x][:y] + current_symbol + "P" + my_map.map[x][y+2:]
 
         # do some animation of the dice
+        my_map.move_right()
 
         # update current position
         current_position = (current_position[0], current_position[1] + 1)
@@ -207,6 +209,7 @@ while run:
         my_map.map[x] = my_map.map[x][:y] + current_symbol + my_map.map[x][y+1:]
 
         # do some animation of the dice
+        my_map.move_up()
 
         # update current position
         current_position = (current_position[0] - 1, current_position[1])
@@ -262,6 +265,7 @@ while run:
         my_map.map[x] = my_map.map[x][:y] + current_symbol + my_map.map[x][y+1:]
 
         # do some animation of the dice
+        my_map.move_down()
 
         # update current position
         current_position = (current_position[0] + 1, current_position[1])
