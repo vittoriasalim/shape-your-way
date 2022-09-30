@@ -8,6 +8,7 @@ print("--------------------")
 WHITE = (0xFF, 0xFF, 0xFF)
 # initialise the pygame
 pygame.init()
+press = False
 
 # create the window
 surface = pygame.display.set_mode((990,660))
@@ -41,20 +42,21 @@ run = True
 while run:
 
     pygame.time.delay(50)
-    
-    
-    
+
     # map game
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+        elif event.type == pygame.KEYUP:
+            press = False
     surface.fill(color)
     
     # get the user input
     keys = pygame.key.get_pressed()
     
     # user interaction with user input
-    if keys[pygame.K_LEFT]:
+    if keys[pygame.K_LEFT] and press ==False:
+        press =True
         
         print("\tLEFT arrow is pressed")
 
@@ -110,8 +112,8 @@ while run:
         if (my_map.has_finished()):
             print("PLAYER HAS PASSED ALL PATHS")
 
-    elif keys[pygame.K_RIGHT]:
-
+    elif keys[pygame.K_RIGHT] and press ==False:
+        press =True
         print("\tRIGHT arrow is pressed")
 
         # check for out of bounds
@@ -164,8 +166,8 @@ while run:
         if (my_map.has_finished()):
             print("PLAYER HAS PASSED ALL PATHS")
 
-    elif keys[pygame.K_UP]:
-        
+    elif keys[pygame.K_UP] and press ==False:
+        press = True
         print("\tUP arrow is pressed")
 
         # check for out of bounds
@@ -220,8 +222,8 @@ while run:
         if (my_map.has_finished()):
             print("PLAYER HAS PASSED ALL PATHS")
 
-    elif keys[pygame.K_DOWN]:
-        
+    elif keys[pygame.K_DOWN] and press == False:
+        press = True 
         print("\tDOWN arrow is pressed")
 
         # check for out of bounds
