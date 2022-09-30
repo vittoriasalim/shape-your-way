@@ -26,7 +26,7 @@ class Game():
         # font for level
         self.myfont = pygame.font.SysFont("Rammetto One",35,bold =True)
         self.endFont = pygame.font.SysFont("Rammetto One",60,bold =True)
-
+        self.buttonFont = pygame.font.SysFont("Rammetto One", 40, bold=True)
         # create a copy of the map
         self.static_map = []
         for i in range(ROW):
@@ -64,10 +64,10 @@ class Game():
             
             if not self.is_running:
         
-                pygame.draw.rect(surface, RECT_COLOR, pygame.Rect(195, 100, 600, 500))
+                pygame.draw.rect(self.surface, RECT_COLOR, pygame.Rect(195, 100, 600, 500))
                 label = self.endFont.render("GAME OVER", 1, BG_COLOR)
                 surface.blit(label, (362, 310))
-                pygame.display.update()
+                pygame.quit()
                 continue
 
             # map game
@@ -346,6 +346,39 @@ class Game():
         # quit
         pygame.quit()
 
+    def mainmenu(self):
+        title_font = pygame.font.SysFont("Rammetto One", 60, bold=True)
+        run = True
+        while run:
+            pygame.draw.rect(self.screen, RECT_COLOR, pygame.Rect(195, 60, 600, 550))
+            label = self.endFont.render("ROLL YOUR WAY", 1, BG_COLOR)
+            self.screen.blit(label, (300, 200))
+            pygame.draw.rect(self.screen, (164, 182, 229, 1), pygame.Rect(195, 60, 600, 550), 10)
+            pygame.draw.rect(self.screen, (164, 182, 229, 1), pygame.Rect(423, 340, 150, 50))
+            pygame.draw.rect(self.screen, BG_COLOR, pygame.Rect(423, 340, 150, 50), 5)
+            mouse = pygame.mouse.get_pos()
+            if 450 <= mouse[0] <= 600 and 350 <= mouse[1] <= 400:
+                label_button = self.buttonFont.render("START", 1, WHITE)
+            else:
+                label_button = self.buttonFont.render("START", 1, BG_COLOR)
+            self.screen.blit(label_button, (450, 350))
+
+            # title_label = title_font.render("Press Enter to begin the game", 1, (255,255,255))
+            # surface.blit(title_label, ((990/2)-380,(660/2)))
+            pygame.display.update()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+
+                    # if the mouse is clicked on the
+                    # button the game is terminated
+                    if 450 <= mouse[0] <= 600 and 350 <= mouse[1] <= 400:
+                        self.mainloop()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        self.mainloop()
+
 if (__name__ == "__main__"):
     
     print("--------------------")
@@ -369,7 +402,7 @@ if (__name__ == "__main__"):
     print("Successfully parsing data for level 1")
 
     # main loop in homescreen
-    Game(surface, data).mainloop()
+    Game(surface, data).mainmenu()
 
     # quit the game properly
     pygame.quit()
