@@ -170,9 +170,9 @@ class Game():
                     next_path_symbol = "default2"
                 if (current_symbol == next_path_symbol):
                     if (self.static_map[x][y] == "G"):
-                        my_map[x] = my_map.map[x][:y] + "K" + "P" + my_map.map[x][y+2:]
+                        my_map.map[x] = my_map.map[x][:y] + "K" + "P" + my_map.map[x][y+2:]
                     elif (self.static_map[x][y] == "R"):
-                        my_map[x] = my_map.map[x][:y] + "H" + "P" + my_map.map[x][y+2:]
+                        my_map.map[x] = my_map.map[x][:y] + "H" + "P" + my_map.map[x][y+2:]
                     my_map.update_check(current_position[0], current_position[1])
 
                 print(f"\tPlayer's current position:  {current_position}")
