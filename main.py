@@ -48,9 +48,12 @@ endFont = pygame.font.SysFont("Rammetto One",60,bold =True)
 run = True
 while True:
     if not run:
+   
         pygame.draw.rect(surface, rect_color, pygame.Rect(195, 100, 600, 500))
-        label = endFont.render("GAME OVER", 1, (233,233,255,1))
-        surface.blit(label, (750, 150))
+        label = endFont.render("GAME OVER", 1, color)
+        surface.blit(label, (362, 310))
+        pygame.display.update()
+        continue
 
 
     pygame.time.delay(50)
