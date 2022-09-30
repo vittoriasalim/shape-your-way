@@ -1,10 +1,8 @@
-import parse
 import pygame
 
 # The dimensions of the map is confirmed to be the 10x10
 ROW = 10
 COLUMN = 10
-
 
 class Map:
     """
