@@ -58,14 +58,19 @@ class Map:
             for j in range(COLUMN):
                 self.set_sprite(self.map[i][j],i,j)
    
+
     def set_sprite(self,symbol, i , j):
-        """set each sprite according to the symbol
+        """Set the sprite and store it into the the map
+
+        Formula:
+        x-coor: (j * 62) + 315 - (i * 27)
+        y-coor: i * 34 + 150
 
         Args:
             symbol (_type_): the symbol from the map
             i (_type_): row
-            j (_type_): column
-        """
+            j (_type_): column"""
+
         if symbol == 'W':
             if self.wizard_frame == 6:
                 self.wizard_frame = 0
@@ -97,7 +102,9 @@ class Map:
             
             self.surface.blit (dice , ((j*62)+315-(i*27),(i*34)+85))
         
+
         elif symbol == 'M':
+            
             sprite = pygame.image.load("./images/Vector 36.png")
             self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
             

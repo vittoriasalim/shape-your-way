@@ -34,6 +34,7 @@ print("Successfully parsing data for level 1")
 # draw the map
 my_map = draw.Map(data, surface)
 
+
 print("Successfully created the map")
 
 # get the starting position of the player
@@ -45,7 +46,6 @@ print(f"The player's current position: {current_position}")
 run = True
 while run:
 
-    
 
     # map game
     for event in pygame.event.get():
@@ -67,22 +67,28 @@ while run:
             continue
 
         # check if the tile is valid
-        
+
         # not out of bounds
         # assign the new map after the user's moved
         x = current_position[0]
         y = current_position[1]
-        my_map.map[x] = my_map.map[x][:y-1] + "P" + " " + my_map.map[x][y+1:]
+
+        print(f"\tPlayer's previous position: {current_position}")
+        print(f"\t previous: {my_map.map[x]}")
+
+        my_map.map[x] = my_map.map[x][:y-1] + "P" + "T" + my_map.map[x][y+1:]
 
         # do some animation of the dice
 
         # update current position
         current_position = (current_position[0], current_position[1] - 1)
+        
+        print(f"\t next:     {my_map.map[x]}")
         print(f"\tPlayer's current position: {current_position}")
 
         # update the map's UI
         surface.fill(color)
-  
+
 
     elif keys[pygame.K_RIGHT]:
 
@@ -99,18 +105,24 @@ while run:
         # not out of bounds
         x = current_position[0]
         y = current_position[1]
-        my_map.map[x] = my_map.map[x][:y-1] + " " + "P" + my_map.map[x][y+1:]
+
+        print(f"\tPlayer's previous position: {current_position}")
+        print(f"\t previous: {my_map.map[x]}")
+        
+        my_map.map[x] = my_map.map[x][:y] + "T" + "P" + my_map.map[x][y+2:]
 
         # do some animation of the dice
 
         # update current position
         current_position = (current_position[0], current_position[1] + 1)
 
-        print(f"\tPlayer's current position: {current_position}")
+        print(f"\t next:     {my_map.map[x]}")
+
+        print(f"\tPlayer's current position:  {current_position}")
 
         # update the map's UI
         surface.fill(color)
- 
+
 
     elif keys[pygame.K_UP]:
         
@@ -128,7 +140,7 @@ while run:
         x = current_position[0]
         y = current_position[1]
         my_map.map[x - 1] = my_map.map[x-1][:y] + "P" + my_map.map[x-1][y+1:]
-        my_map.map[x] = my_map.map[x][:y] + " " + my_map.map[x][y+1:]
+        my_map.map[x] = my_map.map[x][:y] + "T" + my_map.map[x][y+1:]
 
         # do some animation of the dice
 
@@ -139,7 +151,7 @@ while run:
 
         # update the map's UI
         surface.fill(color)
-     
+
     
     elif keys[pygame.K_DOWN]:
         
@@ -157,7 +169,7 @@ while run:
         x = current_position[0]
         y = current_position[1]
         my_map.map[x + 1] = my_map.map[x+1][:y] + "P" + my_map.map[x+1][y+1:]
-        my_map.map[x] = my_map.map[x][:y] + " " + my_map.map[x][y+1:]
+        my_map.map[x] = my_map.map[x][:y] + "T" + my_map.map[x][y+1:]
 
         # do some animation of the dice
 
@@ -168,7 +180,7 @@ while run:
 
         # update the map's UI
         surface.fill(color)
-  
+
     
 
     my_map.read_data()
