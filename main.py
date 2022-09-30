@@ -22,9 +22,8 @@ my_map = draw.Map(data,surface)
 my_map.draw()
 run = True
 while run:
-    pygame.time.delay(500)
-    my_map.read_data()
-    pygame.display.flip()
+    pygame.time.delay(60)
+    
 
     
     
@@ -43,6 +42,9 @@ while run:
         pass
     if keys[pygame.K_DOWN]:
         pass
+    
+    my_map.read_data()
+    pygame.display.flip()
 
     
 
