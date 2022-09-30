@@ -40,6 +40,8 @@ print(f"The player's current position: {current_position}")
 run = True
 while run:
 
+    pygame.time.delay(50)
+
     # map game
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -72,11 +74,11 @@ while run:
             run = False
             continue
 
-        elif (current_symbol == 'R' and (next_path_symbol != 'G' or next_path_symbol != 'K')):
+        elif (current_symbol == 'R' and (next_path_symbol != 'G' and next_path_symbol != 'K')):
             print("WARNING: move not allowed")
             continue
 
-        elif (current_symbol == 'G' and (next_path_symbol != 'R' or next_path_symbol != 'H')):
+        elif (current_symbol == 'G' and (next_path_symbol != 'R' and next_path_symbol != 'H')):
             print("WARNING: move not allowed")
             continue
 
@@ -129,12 +131,12 @@ while run:
             run = False
             continue
         
-        elif (current_symbol == 'R' and (next_path_symbol != 'G' or next_path_symbol != 'K')):
-            print("WARNING: move not allowed")
+        elif (current_symbol == 'R' and (next_path_symbol != 'G' and next_path_symbol != 'K')):
+            print("WARNING: move not allowed 1")
             continue
 
-        elif (current_symbol == 'G' and (next_path_symbol != 'R' or next_path_symbol != 'H')):
-            print("WARNING: move not allowed")
+        elif (current_symbol == 'G' and (next_path_symbol != 'R' and next_path_symbol != 'H')):
+            print("WARNING: move not allowed 2")
             continue
         
         # not out of bounds
@@ -184,11 +186,11 @@ while run:
             run = False
             continue
 
-        elif (current_symbol == 'R' and (next_path_symbol != 'G' or next_path_symbol != 'K')):
+        elif (current_symbol == 'R' and (next_path_symbol != 'G' and next_path_symbol != 'K')):
             print("WARNING: move not allowed")
             continue
 
-        elif (current_symbol == 'G' and (next_path_symbol != 'R' or next_path_symbol != 'H')):
+        elif (current_symbol == 'G' and (next_path_symbol != 'R' and next_path_symbol != 'H')):
             print("WARNING: move not allowed")
             continue
 
@@ -196,7 +198,7 @@ while run:
         if (current_symbol == "R"):
             my_map.map[x - 1] = my_map.map[x-1][:y] + "P" + my_map.map[x-1][y+1:]
             my_map.map[x] = my_map.map[x][:y] + "H" + my_map.map[x][y+1:]
-        elif (current_position == "G"):
+        elif (current_symbol == "G"):
             my_map.map[x - 1] = my_map.map[x-1][:y] + "P" + my_map.map[x-1][y+1:]
             my_map.map[x] = my_map.map[x][:y] + "K" + my_map.map[x][y+1:]
 
@@ -240,11 +242,11 @@ while run:
             run = False
             continue
         
-        elif (current_symbol == 'R' and (next_path_symbol != 'G' or next_path_symbol != 'K')):
+        elif (current_symbol == 'R' and (next_path_symbol != 'G' and next_path_symbol != 'K')):
             print("WARNING: move not allowed")
             continue
 
-        elif (current_symbol == 'G' and (next_path_symbol != 'R' or next_path_symbol != 'H')):
+        elif (current_symbol == 'G' and (next_path_symbol != 'R' and next_path_symbol != 'H')):
             print("WARNING: move not allowed")
             continue
 
@@ -276,7 +278,7 @@ while run:
     my_map.read_data()
     pygame.display.update()
     # delay for user interaction
-    pygame.time.delay(50)
+    # pygame.time.delay(50)
     
 # quit
 pygame.quit()
