@@ -25,25 +25,24 @@ class HomeScreen():
         # self.create_objects()
 
     def draw(self):
-        pygame.draw.rect(surface, RECT_COLOR, pygame.Rect(195, 60, 600, 550))
+        pygame.draw.rect(self.screen, RECT_COLOR, pygame.Rect(195, 60, 600, 550))
         label = self.endFont.render("ROLL YOUR WAY", 1, BG_COLOR)
-        surface.blit(label, (300, 200))
-        pygame.draw.rect(surface, (164, 182, 229, 1), pygame.Rect(195, 60,600, 550),  10)
-        pygame.draw.rect(surface, (164, 182, 229, 1), pygame.Rect(423, 340,150, 50))
-        pygame.draw.rect(surface, BG_COLOR, pygame.Rect(423, 340,150, 50),  5)
+        self.screen.blit(label, (300, 200))
+        pygame.draw.rect(self.screen, (164, 182, 229, 1), pygame.Rect(195, 60,600, 550),  10)
+        pygame.draw.rect(self.screen, (164, 182, 229, 1), pygame.Rect(423, 340,150, 50))
+        pygame.draw.rect(self.screen, BG_COLOR, pygame.Rect(423, 340,150, 50),  5)
         mouse = pygame.mouse.get_pos()
         if 450 <= mouse[0] <= 600 and 350 <= mouse[1] <= 400:
             label_button = self.buttonFont.render("START", 1,WHITE)
         else:
             label_button = self.buttonFont.render("START",1, BG_COLOR)
-        surface.blit(label_button, (450, 350))
+        self.screen.blit(label_button, (450, 350))
 
     def mainloop(self):
         
         self.is_running = True
         while (self.is_running):
             
-
             # frame per second
             pygame.time.delay(50)
 
@@ -54,16 +53,16 @@ class HomeScreen():
                 if ev.type == pygame.QUIT:
                     pygame.quit()
                     
-                #checks if a mouse is clicked
+                # checks if a mouse is clicked
                 if ev.type == pygame.MOUSEBUTTONDOWN:
                     
-                    #if the mouse is clicked on the
+                    # if the mouse is clicked on the
                     # button the game is terminated
                     if 450 <= mouse[0] <= 600 and 350 <= mouse[1] <= 400:
                         pygame.quit()
 
             # draw
-            surface.fill(BG_COLOR)
+            self.screen.fill(BG_COLOR)
             self.draw()
             pygame.display.update()
 
