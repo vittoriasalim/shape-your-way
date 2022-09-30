@@ -56,10 +56,19 @@ class Game():
         # main loop
         press = False
         self.is_running = True
-        while self.is_running:
+        while True:
+            
 
             # frame per second
             pygame.time.delay(50)
+            
+            if not self.is_running:
+        
+                pygame.draw.rect(surface, RECT_COLOR, pygame.Rect(195, 100, 600, 500))
+                label = self.endFont.render("GAME OVER", 1, BG_COLOR)
+                surface.blit(label, (362, 310))
+                pygame.display.update()
+                continue
 
             # map game
             for event in pygame.event.get():
@@ -91,8 +100,10 @@ class Game():
                 if (my_map.has_finished() and next_path_symbol == 'E'):
                     my_map.map[x] = my_map.map[x][:y-1] + "P" + self.static_map[x][y] + my_map.map[x][y+1:]
                     self.screen.fill(BG_COLOR)
-                    print("PLAYER has won")
-                    continue
+                    self.cur_level+=1
+                    if self.cur_level == len(levels):
+                        self.is_running = False
+                        continue
 
                 elif (next_path_symbol not in allowed_tiles):
                     print("WARNING: move not allowed")
@@ -145,8 +156,10 @@ class Game():
                 if (my_map.has_finished() and next_path_symbol == 'E'):
                     my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + "P" + my_map.map[x][y+2:]
                     self.screen.fill(BG_COLOR)
-                    print("PLAYER has won")
-                    continue
+                    self.cur_level+=1
+                    if self.cur_level == len(levels):
+                        self.is_running = False
+                        continue
                 
                 elif (next_path_symbol not in allowed_tiles):
                     print("WARNING: move not allowed")
@@ -200,8 +213,10 @@ class Game():
                     my_map.map[x - 1] = my_map.map[x-1][:y] + "P" + my_map.map[x-1][y+1:]
                     my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + my_map.map[x][y+1:]
                     self.screen.fill(BG_COLOR)
-                    print("PLAYER has won")
-                    continue
+                    self.cur_level+=1
+                    if self.cur_level == len(levels):
+                        self.is_running = False
+                        continue
 
                 elif (next_path_symbol not in allowed_tiles):
                     print("WARNING: move not allowed")
@@ -255,8 +270,11 @@ class Game():
                     my_map.map[x + 1] = my_map.map[x+1][:y] + "P" + my_map.map[x+1][y+1:]
                     my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + my_map.map[x][y+1:]
                     self.screen.fill(BG_COLOR)
-                    print("PLAYER has won")
-                    continue
+                    self.cur_level+=1
+                    if self.cur_level == len(levels):
+                        self.is_running = False
+                        continue
+                    
                 
                 elif (next_path_symbol not in allowed_tiles):
                     print("WARNING: move not allowed")
