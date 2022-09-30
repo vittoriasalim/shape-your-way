@@ -69,10 +69,10 @@ class Map:
                 self.wizard_frame = 0
 
             sprite = pygame.image.load("./images/Vector 135.png")
-            self.surface.blit (sprite , ((j*55)+315-(i*27),(i*34)+150))
-                   
+            self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
+
             wizard = pygame.image.load("./images/Idle.png")
-            self.surface.blit (wizard , ((j*55)+250-(i*27),(i*34)+35),((self.wizard_frame*231),0,231,180))
+            self.surface.blit (wizard , ((j*62)+250-(i*27),(i*34)+35),((self.wizard_frame*231),0,231,180))
 
             self.wizard_frame += 1
         
@@ -80,14 +80,17 @@ class Map:
         elif symbol == 'T':
 
             tile = pygame.image.load("./images/print-tile.png")
-            self.surface.blit (tile , ((j*55)+315-(i*27),(i*34)+150))
+            self.surface.blit (tile , ((j*62)+315-(i*27),(i*34)+150))
             
         # draw the player's dice
         elif symbol == 'P':
-
-            dice = pygame.image.load("./dice/Group 39.png")
-            self.surface.blit (dice , ((j*55)+315-(i*27),(i*34)+85))
-
+        
+            dice = pygame.image.load("./dice/dice.png")
+            self.surface.blit (dice , ((j*62)+315-(i*27),(i*34)+85))
+        elif symbol == 'M':
+            sprite = pygame.image.load("./images/Vector 36.png")
+            self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
+         
     def draw(self):
         for i in range (ROW):
             for j in range(COLUMN):
@@ -99,3 +102,4 @@ class Map:
         Get the starting position of the player
         """
         return self.starting_position
+        
