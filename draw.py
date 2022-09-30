@@ -5,24 +5,6 @@ import pygame
 ROW = 10
 COLUMN = 10
 
-class Sprite:
-    """
-    Sprite class, currently these are all the sprites symbols and names:
-    - W: wizard
-    - R: red tile
-    - G: green tile
-    - P: player's dice
-    - B: indicates that the tile is blocked (the tile is already passed by the player)
-    """
-    def __init__(self, symbol, path):
-        self.symbol = symbol
-        self.path = path
-
-    def get_symbol(self):
-        return self.symbol
-
-    def get_sprite(self):
-        return pygame.image.load(self.path)
 
 class Map:
     """
@@ -46,10 +28,12 @@ class Map:
         self.map = data
         self.surface = surface
         self.dice = pygame.image.load("./dice/dice.png")
+        self.dice_position= "down"
         for i in range(ROW):
             for j in range(COLUMN):
                 if (self.map[i][j] == 'P'):
                     self.starting_position = (i, j)
+                    
         self.check = []
         for i in range(ROW):
             self.check.append([])
@@ -68,6 +52,7 @@ class Map:
         for i in range (ROW):
             for j in range(COLUMN):
                 self.set_sprite(self.map[i][j],i,j)
+
 
     def set_sprite(self, symbol, i: int, j: int):
         """
@@ -97,6 +82,7 @@ class Map:
             self.wizard_frame+=1
 
         elif symbol == 'R':
+            
             tile = pygame.image.load("./images/red.png")
             self.surface.blit (tile , ((j*62)+315-(i*27),(i*34)+150))
 
@@ -109,24 +95,26 @@ class Map:
             self.surface.blit (tile , ((j*62)+315-(i*27),(i*34)+150))
             
         elif symbol == 'P':
-
             
             self.surface.blit (self.dice , ((j*62)+315-(i*27),(i*34)+85))
-        
-
+            
 
         elif symbol == 'M':
             sprite = pygame.image.load("./images/Vector 36.png")
             self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
-    def move_right(self):
-        self.dice = pygame.image.load("./dice/right.png")
-    def move_left(self):
-        self.dice = pygame.image.load("./dice/left.png")
-    def move_up(self):
-        self.dice = pygame.image.load("./dice/up.png")
+    
+    def set_direction(self):
+        if self.dice_position == "up":
+            self.dice =pygame.image.load("./dice/dice.png")
+            self.dice_position ="down"
+        elif self.dice_position == "down":
+            self.dice = pygame.image.load("./dice/dice2.png")
+            self.dice_position = "up"
+            
         
-    def move_down(self):
-        self.dice = pygame.image.load("./dice/down.png")
+
+    def move(self):
+        self.set_direction()
             
     def get_starting_position(self):
         """

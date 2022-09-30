@@ -40,7 +40,7 @@ print(f"The player's current position: {current_position}")
 run = True
 while run:
 
-    pygame.time.delay(50)
+
 
     # map game
     for event in pygame.event.get():
@@ -90,7 +90,7 @@ while run:
         my_map.map[x] = my_map.map[x][:y-1] + "P" + current_symbol + my_map.map[x][y+1:]
 
         # do some animation of the dice
-        my_map.move_left()
+        my_map.move()
 
         # update current position and current symbol
         current_position = (current_position[0], current_position[1] - 1)
@@ -105,8 +105,7 @@ while run:
         if (my_map.has_finished()):
             print("PLAYER HAS PASSED ALL PATHS")
 
-        # update the map's UI
-        surface.fill(color)
+
 
 
     elif keys[pygame.K_RIGHT]:
@@ -145,7 +144,7 @@ while run:
         my_map.map[x] = my_map.map[x][:y] + current_symbol + "P" + my_map.map[x][y+2:]
 
         # do some animation of the dice
-        my_map.move_right()
+        my_map.move()
 
         # update current position
         current_position = (current_position[0], current_position[1] + 1)
@@ -160,8 +159,7 @@ while run:
         if (my_map.has_finished()):
             print("PLAYER HAS PASSED ALL PATHS")
 
-        # update the map's UI
-        surface.fill(color)
+      
 
 
     elif keys[pygame.K_UP]:
@@ -203,7 +201,7 @@ while run:
         my_map.map[x] = my_map.map[x][:y] + current_symbol + my_map.map[x][y+1:]
 
         # do some animation of the dice
-        my_map.move_up()
+        my_map.move()
 
         # update current position
         current_position = (current_position[0] - 1, current_position[1])
@@ -218,8 +216,7 @@ while run:
         if (my_map.has_finished()):
             print("PLAYER HAS PASSED ALL PATHS")
 
-        # update the map's UI
-        surface.fill(color)
+     
 
     
     elif keys[pygame.K_DOWN]:
@@ -259,7 +256,7 @@ while run:
         my_map.map[x] = my_map.map[x][:y] + current_symbol + my_map.map[x][y+1:]
 
         # do some animation of the dice
-        my_map.move_down()
+        my_map.move()
 
         # update current position
         current_position = (current_position[0] + 1, current_position[1])
@@ -274,12 +271,11 @@ while run:
         if (my_map.has_finished()):
             print("PLAYER HAS PASSED ALL PATHS")
 
-        # update the map's UI
-        surface.fill(color)
 
     my_map.read_data()
     pygame.display.update()
     # delay for user interaction
+    pygame.time.delay(50)
     
 # quit
 pygame.quit()
