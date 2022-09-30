@@ -32,6 +32,9 @@ class Game():
         current_symbol = my_map.get_starting_symbol()
 
         print(f"The player's current position: {current_position}")
+
+        # tiles that are allowed to go through
+        allowed_tiles = [ 'R', 'G', 'M', 'E', 'H', 'K' ]
         
         # main loop
         press = False
@@ -77,11 +80,7 @@ class Game():
                     run = False
                     continue
 
-                elif (current_symbol == 'R' and (next_path_symbol != 'G' and next_path_symbol != 'K')):
-                    print("WARNING: move not allowed")
-                    continue
-
-                elif (current_symbol == 'G' and (next_path_symbol != 'R' and next_path_symbol != 'H')):
+                elif (next_path_symbol not in allowed_tiles):
                     print("WARNING: move not allowed")
                     continue
 
@@ -91,9 +90,9 @@ class Game():
                 print(f"\t previous: {my_map.map[x]}")
 
                 if (current_symbol == "R"):
-                    my_map.map[x] = my_map.map[x][:y-1] + "P" + "H" + my_map.map[x][y+1:]
-                elif (current_symbol == "G"):
                     my_map.map[x] = my_map.map[x][:y-1] + "P" + "K" + my_map.map[x][y+1:]
+                elif (current_symbol == "G"):
+                    my_map.map[x] = my_map.map[x][:y-1] + "P" + "H" + my_map.map[x][y+1:]
 
                 # do some animation of the dice
                 my_map.move()
@@ -304,7 +303,7 @@ if (__name__ == "__main__"):
 
     # load the levels and data
     levels = parse.parse_json()
-    data = parse.read_map(levels[1]['path'])
+    data = parse.read_map(levels[0]['path'])
 
     print("Successfully parsing data for level 2")
 
