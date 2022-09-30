@@ -1,11 +1,11 @@
 {
     "levels":[
         {
-            "path":"level1.txt",
+            "path":"./levels/level1.txt",
             "pattern":"pattern1.txt"
         },
         {
-            "path":"level2.txt",
+            "path":"./levels/level2.txt",
             "pattern":"pattern2.txt"
         }
     ]
