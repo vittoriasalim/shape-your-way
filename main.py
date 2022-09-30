@@ -40,8 +40,6 @@ print(f"The player's current position: {current_position}")
 run = True
 while run:
 
-
-
     # map game
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -74,11 +72,11 @@ while run:
             run = False
             continue
 
-        elif (current_symbol == 'R' and next_path_symbol != 'G'):
+        elif (current_symbol == 'R' and (next_path_symbol != 'G' or next_path_symbol != 'K')):
             print("WARNING: move not allowed")
             continue
 
-        elif (current_symbol == 'G' and next_path_symbol != 'R'):
+        elif (current_symbol == 'G' and (next_path_symbol != 'R' or next_path_symbol != 'H')):
             print("WARNING: move not allowed")
             continue
 
@@ -87,7 +85,10 @@ while run:
         print(f"\tPlayer's previous position: {current_position}")
         print(f"\t previous: {my_map.map[x]}")
 
-        my_map.map[x] = my_map.map[x][:y-1] + "P" + current_symbol + my_map.map[x][y+1:]
+        if (current_symbol == "R"):
+            my_map.map[x] = my_map.map[x][:y-1] + "P" + "H" + my_map.map[x][y+1:]
+        elif (current_symbol == "G"):
+            my_map.map[x] = my_map.map[x][:y-1] + "P" + "K" + my_map.map[x][y+1:]
 
         # do some animation of the dice
         my_map.move()
@@ -104,9 +105,6 @@ while run:
 
         if (my_map.has_finished()):
             print("PLAYER HAS PASSED ALL PATHS")
-
-
-
 
     elif keys[pygame.K_RIGHT]:
 
@@ -131,17 +129,20 @@ while run:
             run = False
             continue
         
-        elif (current_symbol == 'R' and next_path_symbol != 'G'):
+        elif (current_symbol == 'R' and (next_path_symbol != 'G' or next_path_symbol != 'K')):
             print("WARNING: move not allowed")
             continue
 
-        elif (current_symbol == 'G' and next_path_symbol != 'R'):
+        elif (current_symbol == 'G' and (next_path_symbol != 'R' or next_path_symbol != 'H')):
             print("WARNING: move not allowed")
             continue
         
         # not out of bounds
         # assign the new map after the user's moved
-        my_map.map[x] = my_map.map[x][:y] + current_symbol + "P" + my_map.map[x][y+2:]
+        if (current_symbol == "R"):
+            my_map.map[x] = my_map.map[x][:y] + "H" + "P" + my_map.map[x][y+2:]
+        elif (current_symbol == "G"):
+            my_map.map[x] = my_map.map[x][:y] + "K" + "P" + my_map.map[x][y+2:]
 
         # do some animation of the dice
         my_map.move()
@@ -158,9 +159,6 @@ while run:
 
         if (my_map.has_finished()):
             print("PLAYER HAS PASSED ALL PATHS")
-
-      
-
 
     elif keys[pygame.K_UP]:
         
@@ -186,19 +184,21 @@ while run:
             run = False
             continue
 
-        elif (current_symbol == 'R' and next_path_symbol != 'G'):
+        elif (current_symbol == 'R' and (next_path_symbol != 'G' or next_path_symbol != 'K')):
             print("WARNING: move not allowed")
             continue
 
-        elif (current_symbol == 'G' and next_path_symbol != 'R'):
+        elif (current_symbol == 'G' and (next_path_symbol != 'R' or next_path_symbol != 'H')):
             print("WARNING: move not allowed")
             continue
-
-        # check if tile is valid
 
         # not out of bounds
-        my_map.map[x - 1] = my_map.map[x-1][:y] + "P" + my_map.map[x-1][y+1:]
-        my_map.map[x] = my_map.map[x][:y] + current_symbol + my_map.map[x][y+1:]
+        if (current_symbol == "R"):
+            my_map.map[x - 1] = my_map.map[x-1][:y] + "P" + my_map.map[x-1][y+1:]
+            my_map.map[x] = my_map.map[x][:y] + "H" + my_map.map[x][y+1:]
+        elif (current_position == "G"):
+            my_map.map[x - 1] = my_map.map[x-1][:y] + "P" + my_map.map[x-1][y+1:]
+            my_map.map[x] = my_map.map[x][:y] + "K" + my_map.map[x][y+1:]
 
         # do some animation of the dice
         my_map.move()
@@ -216,9 +216,6 @@ while run:
         if (my_map.has_finished()):
             print("PLAYER HAS PASSED ALL PATHS")
 
-     
-
-    
     elif keys[pygame.K_DOWN]:
         
         print("\tDOWN arrow is pressed")
@@ -243,17 +240,21 @@ while run:
             run = False
             continue
         
-        elif (current_symbol == 'R' and next_path_symbol != 'G'):
+        elif (current_symbol == 'R' and (next_path_symbol != 'G' or next_path_symbol != 'K')):
             print("WARNING: move not allowed")
             continue
 
-        elif (current_symbol == 'G' and next_path_symbol != 'R'):
+        elif (current_symbol == 'G' and (next_path_symbol != 'R' or next_path_symbol != 'H')):
             print("WARNING: move not allowed")
             continue
 
         # not out of bounds
-        my_map.map[x + 1] = my_map.map[x+1][:y] + "P" + my_map.map[x+1][y+1:]
-        my_map.map[x] = my_map.map[x][:y] + current_symbol + my_map.map[x][y+1:]
+        if (current_symbol == "R"):
+            my_map.map[x + 1] = my_map.map[x+1][:y] + "P" + my_map.map[x+1][y+1:]
+            my_map.map[x] = my_map.map[x][:y] + "H" + my_map.map[x][y+1:]
+        elif (current_symbol == "G"):
+            my_map.map[x + 1] = my_map.map[x+1][:y] + "P" + my_map.map[x+1][y+1:]
+            my_map.map[x] = my_map.map[x][:y] + "K" + my_map.map[x][y+1:]
 
         # do some animation of the dice
         my_map.move()
