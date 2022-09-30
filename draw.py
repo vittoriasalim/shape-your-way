@@ -58,38 +58,50 @@ class Map:
             for j in range(COLUMN):
                 self.set_sprite(self.map[i][j],i,j)
    
-    def set_sprite(self, symbol, i , j):
-        """
-        Set the sprite and store it into the the map
-        """
-        # draw the wizard sprite
-        if symbol == 'W':
+    def set_sprite(self,symbol, i , j):
+        """set each sprite according to the symbol
 
+        Args:
+            symbol (_type_): the symbol from the map
+            i (_type_): row
+            j (_type_): column
+        """
+        if symbol == 'W':
             if self.wizard_frame == 6:
                 self.wizard_frame = 0
+      
 
             sprite = pygame.image.load("./images/Vector 135.png")
             self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
-
+            
+           
             wizard = pygame.image.load("./images/Idle.png")
+            
             self.surface.blit (wizard , ((j*62)+250-(i*27),(i*34)+35),((self.wizard_frame*231),0,231,180))
+           
 
-            self.wizard_frame += 1
-        
-        # draw the tile
-        elif symbol == 'T':
-
-            tile = pygame.image.load("./images/print-tile.png")
+            self.wizard_frame+=1
+        elif symbol == 'R':
+            tile = pygame.image.load("./images/red.png")
+            self.surface.blit (tile , ((j*62)+315-(i*27),(i*34)+150))
+        elif symbol == 'G':
+            tile = pygame.image.load("./images/green.png")
+            self.surface.blit (tile , ((j*62)+315-(i*27),(i*34)+150))
+        elif symbol == 'E':
+            tile = pygame.image.load("./images/end.png")
             self.surface.blit (tile , ((j*62)+315-(i*27),(i*34)+150))
             
-        # draw the player's dice
         elif symbol == 'P':
-        
             dice = pygame.image.load("./dice/dice.png")
+     
+            
             self.surface.blit (dice , ((j*62)+315-(i*27),(i*34)+85))
+        
         elif symbol == 'M':
             sprite = pygame.image.load("./images/Vector 36.png")
             self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
+            
+            
          
             
     def get_starting_position(self):
