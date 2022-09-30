@@ -86,6 +86,7 @@ class Map:
         elif symbol == 'P':
         
             dice = pygame.image.load("./dice/dice.png")
+            # dice = pygame
             self.surface.blit (dice , ((j*62)+315-(i*27),(i*34)+85))
         elif symbol == 'M':
             sprite = pygame.image.load("./images/Vector 36.png")
