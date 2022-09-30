@@ -67,13 +67,21 @@ while run:
 
         # check if the next tile is valid
         next_path_symbol = my_map.map[x][y - 1]
-        if (current_symbol == 'R' and next_path_symbol != 'G'):
+        if (my_map.has_finished() and next_path_symbol == 'E'):
+            my_map.map[x] = my_map.map[x][:y-1] + "P" + "E" + my_map.map[x][y+1:]
+            surface.fill(color)
+            print("PLAYER has won")
+            run = False
+            continue
+
+        elif (current_symbol == 'R' and next_path_symbol != 'G'):
             print("WARNING: move not allowed")
             continue
 
-        if (current_symbol == 'G' and next_path_symbol != 'R'):
+        elif (current_symbol == 'G' and next_path_symbol != 'R'):
             print("WARNING: move not allowed")
             continue
+        
 
         # not out of bounds
         # assign the new map after the user's moved
@@ -90,9 +98,13 @@ while run:
             current_symbol = 'R'
         else:
             current_symbol = 'G'
+        my_map.update_check(x, y)
         
         print(f"\t next:     {my_map.map[x]}")
         print(f"\tPlayer's current position: {current_position}")
+
+        if (my_map.has_finished()):
+            print("PLAYER HAS PASSED ALL PATHS")
 
         # update the map's UI
         surface.fill(color)
@@ -114,11 +126,18 @@ while run:
 
         # check if the next tile is valid
         next_path_symbol = my_map.map[x][y + 1]
-        if (current_symbol == 'R' and next_path_symbol != 'G'):
+        if (my_map.has_finished() and next_path_symbol == 'E'):
+            my_map.map[x] = my_map.map[x][:y] + "E" + "P" + my_map.map[x][y+2:]
+            surface.fill(color)
+            print("PLAYER has won")
+            run = False
+            continue
+        
+        elif (current_symbol == 'R' and next_path_symbol != 'G'):
             print("WARNING: move not allowed")
             continue
 
-        if (current_symbol == 'G' and next_path_symbol != 'R'):
+        elif (current_symbol == 'G' and next_path_symbol != 'R'):
             print("WARNING: move not allowed")
             continue
 
@@ -137,9 +156,13 @@ while run:
             current_symbol = 'R'
         else:
             current_symbol = 'G'
+        my_map.update_check(x, y)
 
         print(f"\t next:     {my_map.map[x]}")
         print(f"\tPlayer's current position:  {current_position}")
+
+        if (my_map.has_finished()):
+            print("PLAYER HAS PASSED ALL PATHS")
 
         # update the map's UI
         surface.fill(color)
@@ -161,11 +184,19 @@ while run:
 
         # check if the next tile is valid
         next_path_symbol = my_map.map[x - 1][y]
-        if (current_symbol == 'R' and next_path_symbol != 'G'):
+        if (my_map.has_finished() and next_path_symbol == 'E'):
+            my_map.map[x - 1] = my_map.map[x-1][:y] + "P" + my_map.map[x-1][y+1:]
+            my_map.map[x] = my_map.map[x][:y] + "E" + my_map.map[x][y+1:]
+            surface.fill(color)
+            print("PLAYER has won")
+            run = False
+            continue
+
+        elif (current_symbol == 'R' and next_path_symbol != 'G'):
             print("WARNING: move not allowed")
             continue
 
-        if (current_symbol == 'G' and next_path_symbol != 'R'):
+        elif (current_symbol == 'G' and next_path_symbol != 'R'):
             print("WARNING: move not allowed")
             continue
 
@@ -183,8 +214,12 @@ while run:
             current_symbol = 'R'
         else:
             current_symbol = 'G'
+        my_map.update_check(x, y)
 
         print(f"\tPlayer's current position: {current_position}")
+
+        if (my_map.has_finished()):
+            print("PLAYER HAS PASSED ALL PATHS")
 
         # update the map's UI
         surface.fill(color)
@@ -206,17 +241,23 @@ while run:
 
         # check if the next tile is valid
         next_path_symbol = my_map.map[x + 1][y]
-        if (current_symbol == 'R' and next_path_symbol != 'G'):
+        if (my_map.has_finished() and next_path_symbol == 'E'):
+            my_map.map[x + 1] = my_map.map[x+1][:y] + "P" + my_map.map[x+1][y+1:]
+            my_map.map[x] = my_map.map[x][:y] + "E" + my_map.map[x][y+1:]
+            surface.fill(color)
+            print("PLAYER has won")
+            run = False
+            continue
+        
+        elif (current_symbol == 'R' and next_path_symbol != 'G'):
             print("WARNING: move not allowed")
             continue
 
-        if (current_symbol == 'G' and next_path_symbol != 'R'):
+        elif (current_symbol == 'G' and next_path_symbol != 'R'):
             print("WARNING: move not allowed")
             continue
 
         # not out of bounds
-        x = current_position[0]
-        y = current_position[1]
         my_map.map[x + 1] = my_map.map[x+1][:y] + "P" + my_map.map[x+1][y+1:]
         my_map.map[x] = my_map.map[x][:y] + current_symbol + my_map.map[x][y+1:]
 
@@ -228,8 +269,12 @@ while run:
             current_symbol = 'R'
         else:
             current_symbol = 'G'
+        my_map.update_check(x, y)
 
         print(f"\tPlayer's current position: {current_position}")
+
+        if (my_map.has_finished()):
+            print("PLAYER HAS PASSED ALL PATHS")
 
         # update the map's UI
         surface.fill(color)

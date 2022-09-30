@@ -49,6 +49,15 @@ class Map:
             for j in range(COLUMN):
                 if (self.map[i][j] == 'P'):
                     self.starting_position = (i, j)
+        self.check = []
+        for i in range(ROW):
+            self.check.append([])
+            for j in range(COLUMN):
+                if (self.map[i][j] == 'R' or self.map[i][j] == 'G'):
+                    self.check[i].append(0)
+                else:
+                    self.check[i].append(1)
+        self.check[self.starting_position[0]][self.starting_position[1]] = 1
         self.starting_symbol = 'R'
 
     def read_data(self):
@@ -58,10 +67,10 @@ class Map:
         for i in range (ROW):
             for j in range(COLUMN):
                 self.set_sprite(self.map[i][j],i,j)
-   
 
-    def set_sprite(self,symbol, i , j):
-        """Set the sprite and store it into the the map
+    def set_sprite(self, symbol, i: int, j: int):
+        """
+        Set the sprite and store it into the the map
 
         Formula:
         x-coor: (j * 62) + 315 - (i * 27)
@@ -70,7 +79,8 @@ class Map:
         Args:
             symbol (_type_): the symbol from the map
             i (_type_): row
-            j (_type_): column"""
+            j (_type_): column
+        """
 
         if symbol == 'W':
             if self.wizard_frame == 6:
@@ -116,3 +126,19 @@ class Map:
         Get the starting symbol of the dice
         """
         return self.starting_symbol
+
+    def update_check(self, i, j):
+        """
+        Update the move by the player
+        """
+        self.check[i][j] = 1
+
+    def has_finished(self):
+        """
+        Check whether the player has passed all red and green paths
+        """
+        for i in range(ROW):
+            for j in range(COLUMN):
+                if (self.check[i][j] != 1):
+                    return False
+        return True
