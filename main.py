@@ -19,7 +19,7 @@ levels = parse.parse_json()
 data =parse.read_map(levels[0]['path'])
 
 my_map = draw.Map(data,surface)
-my_map.draw()
+# my_map.draw()
 run = True
 while run:
     pygame.time.delay(60)

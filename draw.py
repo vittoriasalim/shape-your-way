@@ -28,29 +28,34 @@ class Map:
       
         
             sprite = pygame.image.load("Vector 135.png")
-            self.surface.blit (sprite , ((j*55)+315-(i*27),(i*34)+150))
+            self.surface.blit (sprite , ((j*60)+315-(i*27),(i*34)+150))
               
             
            
             wizard = pygame.image.load("idle.png")
-            self.surface.blit (wizard , ((j*55)+250-(i*27),(i*34)+35),((self.wizard_frame*231),0,231,180))
+            self.surface.blit (wizard , ((j*60)+250-(i*27),(i*34)+35),((self.wizard_frame*231),0,231,180))
            
             # self.surface.blit(wizard,((j*66)+30,(i*66)-18),((self.wizard_frame*231),0,231,180))
 
             self.wizard_frame+=1
-        elif symbol == 'T':
-            tile = pygame.image.load("print-tile.png")
-            self.surface.blit (tile , ((j*55)+315-(i*27),(i*34)+150))
-            
+        
         elif symbol == 'P':
             dice = pygame.image.load("dice/Group 39.png")
-            self.surface.blit (dice , ((j*55)+315-(i*27),(i*34)+85))
+            self.surface.blit (dice , ((j*60)+315-(i*27),(i*34)+83))
+        elif symbol == 'T':
+            tile = pygame.image.load("print-tile.png")
+            self.surface.blit (tile , ((j*60)+315-(i*27),(i*34)+150))
+            
+        else:
+            sprite = pygame.image.load("Vector 36.png")
+            self.surface.blit (sprite , ((j*60)+315-(i*27),(i*34)+150))
+            
        
         
-    def draw(self):
-        for i in range (ROW):
-            for j in range(COLUMN):
-                sprite = pygame.image.load("Vector 36.png")
-                self.surface.blit (sprite , ((j*55)+315-(i*27),(i*34)+150))
+    # def draw(self):
+    #     for i in range (ROW):
+    #         for j in range(COLUMN):
+    #             sprite = pygame.image.load("Vector 36.png")
+    #             self.surface.blit (sprite , ((j*55)+315-(i*27),(i*34)+150))
             
             
