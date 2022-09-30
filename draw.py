@@ -64,7 +64,7 @@ class Map:
 
         Formula:
         x-coor: (j * 62) + 315 - (i * 27)
-        y-coor: i * 34
+        y-coor: i * 34 + 150
         """
         # draw the wizard sprite
         if symbol == 'W':
