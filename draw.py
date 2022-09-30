@@ -17,6 +17,10 @@ class Sprite:
     def __init__(self, symbol, path):
         self.symbol = symbol
         self.path = path
+        self.right = False
+        self.left = False
+        self.up = False
+        self.down = False
 
     def get_symbol(self):
         return self.symbol
@@ -46,6 +50,11 @@ class Map:
         self.map = data
         self.surface = surface
         self.dice = pygame.image.load("./dice/dice.png")
+        self.dice_position= "default"
+        self.right =False
+        self.left =False
+        self.down = False
+        self.up = False
         for i in range(ROW):
             for j in range(COLUMN):
                 if (self.map[i][j] == 'P'):
@@ -68,6 +77,19 @@ class Map:
         for i in range (ROW):
             for j in range(COLUMN):
                 self.set_sprite(self.map[i][j],i,j)
+    def set_img_direction(self):
+        if self.dice_position == "left":
+            self.set_dice_direction_left()
+        elif self.dice_position == "right":
+            self.set_dice_direction_right()
+        elif self.dice_position == "up":
+            self.set_dice_direction_up()
+        elif self.dice_position == "down":
+            self.set_dice_direction_down()
+        elif self.dice_position == "default":
+            self.set_dice_direction_default()
+        elif self.dice_position == "default2":
+            self.set_dice_direction_default2()
 
     def set_sprite(self, symbol, i: int, j: int):
         """
@@ -97,6 +119,7 @@ class Map:
             self.wizard_frame+=1
 
         elif symbol == 'R':
+            
             tile = pygame.image.load("./images/red.png")
             self.surface.blit (tile , ((j*62)+315-(i*27),(i*34)+150))
 
@@ -109,24 +132,106 @@ class Map:
             self.surface.blit (tile , ((j*62)+315-(i*27),(i*34)+150))
             
         elif symbol == 'P':
-
-            
+            self.set_img_direction()
+            self.reset_direction()
             self.surface.blit (self.dice , ((j*62)+315-(i*27),(i*34)+85))
-        
-
+            
 
         elif symbol == 'M':
             sprite = pygame.image.load("./images/Vector 36.png")
             self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
+            
+            
+    def set_dice_direction_default(self):
+ 
+           
+        if self.right and not self.left and not self.up and not self.down:
+            self.dice = pygame.image.load("./dice/right.png")
+            self.dice_position = "right"
+        elif not self.right and self.left and not self.up and not self.down:
+            self.dice = pygame.image.load("./dice/left.png")
+            self.dice_position ="left"
+        elif not self.right and not self.left and self.up and not self.down:
+            self.dice = pygame.image.load("./dice/up.png")
+            self.dice_position = "up"
+        elif not self.right and not self.left and not self.up and self.down:
+            self.dice = pygame.image.load("./dice/down.png")
+            self.dice_position ="down"
+    def set_dice_direction_default2(self):
+        if self.right and self.left and not self.up and not self.down:
+            self.dice = pygame.image.load("./dice/left.png")
+            self.dice_position ="right"
+        
+        elif not self.right and self.left and not self.up and not self.down:
+            self.dice = pygame.image.load("./dice/right.png")
+            self.dice_position ="left"
+        elif not self.right and not self.left and self.up and not self.down:
+            self.dice = pygame.image.load("./dice/down.png")
+            self.dice_position = "up"
+        elif not self.right and not self.left and not self.up and self.down:
+            self.dice = pygame.image.load("./dice/up.png")
+            self.dice_position ="down"
+            
+    def set_dice_direction_right(self):
+        if self.right and not self.left and not self.up and not self.down:
+            self.dice = pygame.image.load("./dice/dice2.png")
+            self.dice_position = "default2"
+        elif not self.right and self.left and not self.up and not self.down:
+            self.dice = pygame.image.load("./dice/dice.png")
+            self.dice_position = "default"
+    def set_dice_direction_left(self):
+        if self.right and not self.left and not self.up and not self.down:
+            self.dice = pygame.image.load("./dice/dice.png")
+            self.dice_position = "default"
+        elif not self.right and self.left and not self.up and not self.down:
+            self.dice = pygame.image.load("./dice/dice2.png")
+            self.dice_position = "default2"
+      
+            
+    def set_dice_direction_up(self):
+   
+        if not self.right and not self.left and self.up and not self.down:
+            self.dice = pygame.image.load("./dice/dice2.png")
+            self.dice_position = "default2"
+        elif not self.right and not self.left and not self.up and self.down:
+            self.dice = pygame.image.load("./dice/dice.png")
+            self.dice_position = "default"
+            
+    def set_dice_direction_down(self):
+        if not self.right and not self.left and self.up and not self.down:
+            self.dice = pygame.image.load("./dice/dice2.png")
+            self.dice_position = "default"
+        elif not self.right and not self.left and not self.up and self.down:
+            self.dice = pygame.image.load("./dice/dice.png")
+            self.dice_position ="default2"
+    
+  
+        
+    def reset_direction(self):
+        self.right =False
+        self.left =False
+        self.up = False
+        self.down = False
     def move_right(self):
-        self.dice = pygame.image.load("./dice/right.png")
+        
+        self.right = True
+    
+   
     def move_left(self):
-        self.dice = pygame.image.load("./dice/left.png")
+     
+        self.left = True
+
+  
     def move_up(self):
-        self.dice = pygame.image.load("./dice/up.png")
+
+        self.up = True
+     
+
         
     def move_down(self):
-        self.dice = pygame.image.load("./dice/down.png")
+   
+        self.down = True
+
             
     def get_starting_position(self):
         """
