@@ -96,7 +96,7 @@ class Game():
                     my_map.map[x] = my_map.map[x][:y-1] + "P" + "K" + my_map.map[x][y+1:]
 
                 # do some animation of the dice
-                my_map.move()
+                my_map.move("left")
 
                 # update current position and current symbol
                 current_position = (current_position[0], current_position[1] - 1)
@@ -150,7 +150,7 @@ class Game():
                     my_map.map[x] = my_map.map[x][:y] + "K" + "P" + my_map.map[x][y+2:]
 
                 # do some animation of the dice
-                my_map.move()
+                my_map.move("right")
 
                 # update current position
                 current_position = (current_position[0], current_position[1] + 1)
@@ -206,7 +206,7 @@ class Game():
                     my_map.map[x] = my_map.map[x][:y] + "K" + my_map.map[x][y+1:]
 
                 # do some animation of the dice
-                my_map.move()
+                my_map.move("up")
 
                 # update current position
                 current_position = (current_position[0] - 1, current_position[1])
@@ -262,7 +262,7 @@ class Game():
                     my_map.map[x] = my_map.map[x][:y] + "K" + my_map.map[x][y+1:]
 
                 # do some animation of the dice
-                my_map.move()
+                my_map.move("down")
 
                 # update current position
                 current_position = (current_position[0] + 1, current_position[1])

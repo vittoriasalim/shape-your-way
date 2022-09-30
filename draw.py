@@ -26,7 +26,7 @@ class Map:
         self.map = data
         self.surface = surface
         self.dice = pygame.image.load("./dice/dice.png")
-        self.dice_position= "down"
+        self.dice_position= "default" #default /default2 / right/ down/ up /left
         for i in range(ROW):
             for j in range(COLUMN):
                 if (self.map[i][j] == 'P'):
@@ -113,19 +113,43 @@ class Map:
             sprite = pygame.image.load("./images/green-fail.png")
             self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
 
-    
-    def set_direction(self):
-        if self.dice_position == "up":
-            self.dice =pygame.image.load("./dice/dice.png")
+    def set_direction_default(self,direction):
+        if direction == "right" :
+            self.dice =pygame.image.load("./dice/right.png")
+            self.dice_position = "right"
+        elif direction == "left":
+            self.dice =pygame.image.load("./dice/left.png")
+            self.dice_position="left"
+        elif direction == "up":
+            self.dice =pygame.image.load("./dice/up.png")
+            self.dice_position ="up"
+        elif direction == "down":
+            self.dice =pygame.image.load("./dice/down.png")
             self.dice_position ="down"
-        elif self.dice_position == "down":
-            self.dice = pygame.image.load("./dice/dice2.png")
-            self.dice_position = "up"
+    def set_direction_default2(self,direction):
+        if direction == "right" :
+            self.dice =pygame.image.load("./dice/left.png")
+            self.dice_position ="left"
+        elif direction == "left":
+            self.dice =pygame.image.load("./dice/right.png")
+            self.dice_position ="right"
+        elif direction == "up":
+            self.dice =pygame.image.load("./dice/down.png")
+            self.dice_position ="down"
+        elif direction == "down":
+            self.dice =pygame.image.load("./dice/up.png")
+            self.dice_position ="up"
             
-        
+    def set_direction(self,direction):
 
-    def move(self):
-        self.set_direction()
+        if self.dice_position == "default":
+            self.set_direction_default(direction)
+        elif self.dice_position=="default2":
+            self.set_direction_default2(direction)
+        
+    
+    def move(self, direction):
+        self.set_direction(direction)
             
     def get_starting_position(self):
         """
@@ -154,3 +178,5 @@ class Map:
                 if (self.check[i][j] != 1):
                     return False
         return True
+    def get_dice_position(self):
+        return self.get_dice_position
