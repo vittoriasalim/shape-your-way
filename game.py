@@ -289,6 +289,11 @@ class Game():
 
                 if (my_map.has_finished()):
                     print("PLAYER HAS PASSED ALL PATHS")
+
+            # update user interface
+            self.screen.fill(BG_COLOR)
+            my_map.read_data()
+            pygame.display.update()
             
         # quit
         pygame.quit()
