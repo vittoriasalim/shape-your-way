@@ -5,7 +5,7 @@ import parse
 print("--------------------")
 print("Console for the game")
 print("--------------------")
-
+WHITE = (0xFF, 0xFF, 0xFF)
 # initialise the pygame
 pygame.init()
 
@@ -14,7 +14,7 @@ surface = pygame.display.set_mode((990,660))
 pygame.display.set_caption("shape-your-way")
 
 # set the background color
-color =(196, 211, 249)
+color =(62, 61, 100)
 rect_color = (233,226,246)
 
 print("Creating a new window")
@@ -41,7 +41,9 @@ run = True
 while run:
 
     pygame.time.delay(50)
-
+    
+    
+    
     # map game
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -274,7 +276,7 @@ while run:
         if (my_map.has_finished()):
             print("PLAYER HAS PASSED ALL PATHS")
 
-
+    # pygame.draw.rect(surface, rect_color, pygame.Rect(195, 100, 600, 500))
     my_map.read_data()
     pygame.display.update()
     # delay for user interaction
