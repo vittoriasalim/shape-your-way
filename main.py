@@ -10,7 +10,7 @@ surface = pygame.display.set_mode((990,660))
 pygame.display.set_caption("shape-your-way")
 
 # set the background color
-color =(164, 182, 229, 1)
+color =(196, 211, 249)
 surface.fill(color)
 rect_color = (233,226,246)
 
@@ -26,7 +26,7 @@ data = parse.read_map(levels[0]['path'])
 
 # draw the map
 my_map = draw.Map(data,surface)
-my_map.draw()
+# my_map.draw()
 
 # main loop
 run = True
