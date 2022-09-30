@@ -1,6 +1,7 @@
 import pygame
 import draw
 import parse
+from game import Game
 # Constants
 WHITE = (0xFF, 0xFF, 0xFF)
 
@@ -21,6 +22,7 @@ class HomeScreen():
         self.is_running = False
         self.endFont = pygame.font.SysFont("Rammetto One",60,bold =True)
         self.buttonFont = pygame.font.SysFont("Rammetto One",40,bold =True)
+        self.play = False
         # self.widgets = [] 
         # self.create_objects()
 
@@ -37,6 +39,13 @@ class HomeScreen():
         else:
             label_button = self.buttonFont.render("START",1, BG_COLOR)
         self.screen.blit(label_button, (450, 350))
+
+
+    def getstate(self):
+        return self.play
+
+    def quit(self):
+        self.is_running=False
 
     def mainloop(self):
         
@@ -59,7 +68,22 @@ class HomeScreen():
                     # if the mouse is clicked on the
                     # button the game is terminated
                     if 450 <= mouse[0] <= 600 and 350 <= mouse[1] <= 400:
-                        pygame.quit()
+                        self.is_running=False
+                        play_game = Game(surface, data)
+                        play_game.mainloop()
+                        # pygame.init()
+                        # press = False
+                        # surface_game = pygame.display.set_mode((990, 660))
+                        # pygame.display.set_caption("Find Your Way Out")
+                        #
+                        # # load the levels and data
+                        # levels_game = parse.parse_json()
+                        # data_game = parse.read_map(levels_game[0]['path'])
+                        #
+                        # play_game = Game(surface_game, data_game)
+                        # play_game.mainloop()
+                        # self.quit()
+
 
             # draw
             self.screen.fill(BG_COLOR)
@@ -87,7 +111,12 @@ if (__name__ == "__main__"):
     print("Successfully parsing data for level 2")
 
     # main loop in homescreen
-    HomeScreen(surface, data).mainloop()
+    while True:
+        play_game = Game(surface,data)
+        home =HomeScreen(surface, data)
+        home.mainloop()
+
+
 
     # quit the game properly
     pygame.quit()
