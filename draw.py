@@ -137,6 +137,59 @@ class Map:
         elif direction == "down":
             self.dice =pygame.image.load("./dice/up.png")
             self.dice_position ="up"
+    def set_direction_right(self,direction):
+        if direction == "right" :
+            self.dice =pygame.image.load("./dice/dice2.png")
+            self.dice_position ="default2"
+        elif direction == "left":
+            self.dice =pygame.image.load("./dice/dice.png")
+            self.dice_position ="default"
+        elif direction == "up":
+            self.dice =pygame.image.load("./dice/right.png")
+            self.dice_position ="right"
+        elif direction == "down":
+            self.dice =pygame.image.load("./dice/right.png")
+            self.dice_position ="right"
+            
+    def set_direction_left(self,direction):
+        if direction == "right" :
+            self.dice =pygame.image.load("./dice/dice.png")
+            self.dice_position ="default"
+        elif direction == "left":
+            self.dice =pygame.image.load("./dice/dice2.png")
+            self.dice_position ="default2"
+        elif direction == "up":
+            self.dice =pygame.image.load("./dice/left.png")
+            self.dice_position ="left"
+        elif direction == "down":
+            self.dice =pygame.image.load("./dice/left.png")
+            self.dice_position ="left"
+    def set_direction_up(self,direction):
+        if direction == "right" :
+            self.dice =pygame.image.load("./dice/up.png")
+            self.dice_position ="up"
+        elif direction == "left":
+            self.dice =pygame.image.load("./dice/up.png")
+            self.dice_position ="up"
+        elif direction == "up":
+            self.dice =pygame.image.load("./dice/dice2.png")
+            self.dice_position ="default2"
+        elif direction == "down":
+            self.dice =pygame.image.load("./dice/dice.png")
+            self.dice_position ="default"
+    def set_direction_down(self,direction):
+        if direction == "right" :
+            self.dice =pygame.image.load("./dice/down.png")
+            self.dice_position ="down"
+        elif direction == "left":
+            self.dice =pygame.image.load("./dice/down.png")
+            self.dice_position ="down"
+        elif direction == "up":
+            self.dice =pygame.image.load("./dice/dice.png")
+            self.dice_position ="default"
+        elif direction == "down":
+            self.dice =pygame.image.load("./dice/dice2.png")
+            self.dice_position ="default2"
             
     def set_direction(self,direction):
 
@@ -145,6 +198,14 @@ class Map:
         
         elif self.dice_position == "default2":
             self.set_direction_default2(direction)
+        elif self.dice_position=="right":
+            self.set_direction_right(direction)
+        elif self.dice_position=="left":
+            self.set_direction_left(direction)
+        elif self.dice_position=="up":
+            self.set_direction_up(direction)
+        elif self.dice_position=="down":
+            self.set_direction_down(direction)
         
     
     def move(self, direction):
