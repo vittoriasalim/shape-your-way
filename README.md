@@ -2,4 +2,5 @@
 
 ## How to Play
 
-This game is a puzzle game. The player has to get through all colored tiles and reach the final tile.
+It is a puzzle game where player has to complete the pattern given with the control of the dice.
+The player has the ability to move up, down , left or right, according to the dice.
