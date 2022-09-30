@@ -19,6 +19,10 @@ class Game():
         self.is_running = False
         self.screen = screen
         self.data = data
+        self.cur_level= 0
+        # font for level
+        self.myfont = pygame.font.SysFont("Rammetto One",35,bold =True)
+        self.endFont = pygame.font.SysFont("Rammetto One",60,bold =True)
 
     def mainloop(self) -> None:
 
@@ -36,7 +40,15 @@ class Game():
         # main loop
         press = False
         self.is_running = True
-        while (self.is_running):
+        rect_color = (233,226,246)
+        while True:
+            if not self.is_running:
+        
+                pygame.draw.rect(surface, RECT_COLOR, pygame.Rect(195, 100, 600, 500))
+                label = self.endFont.render("GAME OVER", 1, BG_COLOR)
+                surface.blit(label, (362, 310))
+                pygame.display.update()
+                continue
 
             # frame per second
             pygame.time.delay(50)
@@ -74,8 +86,20 @@ class Game():
                     my_map.map[x] = my_map.map[x][:y-1] + "P" + "E" + my_map.map[x][y+1:]
                     self.screen.fill(BG_COLOR)
                     print("PLAYER has won")
-                    run = False
+                    self.cur_level+=1
+                    if self.cur_level == len(levels):
+                        self.is_running = False
+                        continue
+                        
+            
+        
+                    data = parse.read_map(levels[self.cur_level]['path'])
+                    my_map = draw.Map(data, surface)
+                    # get the starting position of the player
+                    current_position = my_map.get_starting_position()
+                    current_symbol = my_map.get_starting_symbol()
                     continue
+                  
 
                 elif (current_symbol == 'R' and (next_path_symbol != 'G' and next_path_symbol != 'K')):
                     print("WARNING: move not allowed")
@@ -131,7 +155,18 @@ class Game():
                     my_map.map[x] = my_map.map[x][:y] + "E" + "P" + my_map.map[x][y+2:]
                     self.screen.fill(BG_COLOR)
                     print("PLAYER has won")
-                    run = False
+                    self.cur_level+=1
+                    if self.cur_level == len(levels):
+                        self.is_running = False
+                        continue
+                        
+            
+        
+                    data = parse.read_map(levels[self.cur_level]['path'])
+                    my_map = draw.Map(data, surface)
+                    # get the starting position of the player
+                    current_position = my_map.get_starting_position()
+                    current_symbol = my_map.get_starting_symbol()
                     continue
                 
                 elif (current_symbol == 'R' and (next_path_symbol != 'G' and next_path_symbol != 'K')):
@@ -186,7 +221,18 @@ class Game():
                     my_map.map[x] = my_map.map[x][:y] + "E" + my_map.map[x][y+1:]
                     self.screen.fill(BG_COLOR)
                     print("PLAYER has won")
-                    run = False
+                    self.cur_level+=1
+                    if self.cur_level == len(levels):
+                        self.is_running = False
+                        continue
+                        
+            
+        
+                    data = parse.read_map(levels[self.cur_level]['path'])
+                    my_map = draw.Map(data, surface)
+                    # get the starting position of the player
+                    current_position = my_map.get_starting_position()
+                    current_symbol = my_map.get_starting_symbol()
                     continue
 
                 elif (current_symbol == 'R' and (next_path_symbol != 'G' and next_path_symbol != 'K')):
@@ -242,7 +288,18 @@ class Game():
                     my_map.map[x] = my_map.map[x][:y] + "E" + my_map.map[x][y+1:]
                     self.screen.fill(BG_COLOR)
                     print("PLAYER has won")
-                    run = False
+                    self.cur_level+=1
+                    if self.cur_level == len(levels):
+                        self.is_running = False
+                        continue
+                        
+            
+        
+                    data = parse.read_map(levels[self.cur_level]['path'])
+                    my_map = draw.Map(data, surface)
+                    # get the starting position of the player
+                    current_position = my_map.get_starting_position()
+                    current_symbol = my_map.get_starting_symbol()
                     continue
                 
                 elif (current_symbol == 'R' and (next_path_symbol != 'G' and next_path_symbol != 'K')):
@@ -278,10 +335,12 @@ class Game():
                     print("PLAYER HAS PASSED ALL PATHS")
 
             # pygame.draw.rect(surface, rect_color, pygame.Rect(195, 100, 600, 500))
+            # render text
+            label = self.myfont.render("LEVEL {} ".format(self.cur_level+1), 1, (233,233,255,1))
+            surface.blit(label, (750, 150))
             my_map.read_data()
             pygame.display.update()
-            # delay for user interaction
-            # pygame.time.delay(50)
+         
             
         # quit
         pygame.quit()
@@ -304,7 +363,7 @@ if (__name__ == "__main__"):
 
     # load the levels and data
     levels = parse.parse_json()
-    data = parse.read_map(levels[1]['path'])
+    data = parse.read_map(levels[0]['path'])
 
     print("Successfully parsing data for level 2")
 
