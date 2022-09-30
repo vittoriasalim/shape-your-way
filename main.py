@@ -21,9 +21,9 @@ print("Creating a new window")
 
 # get the data (level and data)
 levels = parse.parse_json()
-data = parse.read_map(levels[0]['path'])
+data = parse.read_map(levels[1]['path'])
 
-print("Successfully parsing data for level 1")
+print("Successfully parsing data for level 2")
 
 # draw the map
 my_map = draw.Map(data, surface)
