@@ -61,6 +61,10 @@ class Map:
     def set_sprite(self, symbol, i , j):
         """
         Set the sprite and store it into the the map
+
+        Formula:
+        x-coor: (j * 62) + 315 - (i * 27)
+        y-coor: i * 34
         """
         # draw the wizard sprite
         if symbol == 'W':
@@ -87,7 +91,10 @@ class Map:
         
             dice = pygame.image.load("./dice/dice.png")
             self.surface.blit (dice , ((j*62)+315-(i*27),(i*34)+85))
+        
+        # draw the 
         elif symbol == 'M':
+            
             sprite = pygame.image.load("./images/Vector 36.png")
             self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
          

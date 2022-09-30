@@ -48,7 +48,7 @@ run = True
 while run:
 
     # delay for user interaction
-    pygame.time.delay(60)
+    pygame.time.delay(50)
 
     # map game
     for event in pygame.event.get():
