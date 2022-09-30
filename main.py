@@ -1,3 +1,4 @@
+from draw import MySprite
 import pygame
 import draw
 import parse
@@ -14,11 +15,6 @@ color =(196, 211, 249)
 surface.fill(color)
 rect_color = (233,226,246)
 
-# pygame.draw.rect(surface, rect_color, pygame.Rect(99, 66, 792, 528))
-# rect_border = (233,233,255)
-# pygame.draw.rect(surface, rect_border, pygame.Rect(99-10, 66-10, 792+20, 528+20),  10)
-
-pygame.display.flip()
 
 # get the data (level and data)
 levels = parse.parse_json()
@@ -27,6 +23,10 @@ data = parse.read_map(levels[0]['path'])
 # draw the map
 my_map = draw.Map(data,surface)
 # my_map.draw()
+my_sprite = MySprite()
+my_group = pygame .sprite.Group(my_sprite)
+
+
 
 # main loop
 run = True
@@ -54,8 +54,8 @@ while run:
         pass
     
 
-    my_map.read_data()
-    pygame.display.flip()
+    my_map.read_data(my_group)
+    pygame.display.update()
 
 # quit
 pygame.quit()

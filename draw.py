@@ -7,7 +7,7 @@ COLUMN= 10
 class Map:
     def __init__(self,data,surface):
         self.wizard_frame = 0
-        self.dice_frame=1
+        self.dice_frame=0
         
         self.map = data
         self.surface = surface
@@ -31,10 +31,10 @@ class Map:
         
             sprite = pygame.image.load("./images/Vector 135.png")
             self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
-              
             
            
             wizard = pygame.image.load("./images/Idle.png")
+            
             self.surface.blit (wizard , ((j*62)+250-(i*27),(i*34)+35),((self.wizard_frame*231),0,231,180))
            
 
@@ -42,11 +42,23 @@ class Map:
         elif symbol == 'T':
             tile = pygame.image.load("./images/print-tile.png")
             self.surface.blit (tile , ((j*62)+315-(i*27),(i*34)+150))
+        elif symbol == 'E':
+            tile = pygame.image.load("./images/end.png")
+            self.surface.blit (tile , ((j*62)+315-(i*27),(i*34)+150))
             
         elif symbol == 'P':
             dice = pygame.image.load("./dice/dice.png")
+            # print(self.dice_frame)
+            dice =pygame.transform.rotate(dice, self.dice_frame*10) 
+            self.dice_frame +=1
+            if self.dice_frame ==9:
+                self.dice_frame=0
+            
             self.surface.blit (dice , ((j*62)+315-(i*27),(i*34)+85))
+            
         elif symbol == 'M':
             sprite = pygame.image.load("./images/Vector 36.png")
             self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
-    
+            
+            
+
