@@ -32,13 +32,6 @@ class App():
         # load the levels and data
         levels = parse.parse_json()
 
-        # main loop in homescreen
-        HomeScreen(surface, levels).mainloop()
-
         # quit the game properly
         pygame.quit()
 
-
-# Main program
-if (__name__ == "__main__"):
-    App()
