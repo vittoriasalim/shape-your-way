@@ -22,6 +22,10 @@ class Game():
         self.is_running = False
         self.screen = screen
         self.data = data
+        # self.cur_level = 0
+        # font for level
+        # self.myfont = pygame.font.SysFont("Rammetto One",35,bold =True)
+        # self.endFont = pygame.font.SysFont("Rammetto One",60,bold =True)
 
         # create a copy of the map
         self.static_map = []
@@ -52,7 +56,7 @@ class Game():
         # main loop
         press = False
         self.is_running = True
-        while (self.is_running):
+        while self.is_running:
 
             # frame per second
             pygame.time.delay(50)
@@ -88,7 +92,6 @@ class Game():
                     my_map.map[x] = my_map.map[x][:y-1] + "P" + self.static_map[x][y] + my_map.map[x][y+1:]
                     self.screen.fill(BG_COLOR)
                     print("PLAYER has won")
-                    # self.is_running = False
                     continue
 
                 elif (next_path_symbol not in allowed_tiles):
@@ -143,7 +146,6 @@ class Game():
                     my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + "P" + my_map.map[x][y+2:]
                     self.screen.fill(BG_COLOR)
                     print("PLAYER has won")
-                    # self.is_running = False
                     continue
                 
                 elif (next_path_symbol not in allowed_tiles):
@@ -199,7 +201,6 @@ class Game():
                     my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + my_map.map[x][y+1:]
                     self.screen.fill(BG_COLOR)
                     print("PLAYER has won")
-                    # self.is_running = False
                     continue
 
                 elif (next_path_symbol not in allowed_tiles):
@@ -255,7 +256,6 @@ class Game():
                     my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + my_map.map[x][y+1:]
                     self.screen.fill(BG_COLOR)
                     print("PLAYER has won")
-                    # self.is_running = False
                     continue
                 
                 elif (next_path_symbol not in allowed_tiles):
@@ -289,11 +289,6 @@ class Game():
 
                 if (my_map.has_finished()):
                     print("PLAYER HAS PASSED ALL PATHS")
-
-            # update user interface
-            self.screen.fill(BG_COLOR)
-            my_map.read_data()
-            pygame.display.update()
             
         # quit
         pygame.quit()
@@ -318,7 +313,7 @@ if (__name__ == "__main__"):
     levels = parse.parse_json()
     data = parse.read_map(levels[0]['path'])
 
-    print("Successfully parsing data for level 2")
+    print("Successfully parsing data for level 1")
 
     # main loop in homescreen
     Game(surface, data).mainloop()
