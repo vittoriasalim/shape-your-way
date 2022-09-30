@@ -1,5 +1,4 @@
 import pygame
-import draw
 import parse
 from home_screen import HomeScreen
 
@@ -38,3 +37,8 @@ class App():
 
         # quit the game properly
         pygame.quit()
+
+
+# Main program
+if (__name__ == "__main__"):
+    App()

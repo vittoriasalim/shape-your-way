@@ -15,12 +15,12 @@ class Game():
     """
     Game Screen
     """
-    def __init__(self, screen, data):
+    def __init__(self, screen, data) -> None:
         self.is_running = False
         self.screen = screen
         self.data = data
 
-    def mainloop(self):
+    def mainloop(self) -> None:
 
         # create the map
         my_map = draw.Map(self.data, self.screen)
