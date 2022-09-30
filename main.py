@@ -2,6 +2,7 @@
 import pygame
 import draw
 import parse
+import player
 
 # initialise the pygame
 pygame.init()
@@ -12,8 +13,6 @@ pygame.display.set_caption("shape-your-way")
 
 # set the background color
 color =(196, 211, 249)
-surface.fill(color)
-rect_color = (233,226,246)
 
 
 # get the data (level and data)
@@ -22,14 +21,14 @@ data = parse.read_map(levels[0]['path'])
 
 # draw the map
 my_map = draw.Map(data,surface)
-
+player = player.Player()
+my_player = pygame.sprite.Group(player)
 
 # main loop
 run = True
 while run:
 
-    # delay for user interaction
-    pygame.time.delay(60)
+
 
     # map game
     for event in pygame.event.get():
@@ -50,8 +49,14 @@ while run:
         pass
     
 
-    my_map.read_data()
+    # my_map.read_data(my_player)
+    surface.fill(color)
+    my_map.read_data(my_player)
+    # my_player.update()
+    # my_player.draw(surface)
     pygame.display.update()
+    # delay for user interaction
+    pygame.time.delay(60)
 
 # quit
 pygame.quit()

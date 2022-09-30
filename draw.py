@@ -15,14 +15,14 @@ class Map:
     def get_map(self):
         return self.map
     
-    def read_data(self):
+    def read_data(self,player):
         for i in range (ROW):
             for j in range(COLUMN):
-                self.set_sprite(self.map[i][j],i,j)
+                self.set_sprite(self.map[i][j],i,j,player)
           
         
             
-    def set_sprite(self,symbol, i , j):
+    def set_sprite(self,symbol, i , j,player):
    
         if symbol == 'W':
             if self.wizard_frame == 6:
@@ -52,13 +52,15 @@ class Map:
         elif symbol == 'P':
             dice = pygame.image.load("./dice/dice.png")
             # print(self.dice_frame)
-            # dice =pygame.transform.rotate(dice, self.dice_frame*10) 
-            # self.dice_frame +=1
-            # if self.dice_frame ==9:
-            #     self.dice_frame=0
+            dice =pygame.transform.rotate(dice, self.dice_frame*-20) 
+            if self.dice_frame <9:
+                self.dice_frame +=1
+            if self.dice_frame ==9:
+                self.dice_frame=9
             
             self.surface.blit (dice , ((j*62)+315-(i*27),(i*34)+85))
-            
+            player.update()
+            player.draw(self.surface)
         elif symbol == 'M':
             sprite = pygame.image.load("./images/Vector 36.png")
             self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
