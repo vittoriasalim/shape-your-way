@@ -15,7 +15,6 @@ pygame.display.set_caption("shape-your-way")
 
 # set the background color
 color =(196, 211, 249)
-surface.fill(color)
 rect_color = (233,226,246)
 
 print("Creating a new window")
@@ -24,7 +23,7 @@ print("Creating a new window")
 # rect_border = (233,233,255)
 # pygame.draw.rect(surface, rect_border, pygame.Rect(99-10, 66-10, 792+20, 528+20),  10)
 
-pygame.display.flip()
+
 
 # get the data (level and data)
 levels = parse.parse_json()
@@ -34,7 +33,6 @@ print("Successfully parsing data for level 1")
 
 # draw the map
 my_map = draw.Map(data, surface)
-my_map.draw()
 
 print("Successfully created the map")
 
@@ -47,13 +45,13 @@ print(f"The player's current position: {current_position}")
 run = True
 while run:
 
-    # delay for user interaction
-    pygame.time.delay(60)
+    
 
     # map game
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+    surface.fill(color)
     
     # get the user input
     keys = pygame.key.get_pressed()
@@ -84,7 +82,7 @@ while run:
 
         # update the map's UI
         surface.fill(color)
-        my_map.draw()
+  
 
     elif keys[pygame.K_RIGHT]:
 
@@ -112,7 +110,7 @@ while run:
 
         # update the map's UI
         surface.fill(color)
-        my_map.draw()
+ 
 
     elif keys[pygame.K_UP]:
         
@@ -141,7 +139,7 @@ while run:
 
         # update the map's UI
         surface.fill(color)
-        my_map.draw()
+     
     
     elif keys[pygame.K_DOWN]:
         
@@ -170,11 +168,13 @@ while run:
 
         # update the map's UI
         surface.fill(color)
-        my_map.draw()
+  
     
 
     my_map.read_data()
-    pygame.display.flip()
+    pygame.display.update()
+    # delay for user interaction
+    pygame.time.delay(100)
 
 # quit
 pygame.quit()

@@ -91,11 +91,6 @@ class Map:
             sprite = pygame.image.load("./images/Vector 36.png")
             self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
          
-    def draw(self):
-        for i in range (ROW):
-            for j in range(COLUMN):
-                sprite = pygame.image.load("./images/Vector 36.png")
-                self.surface.blit (sprite , ((j*55)+315-(i*27),(i*34)+150))
             
     def get_starting_position(self):
         """
