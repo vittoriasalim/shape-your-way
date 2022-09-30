@@ -26,7 +26,7 @@ class Map:
         self.map = data
         self.surface = surface
         self.dice = pygame.image.load("./dice/dice.png")
-        self.dice_position= "default" #default /default2 / right/ down/ up /left
+        self.dice_position= "default" # default /default2 / right/ down/ up /left
         for i in range(ROW):
             for j in range(COLUMN):
                 if (self.map[i][j] == 'P'):
@@ -243,4 +243,4 @@ class Map:
         """
         Return the dice's position
         """
-        return self.get_dice_position
+        return self.dice_position
