@@ -95,13 +95,25 @@ class Map:
             self.surface.blit (tile , ((j*62)+315-(i*27),(i*34)+150))
             
         elif symbol == 'P':
-            
             self.surface.blit (self.dice , ((j*62)+315-(i*27),(i*34)+85))
             
-
         elif symbol == 'M':
             sprite = pygame.image.load("./images/Vector 36.png")
             self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
+        # elif symbol == ''
+        elif symbol == 'H':
+            sprite = pygame.image.load("./images/red-success.png")
+            self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
+        elif symbol == 'K':
+            sprite = pygame.image.load("./images/green-success.png")
+            self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
+        elif symbol == 'L':
+            sprite = pygame.image.load("./images/red-fail.png")
+            self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
+        elif symbol == 'N':
+            sprite = pygame.image.load("./images/green-fail.png")
+            self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
+
     
     def set_direction(self):
         if self.dice_position == "up":
