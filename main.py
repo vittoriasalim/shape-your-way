@@ -81,7 +81,6 @@ while run:
         elif (current_symbol == 'G' and next_path_symbol != 'R'):
             print("WARNING: move not allowed")
             continue
-        
 
         # not out of bounds
         # assign the new map after the user's moved
@@ -99,9 +98,8 @@ while run:
             current_symbol = 'R'
         else:
             current_symbol = 'G'
-        my_map.update_check(x, y)
+        my_map.update_check(current_position[0], current_position[1])
         
-        print(f"\t next:     {my_map.map[x]}")
         print(f"\tPlayer's current position: {current_position}")
 
         if (my_map.has_finished()):
@@ -141,9 +139,6 @@ while run:
         elif (current_symbol == 'G' and next_path_symbol != 'R'):
             print("WARNING: move not allowed")
             continue
-
-        print(f"\tPlayer's previous position: {current_position}")
-        print(f"\t previous: {my_map.map[x]}")
         
         # not out of bounds
         # assign the new map after the user's moved
@@ -158,9 +153,8 @@ while run:
             current_symbol = 'R'
         else:
             current_symbol = 'G'
-        my_map.update_check(x, y)
+        my_map.update_check(current_position[0], current_position[1])
 
-        print(f"\t next:     {my_map.map[x]}")
         print(f"\tPlayer's current position:  {current_position}")
 
         if (my_map.has_finished()):
@@ -217,7 +211,7 @@ while run:
             current_symbol = 'R'
         else:
             current_symbol = 'G'
-        my_map.update_check(x, y)
+        my_map.update_check(current_position[0], current_position[1])
 
         print(f"\tPlayer's current position: {current_position}")
 
@@ -273,7 +267,7 @@ while run:
             current_symbol = 'R'
         else:
             current_symbol = 'G'
-        my_map.update_check(x, y)
+        my_map.update_check(current_position[0], current_position[1])
 
         print(f"\tPlayer's current position: {current_position}")
 
