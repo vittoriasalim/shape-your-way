@@ -39,8 +39,11 @@ class Map:
            
 
             self.wizard_frame+=1
-        elif symbol == 'T':
-            tile = pygame.image.load("./images/print-tile.png")
+        elif symbol == 'R':
+            tile = pygame.image.load("./images/red.png")
+            self.surface.blit (tile , ((j*62)+315-(i*27),(i*34)+150))
+        elif symbol == 'G':
+            tile = pygame.image.load("./images/green.png")
             self.surface.blit (tile , ((j*62)+315-(i*27),(i*34)+150))
         elif symbol == 'E':
             tile = pygame.image.load("./images/end.png")
@@ -49,10 +52,10 @@ class Map:
         elif symbol == 'P':
             dice = pygame.image.load("./dice/dice.png")
             # print(self.dice_frame)
-            dice =pygame.transform.rotate(dice, self.dice_frame*10) 
-            self.dice_frame +=1
-            if self.dice_frame ==9:
-                self.dice_frame=0
+            # dice =pygame.transform.rotate(dice, self.dice_frame*10) 
+            # self.dice_frame +=1
+            # if self.dice_frame ==9:
+            #     self.dice_frame=0
             
             self.surface.blit (dice , ((j*62)+315-(i*27),(i*34)+85))
             

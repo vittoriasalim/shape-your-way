@@ -1,4 +1,4 @@
-from draw import MySprite
+
 import pygame
 import draw
 import parse
@@ -22,10 +22,6 @@ data = parse.read_map(levels[0]['path'])
 
 # draw the map
 my_map = draw.Map(data,surface)
-# my_map.draw()
-my_sprite = MySprite()
-my_group = pygame .sprite.Group(my_sprite)
-
 
 
 # main loop
@@ -54,7 +50,7 @@ while run:
         pass
     
 
-    my_map.read_data(my_group)
+    my_map.read_data()
     pygame.display.update()
 
 # quit
