@@ -22,10 +22,10 @@ class Game():
         self.is_running = False
         self.screen = screen
         self.data = data
-        # self.cur_level = 0
+        self.cur_level = 0
         # font for level
-        # self.myfont = pygame.font.SysFont("Rammetto One",35,bold =True)
-        # self.endFont = pygame.font.SysFont("Rammetto One",60,bold =True)
+        self.myfont = pygame.font.SysFont("Rammetto One",35,bold =True)
+        self.endFont = pygame.font.SysFont("Rammetto One",60,bold =True)
 
         # create a copy of the map
         self.static_map = []
@@ -99,11 +99,17 @@ class Game():
                 next_path_symbol = my_map.map[x][y - 1]    
                 if (my_map.has_finished() and next_path_symbol == 'E'):
                     my_map.map[x] = my_map.map[x][:y-1] + "P" + self.static_map[x][y] + my_map.map[x][y+1:]
-                    self.screen.fill(BG_COLOR)
+                  
                     self.cur_level+=1
                     if self.cur_level == len(levels):
                         self.is_running = False
                         continue
+                    data = parse.read_map(levels[self.cur_level]['path'])
+                    my_map = draw.Map(data, surface)
+                    # get the starting position of the player
+                    current_position = my_map.get_starting_position()
+                    current_symbol = my_map.get_starting_symbol()
+                    continue
 
                 elif (next_path_symbol not in allowed_tiles):
                     print("WARNING: move not allowed")
@@ -155,11 +161,17 @@ class Game():
                 next_path_symbol = my_map.map[x][y + 1]
                 if (my_map.has_finished() and next_path_symbol == 'E'):
                     my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + "P" + my_map.map[x][y+2:]
-                    self.screen.fill(BG_COLOR)
+                    
                     self.cur_level+=1
                     if self.cur_level == len(levels):
                         self.is_running = False
                         continue
+                    data = parse.read_map(levels[self.cur_level]['path'])
+                    my_map = draw.Map(data, surface)
+                    # get the starting position of the player
+                    current_position = my_map.get_starting_position()
+                    current_symbol = my_map.get_starting_symbol()
+                    continue
                 
                 elif (next_path_symbol not in allowed_tiles):
                     print("WARNING: move not allowed")
@@ -212,11 +224,17 @@ class Game():
                 if (my_map.has_finished() and next_path_symbol == 'E'):
                     my_map.map[x - 1] = my_map.map[x-1][:y] + "P" + my_map.map[x-1][y+1:]
                     my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + my_map.map[x][y+1:]
-                    self.screen.fill(BG_COLOR)
+                 
                     self.cur_level+=1
                     if self.cur_level == len(levels):
                         self.is_running = False
                         continue
+                    data = parse.read_map(levels[self.cur_level]['path'])
+                    my_map = draw.Map(data, surface)
+                    # get the starting position of the player
+                    current_position = my_map.get_starting_position()
+                    current_symbol = my_map.get_starting_symbol()
+                    continue
 
                 elif (next_path_symbol not in allowed_tiles):
                     print("WARNING: move not allowed")
@@ -269,11 +287,17 @@ class Game():
                 if (my_map.has_finished() and next_path_symbol == 'E'):
                     my_map.map[x + 1] = my_map.map[x+1][:y] + "P" + my_map.map[x+1][y+1:]
                     my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + my_map.map[x][y+1:]
-                    self.screen.fill(BG_COLOR)
+                
                     self.cur_level+=1
                     if self.cur_level == len(levels):
                         self.is_running = False
                         continue
+                    data = parse.read_map(levels[self.cur_level]['path'])
+                    my_map = draw.Map(data, surface)
+                    # get the starting position of the player
+                    current_position = my_map.get_starting_position()
+                    current_symbol = my_map.get_starting_symbol()
+                    continue
                     
                 
                 elif (next_path_symbol not in allowed_tiles):
@@ -307,9 +331,15 @@ class Game():
 
                 if (my_map.has_finished()):
                     print("PLAYER HAS PASSED ALL PATHS")
+            # pygame.draw.rect(surface, rect_color, pygame.Rect(195, 100, 600, 500))
+            # render text
+            
+            self.screen.fill(BG_COLOR)
+            label = self.myfont.render("LEVEL {} ".format(self.cur_level+1), 1, (233,233,255,1))
+            surface.blit(label, (750, 150))
 
             # update user interface
-            self.screen.fill(BG_COLOR)
+
             my_map.read_data()
             pygame.display.update()
             
