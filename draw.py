@@ -55,11 +55,9 @@ class Map:
     def set_sprite(self, symbol, i: int, j: int):
         """
         Set the sprite and store it into the the map
-
         Formula:
         x-coor: (j * 62) + 315 - (i * 27)
         y-coor: i * 34 + 150
-
         Args:
             symbol (_type_): the symbol from the map
             i (_type_): row
@@ -144,7 +142,8 @@ class Map:
 
         if self.dice_position == "default":
             self.set_direction_default(direction)
-        elif self.dice_position=="default2":
+        
+        elif self.dice_position == "default2":
             self.set_direction_default2(direction)
         
     
@@ -178,5 +177,9 @@ class Map:
                 if (self.check[i][j] != 1):
                     return False
         return True
+
     def get_dice_position(self):
+        """
+        Return the dice's position
+        """
         return self.get_dice_position
