@@ -121,6 +121,7 @@ class Game():
         # main loop
         press = False
         self.is_running = True
+        is_quit = False
         while (self.is_running):
             
             # frame per second
@@ -130,6 +131,7 @@ class Game():
             for event in pygame.event.get():
                 if (event.type == pygame.QUIT):
                     self.is_running = False
+                    is_quit = True
                     continue
 
                 elif (event.type == pygame.KEYUP):
@@ -393,17 +395,17 @@ class Game():
             pygame.display.update()
 
         
-        # end game
-        if (self.cur_level == MAX_LEVEL):
+        # quit the game
+        if (is_quit):
+            pygame.quit()
+        
+        # last level
+        elif (self.cur_level == MAX_LEVEL):
             print("Congratulations! You have passed all stages!")
 
         # to the next game
         else:
             Game(self.screen, self.cur_level + 1).mainloop()
-
-        
-        # quit
-        pygame.quit()
 
 
 if (__name__ == "__main__"):
