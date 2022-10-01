@@ -1,7 +1,4 @@
-
 import pygame
-import parse
-from game import Game
 
 # Constants
 WHITE = (0xFF, 0xFF, 0xFF)
@@ -16,10 +13,9 @@ class HomeScreen():
     """
     Home Screen (or Main Screen)
     """
-    def __init__(self, screen, data):
+    def __init__(self, screen):
 
         self.screen = screen
-        self.data = data
         self.is_running = False
         self.endFont = pygame.font.SysFont("Rammetto One", 60, bold=True)
         self.buttonFont = pygame.font.SysFont("Rammetto One", 40, bold=True)
@@ -44,7 +40,6 @@ class HomeScreen():
 
     def mainloop(self):
 
-
         self.is_running = True
         while (self.is_running):
 
@@ -64,15 +59,9 @@ class HomeScreen():
                     # if the mouse is clicked on the
                     # button, go to the game page
                     if 450 <= mouse[0] <= 600 and 350 <= mouse[1] <= 400:
-             
                         self.is_running = False
 
             # draw
             self.screen.fill(BG_COLOR)
             self.draw()
             pygame.display.update()
-
-
-            
-
-
