@@ -14,7 +14,7 @@ RECT_COLOR = (233, 226, 246)
 SCREEN_WIDTH = 990
 SCREEN_HEIGHT = 660
 
-MAX_LEVEL = 4
+MAX_LEVEL = 5
 
 class Game():
     """
@@ -136,6 +136,15 @@ class Game():
                     return False
         return True
 
+    def update_ui(self, my_map) -> None:
+        """
+        Update the UI
+        """
+        self.screen.fill(BG_COLOR)
+        my_map.read_data()
+        label = self.myfont.render("LEVEL {} ".format(self.cur_level), 1, (233,233,255,1))
+        self.screen.blit(label, (750, 100))
+
     def mainloop(self) -> bool:
 
         # create the map
@@ -222,11 +231,21 @@ class Game():
                 # hit the teleport
                 elif next_path_symbol == "T":
 
+                    # get the dice to the position
+                    my_map.map[x] = my_map.map[x][:y-1] + "P" + self.static_map[x][y] + my_map.map[x][y+1:]
+
+                    # do some animation of the dice
+                    my_map.move("left")
+
+                    # update UI
+                    self.update_ui(my_map)
+                    pygame.display.update()
+
+                    # delay
+                    pygame.time.delay(200)
+
                     # reset the map
                     my_map.map[x] = "".join(self.static_map[x])
-
-                    # move the dice to the left
-                    my_map.move("left")
 
                     # get the starting position and move the dice to the starting position
                     x = self.starting_position[0]
@@ -235,8 +254,7 @@ class Game():
                     my_map.map[x] = my_map.map[x][:y] + "P" + my_map.map[x][y+1:]
 
                     # update UI
-                    self.screen.fill(BG_COLOR)
-                    my_map.read_data()
+                    self.update_ui(my_map)
                     pygame.display.update()
                     continue
 
@@ -309,11 +327,21 @@ class Game():
                 # hit the teleport
                 elif next_path_symbol == "T":
 
-                    # reset the map
-                    my_map.map[x] = "".join(self.static_map[x])
+                    # get the dice to the position
+                    my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + "P" + my_map.map[x][y+2:]
 
                     # move the dice to the right
                     my_map.move("right")
+
+                    # update UI
+                    self.update_ui(my_map)
+                    pygame.display.update()
+
+                    # delay
+                    pygame.time.delay(200)
+
+                    # reset the map
+                    my_map.map[x] = "".join(self.static_map[x])
 
                     # get the starting position and move the dice to the starting position
                     x = self.starting_position[0]
@@ -322,8 +350,7 @@ class Game():
                     my_map.map[x] = my_map.map[x][:y] + "P" + my_map.map[x][y+1:]
 
                     # update UI
-                    self.screen.fill(BG_COLOR)
-                    my_map.read_data()
+                    self.update_ui(my_map)
                     pygame.display.update()
                     continue
                 
@@ -396,11 +423,23 @@ class Game():
                 # hit the teleport
                 elif next_path_symbol == "T":
                     
-                    # reset the map
-                    my_map.map[x] = "".join(self.static_map[x])
+                    # get the dice to the position
+                    my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + my_map.map[x][y+1:]
+                    my_map.map[x - 1] = my_map.map[x-1][:y] + "P" + my_map.map[x-1][y+1:]
 
                     # move up the dice
                     my_map.move("up")
+
+                    # update UI
+                    self.update_ui(my_map)
+                    pygame.display.update()
+
+                    # delay
+                    pygame.time.delay(200)
+
+                    # reset the map
+                    my_map.map[x] = "".join(self.static_map[x])
+                    my_map.map[x - 1] = "".join(self.static_map[x - 1])
 
                     # get the starting position and move the dice to the starting position
                     x = self.starting_position[0]
@@ -409,8 +448,7 @@ class Game():
                     my_map.map[x] = my_map.map[x][:y] + "P" + my_map.map[x][y+1:]
 
                     # update UI
-                    self.screen.fill(BG_COLOR)
-                    my_map.read_data()
+                    self.update_ui(my_map)
                     pygame.display.update()
                     continue
 
@@ -486,11 +524,23 @@ class Game():
                 # hit the teleport
                 elif next_path_symbol == "T":
                     
-                    # reset the map
-                    my_map.map[x] = "".join(self.static_map[x])
+                    # get the dice to the position
+                    my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + my_map.map[x][y+1:]
+                    my_map.map[x + 1] = my_map.map[x+1][:y] + "P" + my_map.map[x+1][y+1:]
 
                     # move down the dice
                     my_map.move("down")
+
+                    # update UI
+                    self.update_ui(my_map)
+                    pygame.display.update()
+
+                    # delay
+                    pygame.time.delay(200)
+
+                    # reset the map
+                    my_map.map[x] = "".join(self.static_map[x])
+                    my_map.map[x + 1] = "".join(self.static_map[x + 1])
 
                     # get the starting position and move the dice to the starting position
                     x = self.starting_position[0]
@@ -499,8 +549,7 @@ class Game():
                     my_map.map[x] = my_map.map[x][:y] + "P" + my_map.map[x][y+1:]
 
                     # update UI
-                    self.screen.fill(BG_COLOR)
-                    my_map.read_data()
+                    self.update_ui(my_map)
                     pygame.display.update()
                     continue
                 
@@ -546,11 +595,12 @@ class Game():
             
             
             # update user interface
-            self.screen.fill(BG_COLOR)
-            label = self.myfont.render("LEVEL {} ".format(self.cur_level), 1, (233,233,255,1))
-            self.screen.blit(label, (750, 150))
+            self.update_ui(my_map)
+            # self.screen.fill(BG_COLOR)
+            # label = self.myfont.render("LEVEL {} ".format(self.cur_level), 1, (233,233,255,1))
+            # self.screen.blit(label, (750, 100))
 
-            my_map.read_data()
+            # my_map.read_data()
             pygame.display.update()
 
         # last level
