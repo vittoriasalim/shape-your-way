@@ -52,20 +52,39 @@ class Game():
         print(f"Current Level: {self.cur_level}")
 
         # load the levels and data according to the indicated current level
-        self.levels = parse.parse_json()
-        data = parse.read_map(self.levels[ self.cur_level - 1 ]['path'])
-        self.data = data
-        
-        self.starting_position = (0,0)
+        self.get_data()
+
+        for i in range(ROW):
+            for j in range(COL):
+                if (self.data[i][j] == 'P'):
+                    self.starting_position = (i, j)
         self.starting_symbol = 'R'
-        self.get_starting_position()
 
         # font for the game
         self.myfont = pygame.font.SysFont("Rammetto One",35,bold =True)
         self.endFont = pygame.font.SysFont("Rammetto One",60,bold =True)
         self.buttonFont = pygame.font.SysFont("Rammetto One", 40, bold=True)
 
+        # create a copy of the map
+        self.create_static_map()
 
+        # create an object to store whether the player has passed the tiles
+        self.create_check()
+
+
+    def get_data(self) -> None:
+        """
+        Parse the config file and get and assign the data
+        """
+        # load the levels and data according to the indicated current level
+        self.levels = parse.parse_json()
+        data = parse.read_map(self.levels[ self.cur_level - 1 ]['path'])
+        self.data = data
+
+    def create_static_map(self) -> None:
+        """
+        Create a static map to store the current map
+        """
         # create a copy of the map
         self.static_map = [] # a list of lists
         for i in range(ROW):
@@ -75,7 +94,11 @@ class Game():
                     self.static_map[i].append("R")
                 else:
                     self.static_map[i].append(self.data[i][j])
-
+    
+    def create_check(self) -> None:
+        """
+        Create a check to store whether the player has passed the tiles
+        """
         # create an object to store whether the player has passed the tiles
         self.check = []
         for i in range(ROW):
@@ -85,17 +108,16 @@ class Game():
                     self.check[i].append(0)
                 else:
                     self.check[i].append(1)
-        
         self.check[self.starting_position[0]][self.starting_position[1]] = 1
-    def get_starting_position(self):
-        # for the game
-        for i in range(ROW):
-            for j in range(COL):
-                if (self.data[i][j] == 'P'):
-                    self.starting_position = (i, j)
-        self.starting_symbol = 'R'
-        
 
+    def reset(self) -> None:
+        """
+        Reset the current level
+        """
+        self.get_data()
+        self.create_static_map()
+        self.create_check()
+    
     def update_check(self, i, j) -> None:
         """
         Update the move by the player
@@ -115,7 +137,7 @@ class Game():
     def mainloop(self) -> bool:
 
         # create the map
-        my_map = draw.Map(self.data, self.screen,self.cur_level, self.levels)
+        my_map = draw.Map(self.data, self.screen, self.cur_level, self.levels)
 
         print("Successfully created the map")
 
@@ -135,14 +157,25 @@ class Game():
             
             # frame per second
             pygame.time.delay(50)
-            if my_map.get_reset() :
-          
-                self.get_starting_position()
 
+            # time runs out, reset the player's position into the starting position
+            if my_map.get_reset():
+                
+                # reset the pygame screen
+                self.screen.fill(BG_COLOR)
+                self.reset() # reset the data
+
+                # create a new map
+                my_map = draw.Map(self.data, self.screen, self.cur_level, self.levels)
+                
+                # resent current_position and current_symbol
                 current_position = self.starting_position
                 current_symbol = self.starting_symbol
-                my_map.set_reset(False)
-            
+
+                # update the user interface
+                my_map.read_data()
+                pygame.display.update()
+                continue
 
             # map game
             for event in pygame.event.get():
@@ -153,7 +186,6 @@ class Game():
 
                 elif (event.type == pygame.KEYUP):
                     press = False
-            
 
             # get the user input
             keys = pygame.key.get_pressed()
@@ -414,14 +446,12 @@ class Game():
 
                 if (self.has_finished()):
                     print("PLAYER HAS PASSED ALL PATHS")
-            # pygame.draw.rect(surface, rect_color, pygame.Rect(195, 100, 600, 500))
-            # render text
             
+            
+            # update user interface
             self.screen.fill(BG_COLOR)
             label = self.myfont.render("LEVEL {} ".format(self.cur_level), 1, (233,233,255,1))
             self.screen.blit(label, (750, 150))
-
-            # update user interface
 
             my_map.read_data()
             pygame.display.update()
