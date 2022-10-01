@@ -2,23 +2,11 @@
     "levels":[
         {
             "path":"./levels/level1.txt",
-            "pattern":"pattern1.txt"
+            "time":60
         },
         {
             "path":"./levels/level2.txt",
-            "pattern":"pattern2.txt"
-        },
-        {
-            "path":"./levels/level3.txt",
-            "pattern":"pattern2.txt"
-        },
-        {
-            "path":"./levels/level5.txt",
-            "pattern":"pattern2.txt"
-        },
-        {
-            "path":"./levels/level.5",
-            "pattern":"pattern2.txt"
+            "time":60
         }
     ]
 }

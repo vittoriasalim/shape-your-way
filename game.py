@@ -48,8 +48,8 @@ class Game():
         print(f"Current Level: {self.cur_level}")
 
         # load the levels and data according to the indicated current level
-        levels = parse.parse_json()
-        data = parse.read_map(levels[ self.cur_level - 1 ]['path'])
+        self.levels = parse.parse_json()
+        data = parse.read_map(self.levels[ self.cur_level - 1 ]['path'])
         self.data = data
 
         # font for the game
@@ -105,7 +105,7 @@ class Game():
     def mainloop(self) -> None:
 
         # create the map
-        my_map = draw.Map(self.data, self.screen)
+        my_map = draw.Map(self.data, self.screen,self.cur_level, self.levels)
 
         print("Successfully created the map")
 

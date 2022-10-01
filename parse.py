@@ -16,6 +16,8 @@ def read_map(file):
     data = my_file.read().split("\n")
     return data
 
+
+
     
 
     
