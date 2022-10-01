@@ -2,13 +2,17 @@ import pygame
 
 # Constants
 WHITE = (0xFF, 0xFF, 0xFF)
-BLACK_COLOR=(0,0,0)
+BLACK_COLOR= (0,0,0)
 BG_COLOR = ((192,192,192))
 RECT_COLOR = (105,105,105)
 TEXT_COLOR = (211,211,211)
 GREY_COLOR=(255,255,255)
+
+# window size
 SCREEN_WIDTH = 990
 SCREEN_HEIGHT = 660
+
+# background images
 DUNGEON_BG = ("./images/dungeon_bg.jpeg")
 CAVE_BG =("./images/purple_dg_bg.png")
 
