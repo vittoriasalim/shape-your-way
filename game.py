@@ -14,7 +14,7 @@ RECT_COLOR = (233, 226, 246)
 SCREEN_WIDTH = 990
 SCREEN_HEIGHT = 660
 
-MAX_LEVEL = 3
+MAX_LEVEL = 2
 
 class Game():
     """
