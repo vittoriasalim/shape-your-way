@@ -16,6 +16,7 @@ MAIN_MENU_MUSIC2 = ("./sounds/sounds_8Bit Platformer Loop.ogg")
 GAME_MUSIC= ("./sounds/Dystopian.ogg")
 GAME_MUSIC2 = ("./sounds/Quantum Loop.ogg")
 WINNING_SCREEN_MUSIC = ("")
+
 # Main App
 class App():
 
