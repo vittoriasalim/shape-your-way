@@ -1,6 +1,6 @@
 import pygame
-import draw
 import parse
+from game import Game
 
 # Constants
 WHITE = (0xFF, 0xFF, 0xFF)
@@ -11,12 +11,10 @@ RECT_COLOR = (233, 226, 246)
 SCREEN_WIDTH = 990
 SCREEN_HEIGHT = 660
 
-
 class HomeScreen():
     """
     Home Screen (or Main Screen)
     """
-
     def __init__(self, screen, data):
 
         self.screen = screen
@@ -24,13 +22,15 @@ class HomeScreen():
         self.is_running = False
         self.endFont = pygame.font.SysFont("Rammetto One", 60, bold=True)
         self.buttonFont = pygame.font.SysFont("Rammetto One", 40, bold=True)
-        # self.widgets = []
-        # self.create_objects()
 
     def draw(self):
+
+        # Create header "Roll Your Way" on home screen
         pygame.draw.rect(self.screen, RECT_COLOR, pygame.Rect(195, 60, 600, 550))
         label = self.endFont.render("ROLL YOUR WAY", 1, BG_COLOR)
         self.screen.blit(label, (300, 200))
+
+        # Create "Start" button
         pygame.draw.rect(self.screen, (164, 182, 229, 1), pygame.Rect(195, 60, 600, 550), 10)
         pygame.draw.rect(self.screen, (164, 182, 229, 1), pygame.Rect(423, 340, 150, 50))
         pygame.draw.rect(self.screen, BG_COLOR, pygame.Rect(423, 340, 150, 50), 5)
@@ -43,6 +43,7 @@ class HomeScreen():
 
     def mainloop(self):
 
+        go_to_game = False
         self.is_running = True
         while (self.is_running):
 
@@ -60,14 +61,20 @@ class HomeScreen():
                 if ev.type == pygame.MOUSEBUTTONDOWN:
 
                     # if the mouse is clicked on the
-                    # button the game is terminated
+                    # button, go to the game page
                     if 450 <= mouse[0] <= 600 and 350 <= mouse[1] <= 400:
-                        pygame.quit()
+                        go_to_game = True
+                        self.is_running = False
 
             # draw
             self.screen.fill(BG_COLOR)
             self.draw()
             pygame.display.update()
+
+        if (go_to_game):
+            # start from level 1
+            self.data = parse.read_map(self.data[0]['path'])
+            Game(self.screen, self.data).mainloop()
 
         pygame.quit()
 
