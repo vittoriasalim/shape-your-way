@@ -10,15 +10,15 @@
         },
         {
             "path":"./levels/level3.txt",
-            "time":30
+            "time":60
         },
         {
             "path":"./levels/level4.txt",
-            "time":30
+            "time":60
         },
         {
             "path":"./levels/level5.txt",
-            "time":30
+            "time":60
         }
     ]
 }
