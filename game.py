@@ -629,7 +629,7 @@ if (__name__ == "__main__"):
 
     # create the window
     surface = pygame.display.set_mode((990,660))
-    pygame.display.set_caption("Find Your Way Out")
+    pygame.display.set_caption("Shape Your Way")
 
     # main loop in homescreen
     Game(surface, 1).mainloop()

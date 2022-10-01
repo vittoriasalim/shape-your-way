@@ -87,7 +87,7 @@ if (__name__ == "__main__"):
 
     # create the window
     surface = pygame.display.set_mode((990, 560))
-    pygame.display.set_caption("Find Your Way Out")
+    pygame.display.set_caption("Shape Your Way")
 
     # load the levels and data
     levels = parse.parse_json()
