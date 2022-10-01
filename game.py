@@ -28,6 +28,7 @@ class Game():
         self.myfont = pygame.font.SysFont("Rammetto One",35,bold =True)
         self.endFont = pygame.font.SysFont("Rammetto One",60,bold =True)
         self.buttonFont = pygame.font.SysFont("Rammetto One", 40, bold=True)
+        self.levels = parse.parse_json()
         # create a copy of the map
         self.static_map = []
         for i in range(ROW):
@@ -102,9 +103,8 @@ class Game():
                 next_path_symbol = my_map.map[x][y - 1]    
                 if (my_map.has_finished() and next_path_symbol == 'E'):
                     my_map.map[x] = my_map.map[x][:y-1] + "P" + self.static_map[x][y] + my_map.map[x][y+1:]
-                  
                     self.cur_level+=1
-                    if self.cur_level == len(levels):
+                    if self.cur_level == len(self.levels):
                         self.is_running = False
                         continue
                     data = parse.read_map(levels[self.cur_level]['path'])
