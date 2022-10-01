@@ -14,7 +14,7 @@ RECT_COLOR = (233, 226, 246)
 SCREEN_WIDTH = 990
 SCREEN_HEIGHT = 660
 
-MAX_LEVEL = 2
+MAX_LEVEL = 3
 
 class Game():
     """
@@ -92,6 +92,8 @@ class Game():
             for j in range(COL):
                 if (self.data[i][j] == "P"):
                     self.static_map[i].append("R")
+                elif (self.data[i][j] == "W"):
+                    self.static_map[i].append("M")
                 else:
                     self.static_map[i].append(self.data[i][j])
     
@@ -215,7 +217,7 @@ class Game():
                 
                 elif next_path_symbol == 'W':
                     my_map.attack()
-                    continue
+                
 
                 elif (next_path_symbol not in allowed_tiles):
                     print("WARNING: move not allowed")
@@ -276,9 +278,9 @@ class Game():
                 if (self.has_finished() and next_path_symbol == 'E'):
                     self.is_running = False
                     continue
+                
                 elif next_path_symbol == 'W':
                     my_map.attack()
-                    continue
                 
                 elif (next_path_symbol not in allowed_tiles):
                     print("WARNING: move not allowed")
@@ -338,9 +340,10 @@ class Game():
                 if (self.has_finished() and next_path_symbol == 'E'):
                     self.is_running = False
                     continue
+                
                 elif next_path_symbol == 'W':
                     my_map.attack()
-                    continue
+                    # continue
 
                 elif (next_path_symbol not in allowed_tiles):
                     print("WARNING: move not allowed")
@@ -403,9 +406,10 @@ class Game():
                 if (self.has_finished() and next_path_symbol == 'E'):
                     self.is_running = False
                     continue
+                    
                 elif next_path_symbol == 'W':
                     my_map.attack()
-                    continue
+                    # continue
                 
                 elif (next_path_symbol not in allowed_tiles):
                     print("WARNING: move not allowed")
