@@ -424,6 +424,10 @@ class Game():
 
                 # hit the teleport
                 elif next_path_symbol == "T":
+
+                    # create temporary objects
+                    temp_up = my_map.map[x - 1]
+                    temp = my_map.map[x]
                     
                     # get the dice to the position
                     my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + my_map.map[x][y+1:]
@@ -440,8 +444,9 @@ class Game():
                     pygame.time.delay(200)
 
                     # reset the map
-                    my_map.map[x] = "".join(self.static_map[x])
-                    my_map.map[x - 1] = "".join(self.static_map[x - 1])
+                    index = temp.find("P")
+                    my_map.map[x] = temp.replace("P", self.static_map[x][index])
+                    my_map.map[x - 1] = temp_up
 
                     # get the starting position and move the dice to the starting position
                     x = self.starting_position[0]
@@ -526,6 +531,10 @@ class Game():
                 # hit the teleport
                 elif next_path_symbol == "T":
                     
+                    # create temporary objects
+                    temp_down = my_map.map[x + 1]
+                    temp = my_map.map[x]
+
                     # get the dice to the position
                     my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + my_map.map[x][y+1:]
                     my_map.map[x + 1] = my_map.map[x+1][:y] + "P" + my_map.map[x+1][y+1:]
@@ -541,8 +550,9 @@ class Game():
                     pygame.time.delay(200)
 
                     # reset the map
-                    my_map.map[x] = "".join(self.static_map[x])
-                    my_map.map[x + 1] = "".join(self.static_map[x + 1])
+                    index = temp.find("P")
+                    my_map.map[x] = temp.replace("P", self.static_map[x][index])
+                    my_map.map[x + 1] = temp_up
 
                     # get the starting position and move the dice to the starting position
                     x = self.starting_position[0]
@@ -638,7 +648,7 @@ if (__name__ == "__main__"):
     pygame.display.set_caption("Shape Your Way")
 
     # main loop in homescreen
-    Game(surface, 1).mainloop()
+    Game(surface, 5).mainloop()
 
     # quit the game properly
     pygame.quit()
