@@ -2,7 +2,7 @@
     "levels":[
        
         {
-            "path":"./levels/level1.txt",
+            "path":"./levels/level.txt",
             "time":20
         },
         {
