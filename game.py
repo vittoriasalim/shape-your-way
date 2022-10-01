@@ -215,7 +215,8 @@ class Game():
                 
                 elif next_path_symbol == 'W':
                     my_map.attack()
-                
+                    my_map.map[x] = my_map.map[x][:y-1] + "M" + "P" + my_map.map[x][y+1:]
+                    continue
 
                 elif (next_path_symbol not in allowed_tiles):
                     print("WARNING: move not allowed")
@@ -279,6 +280,8 @@ class Game():
                 
                 elif next_path_symbol == 'W':
                     my_map.attack()
+                    my_map.map[x] = my_map.map[x][:y] + "P" + "M" + my_map.map[x][y+2:]
+                    continue
                 
                 elif (next_path_symbol not in allowed_tiles):
                     print("WARNING: move not allowed")
@@ -341,7 +344,9 @@ class Game():
                 
                 elif next_path_symbol == 'W':
                     my_map.attack()
-                    # continue
+                    my_map.map[x] = my_map.map[x][:y] + "P" + my_map.map[x][y+1:]
+                    my_map.map[x - 1] = my_map.map[x-1][:y] + "M" + my_map.map[x-1][y+1:]
+                    continue
 
                 elif (next_path_symbol not in allowed_tiles):
                     print("WARNING: move not allowed")
@@ -407,7 +412,9 @@ class Game():
                     
                 elif next_path_symbol == 'W':
                     my_map.attack()
-                    # continue
+                    my_map.map[x] = my_map.map[x][:y] + "P" + my_map.map[x][y+1:]
+                    my_map.map[x + 1] = my_map.map[x+1][:y] + "M" + my_map.map[x+1][y+1:]
+                    continue
                 
                 elif (next_path_symbol not in allowed_tiles):
                     print("WARNING: move not allowed")
