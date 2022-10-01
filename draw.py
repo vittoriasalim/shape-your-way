@@ -1,6 +1,7 @@
 import pygame
 
 import parse
+import game
 # The dimensions of the map is confirmed to be the 10x10
 ROW = 10
 COLUMN = 10
@@ -35,6 +36,7 @@ class Map:
         self.tick = 0
         self.myfont = pygame.font.SysFont("Rammetto One",35,bold =True)
         self.wizard_attack =False
+        self.reset =False
     def read_data(self):
         """
         Set the sprite of the map in each tile (all the tiles)
@@ -43,11 +45,19 @@ class Map:
             # print(self.cur_level)
             self.map = parse.read_map(self.levels[ self.cur_level - 1 ]['path'])
             self.time = self.levels[self.cur_level-1]['time']
+            self.reset = True
+
+        else:
   
             
-        for i in range (ROW):
-            for j in range(COLUMN):
-                self.set_sprite(self.map[i][j],i,j)
+            for i in range (ROW):
+                for j in range(COLUMN):
+                    self.set_sprite(self.map[i][j],i,j)
+    def get_reset(self):
+        return self.reset
+    def set_reset(self, reset):
+        self.reset = reset
+        
     
     def set_sprite(self, symbol, i: int, j: int):
         """
@@ -75,9 +85,11 @@ class Map:
             if self.wizard_frame == 6 and self.wizard_attack:
                 self.wizard_frame = 0
                 self.wizard_attack = False
+                
              
             elif self.wizard_frame == 6:
                 self.wizard_frame = 0
+           
             
       
 
