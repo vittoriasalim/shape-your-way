@@ -14,7 +14,7 @@ RECT_COLOR = (233, 226, 246)
 SCREEN_WIDTH = 990
 SCREEN_HEIGHT = 660
 
-MAX_LEVEL = 2
+MAX_LEVEL = 4
 
 class Game():
     """
@@ -213,9 +213,31 @@ class Game():
                     self.is_running = False                    
                     continue
                 
+                # hit the wizard
                 elif next_path_symbol == 'W':
                     my_map.attack()
                     my_map.map[x] = my_map.map[x][:y-1] + "M" + "P" + my_map.map[x][y+1:]
+                    continue
+
+                # hit the teleport
+                elif next_path_symbol == "T":
+
+                    # reset the map
+                    my_map.map[x] = "".join(self.static_map[x])
+
+                    # move the dice to the left
+                    my_map.move("left")
+
+                    # get the starting position and move the dice to the starting position
+                    x = self.starting_position[0]
+                    y = self.starting_position[1]
+                    current_position = (x, y)
+                    my_map.map[x] = my_map.map[x][:y] + "P" + my_map.map[x][y+1:]
+
+                    # update UI
+                    self.screen.fill(BG_COLOR)
+                    my_map.read_data()
+                    pygame.display.update()
                     continue
 
                 elif (next_path_symbol not in allowed_tiles):
@@ -278,9 +300,31 @@ class Game():
                     self.is_running = False
                     continue
                 
+                # hit the wizard
                 elif next_path_symbol == 'W':
                     my_map.attack()
                     my_map.map[x] = my_map.map[x][:y] + "P" + "M" + my_map.map[x][y+2:]
+                    continue
+
+                # hit the teleport
+                elif next_path_symbol == "T":
+
+                    # reset the map
+                    my_map.map[x] = "".join(self.static_map[x])
+
+                    # move the dice to the right
+                    my_map.move("right")
+
+                    # get the starting position and move the dice to the starting position
+                    x = self.starting_position[0]
+                    y = self.starting_position[1]
+                    current_position = (x, y)
+                    my_map.map[x] = my_map.map[x][:y] + "P" + my_map.map[x][y+1:]
+
+                    # update UI
+                    self.screen.fill(BG_COLOR)
+                    my_map.read_data()
+                    pygame.display.update()
                     continue
                 
                 elif (next_path_symbol not in allowed_tiles):
@@ -342,10 +386,32 @@ class Game():
                     self.is_running = False
                     continue
                 
+                # hit the wizard
                 elif next_path_symbol == 'W':
                     my_map.attack()
                     my_map.map[x] = my_map.map[x][:y] + "P" + my_map.map[x][y+1:]
                     my_map.map[x - 1] = my_map.map[x-1][:y] + "M" + my_map.map[x-1][y+1:]
+                    continue
+
+                # hit the teleport
+                elif next_path_symbol == "T":
+                    
+                    # reset the map
+                    my_map.map[x] = "".join(self.static_map[x])
+
+                    # move up the dice
+                    my_map.move("up")
+
+                    # get the starting position and move the dice to the starting position
+                    x = self.starting_position[0]
+                    y = self.starting_position[1]
+                    current_position = (x, y)
+                    my_map.map[x] = my_map.map[x][:y] + "P" + my_map.map[x][y+1:]
+
+                    # update UI
+                    self.screen.fill(BG_COLOR)
+                    my_map.read_data()
+                    pygame.display.update()
                     continue
 
                 elif (next_path_symbol not in allowed_tiles):
@@ -409,11 +475,33 @@ class Game():
                 if (self.has_finished() and next_path_symbol == 'E'):
                     self.is_running = False
                     continue
-                    
+                
+                # hit the wizard
                 elif next_path_symbol == 'W':
                     my_map.attack()
                     my_map.map[x] = my_map.map[x][:y] + "P" + my_map.map[x][y+1:]
                     my_map.map[x + 1] = my_map.map[x+1][:y] + "M" + my_map.map[x+1][y+1:]
+                    continue
+
+                # hit the teleport
+                elif next_path_symbol == "T":
+                    
+                    # reset the map
+                    my_map.map[x] = "".join(self.static_map[x])
+
+                    # move down the dice
+                    my_map.move("down")
+
+                    # get the starting position and move the dice to the starting position
+                    x = self.starting_position[0]
+                    y = self.starting_position[1]
+                    current_position = (x, y)
+                    my_map.map[x] = my_map.map[x][:y] + "P" + my_map.map[x][y+1:]
+
+                    # update UI
+                    self.screen.fill(BG_COLOR)
+                    my_map.read_data()
+                    pygame.display.update()
                     continue
                 
                 elif (next_path_symbol not in allowed_tiles):

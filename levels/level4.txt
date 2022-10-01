@@ -1,5 +1,5 @@
 ----------
-----------
+W-------W-
 --MMMMM---
 -MMGMMMM--
 -MMRMRGM--
@@ -7,4 +7,4 @@
 -MGRMRMM--
 -MMMMGMM--
 --MMMMM---
-----------
+W-------W-

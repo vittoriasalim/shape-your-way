@@ -134,6 +134,10 @@ class Map:
         elif symbol == 'N':
             sprite = pygame.image.load("./images/green-fail.png")
             self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
+
+        # elif symbol == 'T':
+        #     sprite = pygame.
+        #     self.surface.blit ()
            
     def set_direction_default(self,direction):
         if direction == "right" :
