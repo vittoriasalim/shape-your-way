@@ -38,6 +38,7 @@ class Game():
     - static_map: it is to indicate the G/R/H/K symbols in the map
     - check: to check whether the player has passed all the required tiles
     """
+    
 
     def __init__(self, screen, cur_level) -> None:
         
@@ -51,18 +52,16 @@ class Game():
         self.levels = parse.parse_json()
         data = parse.read_map(self.levels[ self.cur_level - 1 ]['path'])
         self.data = data
+        
+        self.starting_position = (0,0)
+        self.starting_symbol = 'R'
+        self.get_starting_position()
 
         # font for the game
         self.myfont = pygame.font.SysFont("Rammetto One",35,bold =True)
         self.endFont = pygame.font.SysFont("Rammetto One",60,bold =True)
         self.buttonFont = pygame.font.SysFont("Rammetto One", 40, bold=True)
 
-        # for the game
-        for i in range(ROW):
-            for j in range(COL):
-                if (self.data[i][j] == 'P'):
-                    self.starting_position = (i, j)
-        self.starting_symbol = 'R'
 
         # create a copy of the map
         self.static_map = [] # a list of lists
@@ -85,6 +84,14 @@ class Game():
                     self.check[i].append(1)
         
         self.check[self.starting_position[0]][self.starting_position[1]] = 1
+    def get_starting_position(self):
+        # for the game
+        for i in range(ROW):
+            for j in range(COL):
+                if (self.data[i][j] == 'P'):
+                    self.starting_position = (i, j)
+        self.starting_symbol = 'R'
+        
 
     def update_check(self, i, j) -> None:
         """
@@ -126,6 +133,14 @@ class Game():
             
             # frame per second
             pygame.time.delay(50)
+            if my_map.get_reset() :
+          
+                self.get_starting_position()
+
+                current_position = self.starting_position
+                current_symbol = self.starting_symbol
+                my_map.set_reset(False)
+            
 
             # map game
             for event in pygame.event.get():
@@ -136,6 +151,7 @@ class Game():
 
                 elif (event.type == pygame.KEYUP):
                     press = False
+            
 
             # get the user input
             keys = pygame.key.get_pressed()
