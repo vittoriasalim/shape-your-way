@@ -61,17 +61,14 @@ class Game():
         self.is_running = True
         while True:
             
-
-            # frame per second
-            pygame.time.delay(50)
-            
             if not self.is_running:
-        
+            
                 pygame.draw.rect(self.screen, RECT_COLOR, pygame.Rect(195, 100, 600, 500))
                 label = self.endFont.render("GAME OVER", 1, BG_COLOR)
                 self.screen.blit(label, (362, 310))
-                pygame.quit()
+                pygame.display.update()
                 continue
+               
 
             # map game
             for event in pygame.event.get():
@@ -372,6 +369,8 @@ class Game():
 
             my_map.read_data()
             pygame.display.update()
+            # frame per second
+            pygame.time.delay(50)
             
         # quit
         pygame.quit()
