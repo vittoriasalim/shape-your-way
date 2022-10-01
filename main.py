@@ -30,14 +30,19 @@ class App():
         surface = pygame.display.set_mode((990,660))
         pygame.display.set_caption("Find Your Way Out")
 
+        is_quit = False
+
         # Get the homescreen
-        HomeScreen(surface).mainloop()
+        if (not is_quit):
+            is_quit = HomeScreen(surface).mainloop()
 
         # start from level 1
-        Game(surface, 1).mainloop()
+        if (not is_quit):
+            is_quit = Game(surface, 1).mainloop()
 
         # once the player passed all the game levels
-        WinningScreen(surface).mainloop()
+        if (not is_quit):
+            is_quit = WinningScreen(surface).mainloop()
 
         # quit the game properly
         pygame.quit()

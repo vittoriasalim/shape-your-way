@@ -1,6 +1,5 @@
 import pygame
 import parse
-from game import Game
 
 # Constants
 WHITE = (0xFF, 0xFF, 0xFF)

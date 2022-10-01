@@ -40,6 +40,9 @@ class Game():
     """
 
     def __init__(self, screen, cur_level) -> None:
+
+        # initialize the pygame
+        pygame.init()
         
         self.is_running = False
         self.screen = screen
@@ -121,7 +124,6 @@ class Game():
         # main loop
         press = False
         self.is_running = True
-        is_quit = False
         while (self.is_running):
             
             # frame per second
@@ -129,10 +131,10 @@ class Game():
 
             # map game
             for event in pygame.event.get():
+
                 if (event.type == pygame.QUIT):
-                    self.is_running = False
-                    is_quit = True
-                    continue
+                    pygame.quit()
+                    return True
 
                 elif (event.type == pygame.KEYUP):
                     press = False
@@ -408,13 +410,8 @@ class Game():
             my_map.read_data()
             pygame.display.update()
 
-        
-        # quit the game
-        if (is_quit):
-            pygame.quit()
-        
         # last level
-        elif (self.cur_level == MAX_LEVEL):
+        if (self.cur_level == MAX_LEVEL):
             print("Congratulations! You have passed all stages!")
 
         # to the next game
