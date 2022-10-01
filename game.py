@@ -176,14 +176,6 @@ class Game():
 
                 my_map.set_reset(False)
                 continue
-            
-
-
-                # update the user interface
-                my_map.read_data()
-                pygame.display.update()
-                continue
-
 
             # map game
             for event in pygame.event.get():
