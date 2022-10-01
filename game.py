@@ -64,9 +64,9 @@ class Game():
             
             if not self.is_running:
         
-                pygame.draw.rect(self.surface, RECT_COLOR, pygame.Rect(195, 100, 600, 500))
+                pygame.draw.rect(self.screen, RECT_COLOR, pygame.Rect(195, 100, 600, 500))
                 label = self.endFont.render("GAME OVER", 1, BG_COLOR)
-                surface.blit(label, (362, 310))
+                self.screen.blit(label, (362, 310))
                 pygame.quit()
                 continue
 
@@ -105,7 +105,7 @@ class Game():
                         self.is_running = False
                         continue
                     data = parse.read_map(levels[self.cur_level]['path'])
-                    my_map = draw.Map(data, surface)
+                    my_map = draw.Map(data, self.screen)
                     # get the starting position of the player
                     current_position = my_map.get_starting_position()
                     current_symbol = my_map.get_starting_symbol()
@@ -167,7 +167,7 @@ class Game():
                         self.is_running = False
                         continue
                     data = parse.read_map(levels[self.cur_level]['path'])
-                    my_map = draw.Map(data, surface)
+                    my_map = draw.Map(data, self.screen)
                     # get the starting position of the player
                     current_position = my_map.get_starting_position()
                     current_symbol = my_map.get_starting_symbol()
@@ -230,7 +230,7 @@ class Game():
                         self.is_running = False
                         continue
                     data = parse.read_map(levels[self.cur_level]['path'])
-                    my_map = draw.Map(data, surface)
+                    my_map = draw.Map(data, self.screen)
                     # get the starting position of the player
                     current_position = my_map.get_starting_position()
                     current_symbol = my_map.get_starting_symbol()
@@ -293,7 +293,7 @@ class Game():
                         self.is_running = False
                         continue
                     data = parse.read_map(levels[self.cur_level]['path'])
-                    my_map = draw.Map(data, surface)
+                    my_map = draw.Map(data, self.screen)
                     # get the starting position of the player
                     current_position = my_map.get_starting_position()
                     current_symbol = my_map.get_starting_symbol()
@@ -336,7 +336,7 @@ class Game():
             
             self.screen.fill(BG_COLOR)
             label = self.myfont.render("LEVEL {} ".format(self.cur_level+1), 1, (233,233,255,1))
-            surface.blit(label, (750, 150))
+            self.screen.blit(label, (750, 150))
 
             # update user interface
 
