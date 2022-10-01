@@ -563,7 +563,7 @@ class Game():
                     # reset the map
                     index = temp.find("P")
                     my_map.map[x] = temp.replace("P", self.static_map[x][index])
-                    my_map.map[x + 1] = temp_up
+                    my_map.map[x + 1] = temp_down
 
                     # get the starting position and move the dice to the starting position
                     x = self.starting_position[0]
