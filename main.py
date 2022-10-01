@@ -40,7 +40,7 @@ class App():
         # Get the homescreen
         if (not is_quit):
             pygame.mixer.music.load(MAIN_MENU_MUSIC)
-            pygame.mixer.music.play()
+            pygame.mixer.music.play(-1)
             is_quit = HomeScreen(surface).mainloop()
 
 
@@ -48,7 +48,7 @@ class App():
         # go to the lore page
         if (not is_quit):
             pygame.mixer.music.load(GAME_MUSIC2)
-            pygame.mixer.music.play()
+            pygame.mixer.music.play(-1)
             is_quit = LorePage(surface).mainloop()
 
         # start from level 1
@@ -58,7 +58,7 @@ class App():
         # once the player passed all the game levels
         if (not is_quit):
             pygame.mixer.music.load(WINNING_SCREEN_MUSIC)
-            pygame.mixer.music.play()
+            pygame.mixer.music.play(-1)
             is_quit = WinningScreen(surface).mainloop()
 
 
