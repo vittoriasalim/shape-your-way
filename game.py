@@ -142,6 +142,7 @@ class Game():
                 current_position = self.starting_position
                 current_symbol = self.starting_symbol
                 my_map.set_reset(False)
+                continue
             
 
             # map game
