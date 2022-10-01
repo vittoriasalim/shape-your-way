@@ -16,7 +16,7 @@ MAIN_MENU_MUSIC2 = ("./sounds/sounds_8Bit Platformer Loop.ogg")
 GAME_MUSIC= ("./sounds/Dystopian.ogg")
 GAME_MUSIC2 = ("./sounds/Quantum Loop.ogg")
 WINNING_SCREEN_MUSIC = ("./sounds/8Bit Jingle Bells Loop.ogg")
-
+WIZARD_ICON= pygame.image.load("./images/wizard_solo.png")
 # Main App
 class App():
 
@@ -32,9 +32,10 @@ class App():
         print("Creating a new window")
 
         # create the window
+
         surface = pygame.display.set_mode((990,660))
         pygame.display.set_caption("Shape Your Way")
-
+        pygame.display.set_icon(WIZARD_ICON)
         is_quit = False
         pygame.mixer.init()
         # Get the homescreen
