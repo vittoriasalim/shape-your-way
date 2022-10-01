@@ -1,10 +1,12 @@
 import pygame
 
+import parse
 # The dimensions of the map is confirmed to be the 10x10
 ROW = 10
 COLUMN = 10
 
 class Map:
+    
     """
     Map class has 4 attributes currently:
     - wizard_frame
@@ -22,22 +24,31 @@ class Map:
         :param surface: pygame.Surface
         """
         self.wizard_frame = 0
+        self.cur_level = cur_level
         self.dice_frame = 1
         self.map = data
         self.surface = surface
+        self.levels =levels
         self.dice = pygame.image.load("./dice/dice.png")
         self.dice_position= "default" # default /default2 / right/ down/ up /left
-        self.time = levels[cur_level]['time']
+        self.time = levels[cur_level-1]['time']
         self.tick = 0
         self.myfont = pygame.font.SysFont("Rammetto One",35,bold =True)
+        self.wizard_attack =False
     def read_data(self):
         """
         Set the sprite of the map in each tile (all the tiles)
         """
+        if self.time <= 0 :
+            # print(self.cur_level)
+            self.map = parse.read_map(self.levels[ self.cur_level - 1 ]['path'])
+            self.time = self.levels[self.cur_level-1]['time']
+  
+            
         for i in range (ROW):
             for j in range(COLUMN):
                 self.set_sprite(self.map[i][j],i,j)
-        
+    
     def set_sprite(self, symbol, i: int, j: int):
         """
         Set the sprite and store it into the the map
@@ -61,14 +72,21 @@ class Map:
         
 
         if symbol == 'W':
-            if self.wizard_frame == 6:
+            if self.wizard_frame == 6 and self.wizard_attack:
                 self.wizard_frame = 0
+                self.wizard_attack = False
+             
+            elif self.wizard_frame == 6:
+                self.wizard_frame = 0
+            
       
 
             sprite = pygame.image.load("./images/Vector 135.png")
             self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
-            
-            wizard = pygame.image.load("./images/Idle.png")
+            if(self.wizard_attack):
+                wizard = pygame.image.load("./images/attack.png")
+            else:
+                wizard = pygame.image.load("./images/Idle.png")
             self.surface.blit (wizard , ((j*62)+250-(i*27),(i*34)+35),((self.wizard_frame*231),0,231,180))
 
             self.wizard_frame+=1
@@ -206,6 +224,10 @@ class Map:
     
     def move(self, direction):
         self.set_direction(direction)
+    def attack(self):
+        self.wizard_attack = True
+        self.time -= 5
+        
     
 
     def get_dice_position(self):

@@ -159,8 +159,12 @@ class Game():
                 next_path_symbol = my_map.map[x][y - 1]
 
                 # player has won
-                if (self.has_finished() and next_path_symbol == 'E'):
+                if  self.has_finished() and next_path_symbol == 'E':
                     self.is_running = False                    
+                    continue
+                
+                elif next_path_symbol == 'W':
+                    my_map.attack()
                     continue
 
                 elif (next_path_symbol not in allowed_tiles):
@@ -182,6 +186,7 @@ class Game():
 
                 # do some animation of the dice
                 my_map.move("left")
+                
 
                 # update current position 
                 current_position = (current_position[0], current_position[1] - 1)
@@ -220,6 +225,9 @@ class Game():
                 # player has won
                 if (self.has_finished() and next_path_symbol == 'E'):
                     self.is_running = False
+                    continue
+                elif next_path_symbol == 'W':
+                    my_map.attack()
                     continue
                 
                 elif (next_path_symbol not in allowed_tiles):
@@ -279,6 +287,9 @@ class Game():
                 # player has won
                 if (self.has_finished() and next_path_symbol == 'E'):
                     self.is_running = False
+                    continue
+                elif next_path_symbol == 'W':
+                    my_map.attack()
                     continue
 
                 elif (next_path_symbol not in allowed_tiles):
@@ -341,6 +352,9 @@ class Game():
                 # player has won
                 if (self.has_finished() and next_path_symbol == 'E'):
                     self.is_running = False
+                    continue
+                elif next_path_symbol == 'W':
+                    my_map.attack()
                     continue
                 
                 elif (next_path_symbol not in allowed_tiles):
