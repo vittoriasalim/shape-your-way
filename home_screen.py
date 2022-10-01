@@ -38,7 +38,7 @@ class HomeScreen():
             label_button = self.buttonFont.render("START", 1, BG_COLOR)
         self.screen.blit(label_button, (450, 350))
 
-    def mainloop(self):
+    def mainloop(self) -> bool:
 
         self.is_running = True
         while (self.is_running):
@@ -52,6 +52,7 @@ class HomeScreen():
 
                 if ev.type == pygame.QUIT:
                     pygame.quit()
+                    return True
 
                 # checks if a mouse is clicked
                 if ev.type == pygame.MOUSEBUTTONDOWN:
@@ -65,3 +66,24 @@ class HomeScreen():
             self.screen.fill(BG_COLOR)
             self.draw()
             pygame.display.update()
+    
+        
+
+if (__name__ == "__main__"):
+    
+    print("--------------------")
+    print("Console for the game")
+    print("--------------------")
+
+    # initialise the pygame
+    pygame.init()
+    press = False
+
+    print("Creating a new window")
+
+    # create the window
+    surface = pygame.display.set_mode((990,660))
+    pygame.display.set_caption("Find Your Way Out")
+
+    # main loop in homescreen
+    HomeScreen(surface).mainloop()

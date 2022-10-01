@@ -24,6 +24,9 @@ class WinningScreen():
     """
     def __init__(self, screen):
 
+        # initialize pygame
+        pygame.init()
+
         self.screen = screen
         self.is_running = False
 
@@ -43,7 +46,7 @@ class WinningScreen():
         self.screen.blit(way_message,(100,300))
         self.screen.blit(enter_to_quit, (400, 380))
 
-    def mainloop(self):
+    def mainloop(self) -> bool:
 
         self.is_running = True
         while (self.is_running):
@@ -55,8 +58,8 @@ class WinningScreen():
             for ev in pygame.event.get():
 
                 if ev.type == pygame.QUIT:
-                    self.is_running = False
-                    continue
+                    pygame.quit()
+                    return True
 
                 # checks if a mouse is clicked
                 if ev.type == pygame.KEYDOWN:
