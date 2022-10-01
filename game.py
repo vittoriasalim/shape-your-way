@@ -41,7 +41,6 @@ class Game():
                     self.static_map[i].append(self.data[i][j])
 
     def mainloop(self) -> None:
-
         # create the map
         my_map = draw.Map(self.data, self.screen)
 

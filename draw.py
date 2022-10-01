@@ -27,6 +27,7 @@ class Map:
         self.surface = surface
         self.dice = pygame.image.load("./dice/dice.png")
         self.dice_position= "default" # default /default2 / right/ down/ up /left
+        
         for i in range(ROW):
             for j in range(COLUMN):
                 if (self.map[i][j] == 'P'):
@@ -110,7 +111,7 @@ class Map:
         elif symbol == 'N':
             sprite = pygame.image.load("./images/green-fail.png")
             self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
-
+            
     def set_direction_default(self,direction):
         if direction == "right" :
             self.dice =pygame.image.load("./dice/right.png")
@@ -137,6 +138,7 @@ class Map:
         elif direction == "down":
             self.dice =pygame.image.load("./dice/up.png")
             self.dice_position ="up"
+
     def set_direction_right(self,direction):
         if direction == "right" :
             self.dice =pygame.image.load("./dice/dice2.png")
@@ -228,6 +230,7 @@ class Map:
         Update the move by the player
         """
         self.check[i][j] = 1
+    
 
     def has_finished(self):
         """
@@ -238,6 +241,7 @@ class Map:
                 if (self.check[i][j] != 1):
                     return False
         return True
+    
 
     def get_dice_position(self):
         """
