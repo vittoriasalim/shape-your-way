@@ -27,21 +27,6 @@ class Map:
         self.surface = surface
         self.dice = pygame.image.load("./dice/dice.png")
         self.dice_position= "default" # default /default2 / right/ down/ up /left
-        for i in range(ROW):
-            for j in range(COLUMN):
-                if (self.map[i][j] == 'P'):
-                    self.starting_position = (i, j)
-                    
-        self.check = []
-        for i in range(ROW):
-            self.check.append([])
-            for j in range(COLUMN):
-                if (self.map[i][j] == 'R' or self.map[i][j] == 'G'):
-                    self.check[i].append(0)
-                else:
-                    self.check[i].append(1)
-        self.check[self.starting_position[0]][self.starting_position[1]] = 1
-        self.starting_symbol = 'R'
 
     def read_data(self):
         """
@@ -210,34 +195,7 @@ class Map:
     
     def move(self, direction):
         self.set_direction(direction)
-            
-    def get_starting_position(self):
-        """
-        Get the starting position of the player
-        """
-        return self.starting_position
-        
-    def get_starting_symbol(self):
-        """
-        Get the starting symbol of the dice
-        """
-        return self.starting_symbol
-
-    def update_check(self, i, j):
-        """
-        Update the move by the player
-        """
-        self.check[i][j] = 1
-
-    def has_finished(self):
-        """
-        Check whether the player has passed all red and green paths
-        """
-        for i in range(ROW):
-            for j in range(COLUMN):
-                if (self.check[i][j] != 1):
-                    return False
-        return True
+    
 
     def get_dice_position(self):
         """

@@ -1,7 +1,7 @@
 import pygame
 import parse
 from home_screen import HomeScreen
-import game
+from game import Game
 
 # Constants
 WHITE = (0xFF, 0xFF, 0xFF)
@@ -30,13 +30,11 @@ class App():
         surface = pygame.display.set_mode((990,660))
         pygame.display.set_caption("Find Your Way Out")
 
-        # load the levels and data
-        levels = parse.parse_json()
-        HomeScreen(surface, levels).mainloop()
+        # Get the homescreen
+        HomeScreen(surface).mainloop()
+
         # start from level 1
-        data = parse.read_map(levels[0]['path'])
-        game.Game(surface, data, levels).mainloop()
-        
+        Game(surface, 1).mainloop()
 
         # quit the game properly
         pygame.quit()
