@@ -14,7 +14,7 @@ RECT_COLOR = (233, 226, 246)
 SCREEN_WIDTH = 990
 SCREEN_HEIGHT = 660
 
-MAX_LEVEL = 4
+MAX_LEVEL = 1
 
 class Game():
     """
@@ -579,7 +579,7 @@ if (__name__ == "__main__"):
 
     # create the window
     surface = pygame.display.set_mode((990,660))
-    pygame.display.set_caption("Find Your Way Out")
+    pygame.display.set_caption("Shape Your Way")
 
     # main loop in homescreen
     Game(surface, 1).mainloop()

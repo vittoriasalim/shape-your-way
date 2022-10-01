@@ -28,8 +28,8 @@ class HomeScreen():
         self.screen.blit(bg,(0,0))
         # Create header "Roll Your Way" on home screen
         #pygame.draw.rect(self.screen, RECT_COLOR, pygame.Rect(195, 60, 600, 100))
-        label = self.endFont.render("ROLL YOUR WAY", 1, GREY_COLOR)
-        self.screen.blit(label, (260, 170))
+        label = self.endFont.render("SHAPE YOUR WAY", 1, GREY_COLOR)
+        self.screen.blit(label, (240, 170))
 
         # Create "Start" button
         #pygame.draw.rect(self.screen, (164, 182, 229, 1), pygame.Rect(305, 350, 400, 400), 10)
@@ -96,7 +96,7 @@ if (__name__ == "__main__"):
 
     # create the window
     surface = pygame.display.set_mode((990,660))
-    pygame.display.set_caption("Find Your Way Out")
+    pygame.display.set_caption("Shape Your Way")
 
     # main loop in homescreen
     HomeScreen(surface).mainloop()

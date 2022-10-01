@@ -33,7 +33,7 @@ class App():
 
         # create the window
         surface = pygame.display.set_mode((990,660))
-        pygame.display.set_caption("Find Your Way Out")
+        pygame.display.set_caption("Shape Your Way")
 
         is_quit = False
         pygame.mixer.init()
