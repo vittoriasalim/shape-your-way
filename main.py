@@ -1,7 +1,7 @@
 import pygame
-import parse
 from home_screen import HomeScreen
 from game import Game
+from winning_screen import WinningScreen
 
 # Constants
 WHITE = (0xFF, 0xFF, 0xFF)
@@ -35,6 +35,9 @@ class App():
 
         # start from level 1
         Game(surface, 1).mainloop()
+
+        # once the player passed all the game levels
+        WinningScreen(surface).mainloop()
 
         # quit the game properly
         pygame.quit()
