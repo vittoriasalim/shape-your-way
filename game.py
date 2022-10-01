@@ -1,3 +1,4 @@
+from tabnanny import check
 import pygame
 import draw
 import parse
@@ -56,7 +57,7 @@ class Game():
         # main loop
         press = False
         self.is_running = True
-        while True:
+        while self.is_running:
             
 
             # frame per second
@@ -74,6 +75,8 @@ class Game():
             for event in pygame.event.get():
                 if (event.type == pygame.QUIT):
                     self.is_running = False
+                    continue
+
                 elif (event.type == pygame.KEYUP):
                     press = False
 
@@ -116,8 +119,17 @@ class Game():
                     continue
 
                 # not out of bounds
-                # assign the new map after the user's moved
-                my_map.map[x] = my_map.map[x][:y-1] + "P" + self.static_map[x][y] + my_map.map[x][y+1:]
+                # update the green color if success
+                if (self.static_map[x][y] == "G" and my_map.check[x][y] == 1):
+                    my_map.map[x] = my_map.map[x][:y-1] + "P" + "K" + my_map.map[x][y+1:]
+
+                # update the red color if success
+                elif (self.static_map[x][y] == "R" and my_map.check[x][y] == 1):
+                    my_map.map[x] = my_map.map[x][:y-1] + "P" + "H" + my_map.map[x][y+1:]
+                
+                # assign the new map after the user's moved (not success)
+                else:
+                    my_map.map[x] = my_map.map[x][:y-1] + "P" + self.static_map[x][y] + my_map.map[x][y+1:]
 
                 # do some animation of the dice
                 my_map.move("left")
@@ -132,10 +144,6 @@ class Game():
                 elif (next_path_symbol == "G"):
                     next_path_symbol = "default2"
                 if (current_symbol == next_path_symbol):
-                    if (self.static_map[x][y] == "G"):
-                        my_map.map[x] = my_map.map[x][:y-1] + "P" + "K" + my_map.map[x][y+1:]
-                    elif (self.static_map[x][y] == "R"):
-                        my_map.map[x] = my_map.map[x][:y-1] + "P" + "H" + my_map.map[x][y+1:]
                     my_map.update_check(current_position[0], current_position[1])
                 
                 print(f"\tPlayer's current position: {current_position}")
@@ -178,8 +186,17 @@ class Game():
                     continue
                 
                 # not out of bounds
-                # assign the new map after the user's moved
-                my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + "P" + my_map.map[x][y+2:]
+                # update the green color if success
+                if (self.static_map[x][y] == "G" and my_map.check[x][y] == 1):
+                    my_map.map[x] = my_map.map[x][:y] + "K" + "P" + my_map.map[x][y+2:]
+
+                # update the red color if success
+                elif (self.static_map[x][y] == "R" and my_map.check[x][y] == 1):
+                    my_map.map[x] = my_map.map[x][:y] + "H" + "P" + my_map.map[x][y+2:]
+
+                # assign the new map after the user's moved (not success)
+                else:
+                    my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + "P" + my_map.map[x][y+2:]
 
                 # do some animation of the dice
                 my_map.move("right")
@@ -194,10 +211,6 @@ class Game():
                 elif (next_path_symbol == "G"):
                     next_path_symbol = "default2"
                 if (current_symbol == next_path_symbol):
-                    if (self.static_map[x][y] == "G"):
-                        my_map.map[x] = my_map.map[x][:y] + "K" + "P" + my_map.map[x][y+2:]
-                    elif (self.static_map[x][y] == "R"):
-                        my_map.map[x] = my_map.map[x][:y] + "H" + "P" + my_map.map[x][y+2:]
                     my_map.update_check(current_position[0], current_position[1])
 
                 print(f"\tPlayer's current position:  {current_position}")
@@ -241,8 +254,20 @@ class Game():
                     continue
 
                 # not out of bounds
+                # update the green color if success
+                if (self.static_map[x][y] == "G" and my_map.check[x][y] == 1):
+                    my_map.map[x] = my_map.map[x][:y] + "K" + my_map.map[x][y+1:]
+                
+                # update the red color if success
+                elif (self.static_map[x][y] == "R" and my_map.check[x][y] == 1):
+                    my_map.map[x] = my_map.map[x][:y] + "H" + my_map.map[x][y+1:]
+                
+                # just assign
+                else:
+                    my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + my_map.map[x][y+1:]
+                
+                # change the player's position
                 my_map.map[x - 1] = my_map.map[x-1][:y] + "P" + my_map.map[x-1][y+1:]
-                my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + my_map.map[x][y+1:]
                 
                 # do some animation of the dice
                 my_map.move("up")
@@ -257,10 +282,6 @@ class Game():
                 elif (next_path_symbol == "G"):
                     next_path_symbol = "default2"
                 if (current_symbol == next_path_symbol):
-                    if (self.static_map[x][y] == "G"):
-                        my_map.map[x] = my_map.map[x][:y] + "K" + my_map.map[x][y+1:]
-                    elif (self.static_map[x][y] == "R"):
-                        my_map.map[x] = my_map.map[x][:y] + "H" + my_map.map[x][y+1:]
                     my_map.update_check(current_position[0], current_position[1])
 
                 print(f"\tPlayer's current position: {current_position}")
@@ -305,8 +326,20 @@ class Game():
                     continue
 
                 # not out of bounds
+                # update the green color if success
+                if (self.static_map[x][y] == "G" and my_map.check[x][y] == 1):
+                    my_map.map[x] = my_map.map[x][:y] + "K" + my_map.map[x][y+1:]
+                
+                # update the red color if success
+                elif (self.static_map[x][y] == "R" and my_map.check[x][y] == 1):
+                    my_map.map[x] = my_map.map[x][:y] + "H" + my_map.map[x][y+1:]
+
+                # just move normally
+                else:
+                    my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + my_map.map[x][y+1:]
+                    
+                # just change the player's position
                 my_map.map[x + 1] = my_map.map[x+1][:y] + "P" + my_map.map[x+1][y+1:]
-                my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + my_map.map[x][y+1:]
 
                 # do some animation of the dice
                 my_map.move("down")
@@ -321,10 +354,6 @@ class Game():
                 elif (next_path_symbol == "G"):
                     next_path_symbol = "default2"
                 if (current_symbol == next_path_symbol):
-                    if (self.static_map[x][y] == "G"):
-                        my_map.map[x] = my_map.map[x][:y] + "K" + my_map.map[x][y+1:]
-                    elif (self.static_map[x][y] == "R"):
-                        my_map.map[x] = my_map.map[x][:y] + "H" + my_map.map[x][y+1:]
                     my_map.update_check(current_position[0], current_position[1])
 
                 print(f"\tPlayer's current position: {current_position}")
@@ -402,7 +431,7 @@ if (__name__ == "__main__"):
     print("Successfully parsing data for level 1")
 
     # main loop in homescreen
-    Game(surface, data).mainmenu()
+    Game(surface, data).mainloop()
 
     # quit the game properly
     pygame.quit()
