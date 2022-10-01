@@ -13,8 +13,10 @@ RECT_COLOR = (233, 226, 246)
 
 SCREEN_WIDTH = 990
 SCREEN_HEIGHT = 660
-
-MAX_LEVEL = 2
+TELEPORT_SOUND = "./sounds/Retro Gun Laser SingleShot 01.wav"
+CLEAR_LEVEL_SOUND = "./sounds/Retro Success Melody 01 - sawtooth lead 1.wav"
+MAX_LEVEL = 5
+pygame.mixer.init()
 
 class Game():
     """
@@ -136,6 +138,15 @@ class Game():
                     return False
         return True
 
+    def update_ui(self, my_map) -> None:
+        """
+        Update the UI
+        """
+        self.screen.fill(BG_COLOR)
+        my_map.read_data()
+        label = self.myfont.render("LEVEL {} ".format(self.cur_level), 1, (233,233,255,1))
+        self.screen.blit(label, (750, 100))
+
     def mainloop(self) -> bool:
 
         # create the map
@@ -213,9 +224,43 @@ class Game():
                     self.is_running = False                    
                     continue
                 
+                # hit the wizard
                 elif next_path_symbol == 'W':
-                    my_map.attack()
+                    my_map.attack(x,y-1)
                     my_map.map[x] = my_map.map[x][:y-1] + "M" + "P" + my_map.map[x][y+1:]
+                    continue
+
+                # hit the teleport
+                elif next_path_symbol == "T":
+
+
+                    # get the dice to the position
+                    my_map.map[x] = my_map.map[x][:y-1] + "P" + self.static_map[x][y] + my_map.map[x][y+1:]
+
+                    # do some animation of the dice
+                    my_map.move("left")
+                    pygame.mixer.music.load(TELEPORT_SOUND)
+                    pygame.mixer.music.play()
+
+                    # update UI
+                    self.update_ui(my_map)
+                    pygame.display.update()
+
+                    # delay
+                    pygame.time.delay(200)
+
+                    # reset the map
+                    my_map.map[x] = "".join(self.static_map[x])
+
+                    # get the starting position and move the dice to the starting position
+                    x = self.starting_position[0]
+                    y = self.starting_position[1]
+                    current_position = (x, y)
+                    my_map.map[x] = my_map.map[x][:y] + "P" + my_map.map[x][y+1:]
+
+                    # update UI
+                    self.update_ui(my_map)
+                    pygame.display.update()
                     continue
 
                 elif (next_path_symbol not in allowed_tiles):
@@ -278,9 +323,43 @@ class Game():
                     self.is_running = False
                     continue
                 
+                # hit the wizard
                 elif next_path_symbol == 'W':
-                    my_map.attack()
+                    my_map.attack(x,y+1)
                     my_map.map[x] = my_map.map[x][:y] + "P" + "M" + my_map.map[x][y+2:]
+                    continue
+
+                # hit the teleport
+                elif next_path_symbol == "T":
+
+
+                    # get the dice to the position
+                    my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + "P" + my_map.map[x][y+2:]
+
+                    # move the dice to the right
+                    my_map.move("right")
+                    pygame.mixer.music.load(TELEPORT_SOUND)
+                    pygame.mixer.music.play()
+
+                    # update UI
+                    self.update_ui(my_map)
+                    pygame.display.update()
+
+                    # delay
+                    pygame.time.delay(200)
+
+                    # reset the map
+                    my_map.map[x] = "".join(self.static_map[x])
+
+                    # get the starting position and move the dice to the starting position
+                    x = self.starting_position[0]
+                    y = self.starting_position[1]
+                    current_position = (x, y)
+                    my_map.map[x] = my_map.map[x][:y] + "P" + my_map.map[x][y+1:]
+
+                    # update UI
+                    self.update_ui(my_map)
+                    pygame.display.update()
                     continue
                 
                 elif (next_path_symbol not in allowed_tiles):
@@ -342,10 +421,50 @@ class Game():
                     self.is_running = False
                     continue
                 
+                # hit the wizard
                 elif next_path_symbol == 'W':
-                    my_map.attack()
+                    my_map.attack(x-1,y)
                     my_map.map[x] = my_map.map[x][:y] + "P" + my_map.map[x][y+1:]
                     my_map.map[x - 1] = my_map.map[x-1][:y] + "M" + my_map.map[x-1][y+1:]
+                    continue
+
+                # hit the teleport
+                elif next_path_symbol == "T":
+
+                    # create temporary objects
+                    temp_up = my_map.map[x - 1]
+                    temp = my_map.map[x]
+
+                    # get the dice to the position
+                    my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + my_map.map[x][y+1:]
+                    my_map.map[x - 1] = my_map.map[x-1][:y] + "P" + my_map.map[x-1][y+1:]
+
+                    # move up the dice
+                    my_map.move("up")
+                    pygame.mixer.music.load(TELEPORT_SOUND)
+                    pygame.mixer.music.play()
+
+                    # update UI
+                    self.update_ui(my_map)
+                    pygame.display.update()
+
+                    # delay
+                    pygame.time.delay(200)
+
+                    # reset the map
+                    index = temp.find("P")
+                    my_map.map[x] = temp.replace("P", self.static_map[x][index])
+                    my_map.map[x - 1] = temp_up
+
+                    # get the starting position and move the dice to the starting position
+                    x = self.starting_position[0]
+                    y = self.starting_position[1]
+                    current_position = (x, y)
+                    my_map.map[x] = my_map.map[x][:y] + "P" + my_map.map[x][y+1:]
+
+                    # update UI
+                    self.update_ui(my_map)
+                    pygame.display.update()
                     continue
 
                 elif (next_path_symbol not in allowed_tiles):
@@ -409,11 +528,52 @@ class Game():
                 if (self.has_finished() and next_path_symbol == 'E'):
                     self.is_running = False
                     continue
-                    
+                
+                # hit the wizard
                 elif next_path_symbol == 'W':
-                    my_map.attack()
+                    my_map.attack(x+1,y)
                     my_map.map[x] = my_map.map[x][:y] + "P" + my_map.map[x][y+1:]
                     my_map.map[x + 1] = my_map.map[x+1][:y] + "M" + my_map.map[x+1][y+1:]
+                    continue
+
+                # hit the teleport
+                elif next_path_symbol == "T":
+
+                    
+                    # create temporary objects
+                    temp_down = my_map.map[x + 1]
+                    temp = my_map.map[x]
+
+                    # get the dice to the position
+                    my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + my_map.map[x][y+1:]
+                    my_map.map[x + 1] = my_map.map[x+1][:y] + "P" + my_map.map[x+1][y+1:]
+
+                    # move down the dice
+                    my_map.move("down")
+                    pygame.mixer.music.load(TELEPORT_SOUND)
+                    pygame.mixer.music.play()
+
+                    # update UI
+                    self.update_ui(my_map)
+                    pygame.display.update()
+
+                    # delay
+                    pygame.time.delay(200)
+
+                    # reset the map
+                    index = temp.find("P")
+                    my_map.map[x] = temp.replace("P", self.static_map[x][index])
+                    my_map.map[x + 1] = temp_down
+
+                    # get the starting position and move the dice to the starting position
+                    x = self.starting_position[0]
+                    y = self.starting_position[1]
+                    current_position = (x, y)
+                    my_map.map[x] = my_map.map[x][:y] + "P" + my_map.map[x][y+1:]
+
+                    # update UI
+                    self.update_ui(my_map)
+                    pygame.display.update()
                     continue
                 
                 elif (next_path_symbol not in allowed_tiles):
@@ -454,15 +614,17 @@ class Game():
                 print(f"\tPlayer's current position: {current_position}")
 
                 if (self.has_finished()):
+
                     print("PLAYER HAS PASSED ALL PATHS")
             
             
             # update user interface
-            self.screen.fill(BG_COLOR)
-            label = self.myfont.render("LEVEL {} ".format(self.cur_level), 1, (233,233,255,1))
-            self.screen.blit(label, (750, 150))
+            self.update_ui(my_map)
+            # self.screen.fill(BG_COLOR)
+            # label = self.myfont.render("LEVEL {} ".format(self.cur_level), 1, (233,233,255,1))
+            # self.screen.blit(label, (750, 100))
 
-            my_map.read_data()
+            # my_map.read_data()
             pygame.display.update()
 
         # last level
@@ -471,6 +633,9 @@ class Game():
 
         # to the next game
         else:
+            pygame.mixer.init()
+            pygame.mixer.music.load(CLEAR_LEVEL_SOUND)
+            pygame.mixer.music.play()
             is_quit = Game(self.screen, self.cur_level + 1).mainloop()
             if (is_quit):
                 pygame.quit()
@@ -491,10 +656,10 @@ if (__name__ == "__main__"):
 
     # create the window
     surface = pygame.display.set_mode((990,660))
-    pygame.display.set_caption("Find Your Way Out")
+    pygame.display.set_caption("Shape Your Way")
 
     # main loop in homescreen
-    Game(surface, 1).mainloop()
+    Game(surface, 5).mainloop()
 
     # quit the game properly
     pygame.quit()

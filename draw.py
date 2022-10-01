@@ -4,7 +4,9 @@ import parse
 # The dimensions of the map is confirmed to be the 10x10
 ROW = 10
 COLUMN = 10
-
+pygame.mixer.init()
+WIZARD_ATTACK_SOUND = "./sounds/Retro Magic 06.wav"
+MOVEMENT_SOUND = "./sounds/Retro Impact Punch 07.wav"
 class Map:
     
     """
@@ -36,6 +38,9 @@ class Map:
         self.myfont = pygame.font.SysFont("Rammetto One",35,bold =True)
         self.wizard_attack =False
         self.reset = False
+        self.attack_position = (-1,-1)
+        self.attack_frame =0
+        
     
     def read_data(self):
         """
@@ -73,30 +78,36 @@ class Map:
         self.surface.blit(label, (295, 100))
         self.surface.blit(clock, (240, 96))
         
+        
         self.tick+=1
         if self.tick == 1600:
             self.tick =0
             self.time -=1
+        if self.wizard_attack and i == self.attack_position[0] and j == self.attack_position[1]:
+
+            if self.attack_frame >= 8:
         
-
-        if symbol == 'W':
-            if self.wizard_frame == 6 and self.wizard_attack:
-                self.wizard_frame = 0
+                self.attack_position = (-1,-1)
                 self.wizard_attack = False
-                
-             
-            elif self.wizard_frame == 6:
-                self.wizard_frame = 0
-           
-            
-      
-
+                self.attack_frame = 0
             sprite = pygame.image.load("./images/Vector 135.png")
             self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
-            if(self.wizard_attack):
-                wizard = pygame.image.load("./images/attack.png")
-            else:
-                wizard = pygame.image.load("./images/Idle.png")
+ 
+            wizard = pygame.image.load("./images/attack.png")    
+            self.surface.blit (wizard , ((j*62)+250-(i*27),(i*34)+35),((self.attack_frame*231),0,231,180))
+            self.attack_frame +=1
+        
+        elif symbol == 'W':
+            
+             
+            if self.wizard_frame == 6:
+                self.wizard_frame = 0
+            sprite = pygame.image.load("./images/Vector 135.png")
+            self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
+           
+            
+
+            wizard = pygame.image.load("./images/Idle.png")
             self.surface.blit (wizard , ((j*62)+250-(i*27),(i*34)+35),((self.wizard_frame*231),0,231,180))
 
             self.wizard_frame+=1
@@ -108,6 +119,9 @@ class Map:
 
         elif symbol == 'G':
             tile = pygame.image.load("./images/green.png")
+            self.surface.blit (tile , ((j*62)+315-(i*27),(i*34)+150))
+        elif symbol == 'T':
+            tile = pygame.image.load("./images/teleport.png")
             self.surface.blit (tile , ((j*62)+315-(i*27),(i*34)+150))
 
         elif symbol == 'E':
@@ -134,6 +148,10 @@ class Map:
         elif symbol == 'N':
             sprite = pygame.image.load("./images/green-fail.png")
             self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
+
+        elif symbol == 'T':
+            sprite = pygame.image.load("./images/teleport.png")
+            self.surface.blit (sprite, ((j*62)+315-(i*27),(i*34)+150))
            
     def set_direction_default(self,direction):
         if direction == "right" :
@@ -234,11 +252,15 @@ class Map:
     
     def move(self, direction):
         self.set_direction(direction)
-    def attack(self):
+        pygame.mixer.music.load(MOVEMENT_SOUND)
+        pygame.mixer.music.play()
+        
+    def attack(self, i , j):
         self.wizard_attack = True
         self.time -= 5
-        
-    
+        self.attack_position =(i,j)
+        pygame.mixer.music.load(WIZARD_ATTACK_SOUND)
+        pygame.mixer.music.play()
 
     def get_dice_position(self):
         """

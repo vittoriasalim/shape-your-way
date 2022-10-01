@@ -1,6 +1,6 @@
 import pygame
 import parse
-
+import time
 # Constants
 WHITE = (0xFF, 0xFF, 0xFF)
 
@@ -22,7 +22,7 @@ class LorePage():
         self.is_running = False
         self.endFont = pygame.font.SysFont("Rammetto One", 80, bold=True)
         self.textFont = pygame.font.SysFont("Rammetto One", 30, bold=False)
-        self.buttonFont = pygame.font.SysFont("Rammetto One", 40, bold=True)
+        self.buttonFont = pygame.font.SysFont("Rammetto One", 20, bold=True)
 
     def draw(self):
         bg = pygame.image.load("./images/dragon_bg.jpg")
@@ -33,13 +33,15 @@ class LorePage():
         third_message = self.textFont.render("          You have been put into captivity into a dungeon",1,TEXT_COLOR)
         fourth_message = self.textFont.render("Your only hope to survive is to make your way through his dungeon ", 1, TEXT_COLOR)
         fifth_message = self.textFont.render("  You vow to return to your loved ones and turn back into human ",True,TEXT_COLOR)
-        enter_to_proceed = self.buttonFont.render("Please press ENTER to shape your way",True,TEXT_COLOR)
-        self.screen.blit(first_message,(170,70))
-        self.screen.blit(second_message, (170, 120))
-        self.screen.blit(third_message, (170, 170))
-        self.screen.blit(fourth_message,(160,220))
-        self.screen.blit(fifth_message,(170,270))
-        self.screen.blit(enter_to_proceed,(180,480))
+
+        enter_to_proceed = self.buttonFont.render("Press ENTER to shape your way",True,TEXT_COLOR)
+        self.screen.blit(first_message,(200,150))
+        self.screen.blit(second_message, (200, 200))
+        self.screen.blit(third_message, (200, 250))
+        self.screen.blit(fourth_message,(200,300))
+        self.screen.blit(fifth_message,(200,350))
+        if time.time() %1 >0.5:
+            self.screen.blit(enter_to_proceed,(730,600))
         # Create "Start" button
 
         mouse = pygame.mouse.get_pos()
@@ -85,7 +87,7 @@ if (__name__ == "__main__"):
 
     # create the window
     surface = pygame.display.set_mode((990, 560))
-    pygame.display.set_caption("Find Your Way Out")
+    pygame.display.set_caption("Shape Your Way")
 
     # load the levels and data
     levels = parse.parse_json()

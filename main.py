@@ -15,8 +15,8 @@ MAIN_MENU_MUSIC = ("./sounds/Free Game Soundtrack by cactusdude - (hurry up).ogg
 MAIN_MENU_MUSIC2 = ("./sounds/sounds_8Bit Platformer Loop.ogg")
 GAME_MUSIC= ("./sounds/Dystopian.ogg")
 GAME_MUSIC2 = ("./sounds/Quantum Loop.ogg")
-WINNING_SCREEN_MUSIC = ("")
-
+WINNING_SCREEN_MUSIC = ("./sounds/8Bit Jingle Bells Loop.ogg")
+WIZARD_ICON= pygame.image.load("./images/wizard_solo.png")
 # Main App
 class App():
 
@@ -32,23 +32,22 @@ class App():
         print("Creating a new window")
 
         # create the window
-        surface = pygame.display.set_mode((990,660))
-        pygame.display.set_caption("Find Your Way Out")
 
+        surface = pygame.display.set_mode((990,660))
+        pygame.display.set_caption("Shape Your Way")
+        pygame.display.set_icon(WIZARD_ICON)
         is_quit = False
         pygame.mixer.init()
         # Get the homescreen
         if (not is_quit):
-            pygame.mixer.music.load(MAIN_MENU_MUSIC2)
-            pygame.mixer.music.play()
+            pygame.mixer.music.load(MAIN_MENU_MUSIC)
+            pygame.mixer.music.play(-1)
             is_quit = HomeScreen(surface).mainloop()
-
-
 
         # go to the lore page
         if (not is_quit):
             pygame.mixer.music.load(GAME_MUSIC2)
-            pygame.mixer.music.play()
+            pygame.mixer.music.play(-1)
             is_quit = LorePage(surface).mainloop()
 
         # start from level 1
@@ -57,7 +56,10 @@ class App():
 
         # once the player passed all the game levels
         if (not is_quit):
+            pygame.mixer.music.load(WINNING_SCREEN_MUSIC)
+            pygame.mixer.music.play(-1)
             is_quit = WinningScreen(surface).mainloop()
+
 
         # quit the game properly
         pygame.quit()
