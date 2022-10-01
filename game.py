@@ -180,7 +180,7 @@ class Game():
                     continue
                 
                 elif next_path_symbol == 'W':
-                    my_map.attack()
+                    my_map.attack(x,y-1)
                     continue
 
                 elif (next_path_symbol not in allowed_tiles):
@@ -243,7 +243,7 @@ class Game():
                     self.is_running = False
                     continue
                 elif next_path_symbol == 'W':
-                    my_map.attack()
+                    my_map.attack(x, y+1)
                     continue
                 
                 elif (next_path_symbol not in allowed_tiles):
@@ -305,7 +305,7 @@ class Game():
                     self.is_running = False
                     continue
                 elif next_path_symbol == 'W':
-                    my_map.attack()
+                    my_map.attack(x-1, y)
                     continue
 
                 elif (next_path_symbol not in allowed_tiles):
@@ -370,7 +370,7 @@ class Game():
                     self.is_running = False
                     continue
                 elif next_path_symbol == 'W':
-                    my_map.attack()
+                    my_map.attack(x+1,y)
                     continue
                 
                 elif (next_path_symbol not in allowed_tiles):

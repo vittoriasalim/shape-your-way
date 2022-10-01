@@ -1,3 +1,4 @@
+from ast import Str
 import pygame
 
 import parse
@@ -37,6 +38,7 @@ class Map:
         self.myfont = pygame.font.SysFont("Rammetto One",35,bold =True)
         self.wizard_attack =False
         self.reset =False
+        self.attack_position = (-1,-1)
     def read_data(self):
         """
         Set the sprite of the map in each tile (all the tiles)
@@ -45,6 +47,8 @@ class Map:
             # print(self.cur_level)
             self.map = parse.read_map(self.levels[ self.cur_level - 1 ]['path'])
             self.time = self.levels[self.cur_level-1]['time']
+            
+        
             self.reset = True
 
         else:
@@ -82,21 +86,25 @@ class Map:
         
 
         if symbol == 'W':
-            if self.wizard_frame == 6 and self.wizard_attack:
+         
+            if self.wizard_frame >= 6 and self.wizard_attack:
                 self.wizard_frame = 0
                 self.wizard_attack = False
+                self.attack_position =(-1,-1)
+                #self.map[i] = self.map[i][:j] + "M" + "P" + self.map[i][j+2:]
+            
                 
              
-            elif self.wizard_frame == 6:
+            elif self.wizard_frame >= 6:
                 self.wizard_frame = 0
-           
-            
-      
+
 
             sprite = pygame.image.load("./images/Vector 135.png")
             self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
-            if(self.wizard_attack):
+        
+            if self.wizard_attack and i == self.attack_position[0] and j == self.attack_position[1]:
                 wizard = pygame.image.load("./images/attack.png")
+                
             else:
                 wizard = pygame.image.load("./images/Idle.png")
             self.surface.blit (wizard , ((j*62)+250-(i*27),(i*34)+35),((self.wizard_frame*231),0,231,180))
@@ -236,9 +244,11 @@ class Map:
     
     def move(self, direction):
         self.set_direction(direction)
-    def attack(self):
+    def attack(self, i ,j):
         self.wizard_attack = True
+        self.wizard_frame =0
         self.time -= 5
+        self.attack_position = (i,j)
         
     
 
