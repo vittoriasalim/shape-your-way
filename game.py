@@ -171,10 +171,10 @@ class Game():
                     my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + "P" + my_map.map[x][y+2:]
                     
                     self.cur_level+=1
-                    if self.cur_level == len(levels):
+                    if self.cur_level == len(self.levels):
                         self.is_running = False
                         continue
-                    data = parse.read_map(levels[self.cur_level]['path'])
+                    data = parse.read_map(self.levels[self.cur_level]['path'])
                     my_map = draw.Map(data, self.screen)
                     # get the starting position of the player
                     current_position = my_map.get_starting_position()
@@ -239,10 +239,10 @@ class Game():
                     my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + my_map.map[x][y+1:]
                  
                     self.cur_level+=1
-                    if self.cur_level == len(levels):
+                    if self.cur_level == len(self.levels):
                         self.is_running = False
                         continue
-                    data = parse.read_map(levels[self.cur_level]['path'])
+                    data = parse.read_map(self.levels[self.cur_level]['path'])
                     my_map = draw.Map(data, self.screen)
                     # get the starting position of the player
                     current_position = my_map.get_starting_position()
