@@ -13,7 +13,7 @@ RECT_COLOR = (233, 226, 246)
 
 SCREEN_WIDTH = 990
 SCREEN_HEIGHT = 660
-
+TELEPORT_SOUND = "./sounds/Retro Gun Laser SingleShot 01.wav"
 CLEAR_LEVEL_SOUND = "./sounds/Retro Success Melody 01 - sawtooth lead 1.wav"
 MAX_LEVEL = 5
 pygame.mixer.init()
@@ -232,6 +232,8 @@ class Game():
 
                 # hit the teleport
                 elif next_path_symbol == "T":
+                    pygame.mixer.music.load(TELEPORT_SOUND)
+                    pygame.mixer.music.play()
 
                     # get the dice to the position
                     my_map.map[x] = my_map.map[x][:y-1] + "P" + self.static_map[x][y] + my_map.map[x][y+1:]
@@ -328,6 +330,8 @@ class Game():
 
                 # hit the teleport
                 elif next_path_symbol == "T":
+                    pygame.mixer.music.load(TELEPORT_SOUND)
+                    pygame.mixer.music.play()
 
                     # get the dice to the position
                     my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + "P" + my_map.map[x][y+2:]
@@ -425,10 +429,14 @@ class Game():
                 # hit the teleport
                 elif next_path_symbol == "T":
 
+                    pygame.mixer.music.load(TELEPORT_SOUND)
+                    pygame.mixer.music.play()
+
+
                     # create temporary objects
                     temp_up = my_map.map[x - 1]
                     temp = my_map.map[x]
-                    
+
                     # get the dice to the position
                     my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + my_map.map[x][y+1:]
                     my_map.map[x - 1] = my_map.map[x-1][:y] + "P" + my_map.map[x-1][y+1:]
@@ -530,6 +538,10 @@ class Game():
 
                 # hit the teleport
                 elif next_path_symbol == "T":
+
+                    pygame.mixer.music.load(TELEPORT_SOUND)
+                    pygame.mixer.music.play()
+
                     
                     # create temporary objects
                     temp_down = my_map.map[x + 1]
