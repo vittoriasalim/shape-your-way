@@ -7,6 +7,18 @@
         {
             "path":"./levels/level2.txt",
             "time":30
+        },
+        {
+            "path":"./levels/level3.txt",
+            "time":30
+        },
+        {
+            "path":"./levels/level4.txt",
+            "time":30
+        },
+        {
+            "path":"./levels/level5.txt",
+            "time":30
         }
     ]
 }

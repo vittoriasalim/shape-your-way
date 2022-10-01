@@ -2,6 +2,7 @@ import pygame
 from home_screen import HomeScreen
 from game import Game
 from winning_screen import WinningScreen
+from lore_page import LorePage
 # Constants
 WHITE = (0xFF, 0xFF, 0xFF)
 
@@ -10,7 +11,9 @@ RECT_COLOR = (233, 226, 246)
 
 SCREEN_WIDTH = 990
 SCREEN_HEIGHT = 660
-
+MAIN_MENU_MUSIC = ("./sounds/8Bit Platformer Loop.ogg")
+GAME_MUSIC= ("./sounds/Quantum Loop.ogg")
+WINNING_SCREEN_MUSIC = ("")
 # Main App
 class App():
 
@@ -30,17 +33,23 @@ class App():
         pygame.display.set_caption("Find Your Way Out")
 
         is_quit = False
-
+        pygame.mixer.init()
         # Get the homescreen
         if (not is_quit):
-            pygame.mixer.init()
-            pygame.mixer.music.load("./sounds/Free Game Soundtrack by cactusdude - (hurry up).ogg")
+            pygame.mixer.music.load(MAIN_MENU_MUSIC)
             pygame.mixer.music.play()
             is_quit = HomeScreen(surface).mainloop()
+
+
+
+        # go to the lore page
+        if (not is_quit):
+            pygame.mixer.music.load(GAME_MUSIC)
+            pygame.mixer.music.play()
+            is_quit = LorePage(surface).mainloop()
+
         # start from level 1
         if (not is_quit):
-            pygame.mixer.music.load("./sounds/Dystopian.ogg")
-            pygame.mixer.music.play()
             is_quit = Game(surface, 1).mainloop()
 
         # once the player passed all the game levels
