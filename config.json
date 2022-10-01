@@ -2,11 +2,11 @@
     "levels":[
         {
             "path":"./levels/level1.txt",
-            "time":60
+            "time":20
         },
         {
             "path":"./levels/level2.txt",
-            "time":60
+            "time":30
         }
     ]
 }
