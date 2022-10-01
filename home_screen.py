@@ -70,8 +70,10 @@ class HomeScreen():
                     # button, go to the game page
                     if 450 <= mouse[0] <= 600 and 350 <= mouse[1] <= 400:
                         self.is_running = False
+                    
                     if 460 <= mouse[0] <= 600 and 420 <= mouse[1] <= 470:
                         pygame.quit()
+                        return True
 
             # draw
             self.screen.fill(BG_COLOR)
