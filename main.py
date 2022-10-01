@@ -39,7 +39,7 @@ class App():
         pygame.mixer.init()
         # Get the homescreen
         if (not is_quit):
-            pygame.mixer.music.load(MAIN_MENU_MUSIC2)
+            pygame.mixer.music.load(MAIN_MENU_MUSIC)
             pygame.mixer.music.play()
             is_quit = HomeScreen(surface).mainloop()
 
