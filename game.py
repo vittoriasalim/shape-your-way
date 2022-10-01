@@ -232,14 +232,15 @@ class Game():
 
                 # hit the teleport
                 elif next_path_symbol == "T":
-                    pygame.mixer.music.load(TELEPORT_SOUND)
-                    pygame.mixer.music.play()
+
 
                     # get the dice to the position
                     my_map.map[x] = my_map.map[x][:y-1] + "P" + self.static_map[x][y] + my_map.map[x][y+1:]
 
                     # do some animation of the dice
                     my_map.move("left")
+                    pygame.mixer.music.load(TELEPORT_SOUND)
+                    pygame.mixer.music.play()
 
                     # update UI
                     self.update_ui(my_map)
@@ -330,14 +331,15 @@ class Game():
 
                 # hit the teleport
                 elif next_path_symbol == "T":
-                    pygame.mixer.music.load(TELEPORT_SOUND)
-                    pygame.mixer.music.play()
+
 
                     # get the dice to the position
                     my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + "P" + my_map.map[x][y+2:]
 
                     # move the dice to the right
                     my_map.move("right")
+                    pygame.mixer.music.load(TELEPORT_SOUND)
+                    pygame.mixer.music.play()
 
                     # update UI
                     self.update_ui(my_map)
@@ -429,10 +431,6 @@ class Game():
                 # hit the teleport
                 elif next_path_symbol == "T":
 
-                    pygame.mixer.music.load(TELEPORT_SOUND)
-                    pygame.mixer.music.play()
-
-
                     # create temporary objects
                     temp_up = my_map.map[x - 1]
                     temp = my_map.map[x]
@@ -443,6 +441,8 @@ class Game():
 
                     # move up the dice
                     my_map.move("up")
+                    pygame.mixer.music.load(TELEPORT_SOUND)
+                    pygame.mixer.music.play()
 
                     # update UI
                     self.update_ui(my_map)
@@ -539,9 +539,6 @@ class Game():
                 # hit the teleport
                 elif next_path_symbol == "T":
 
-                    pygame.mixer.music.load(TELEPORT_SOUND)
-                    pygame.mixer.music.play()
-
                     
                     # create temporary objects
                     temp_down = my_map.map[x + 1]
@@ -553,6 +550,8 @@ class Game():
 
                     # move down the dice
                     my_map.move("down")
+                    pygame.mixer.music.load(TELEPORT_SOUND)
+                    pygame.mixer.music.play()
 
                     # update UI
                     self.update_ui(my_map)
