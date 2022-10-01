@@ -173,17 +173,17 @@ class Game():
                 # resent current_position and current_symbol
                 current_position = self.starting_position
                 current_symbol = self.starting_symbol
-<<<<<<< HEAD
+
                 my_map.set_reset(False)
                 continue
             
-=======
+
 
                 # update the user interface
                 my_map.read_data()
                 pygame.display.update()
                 continue
->>>>>>> 219bee205458f8c1a006bfd9b606777b7248a5da
+
 
             # map game
             for event in pygame.event.get():
