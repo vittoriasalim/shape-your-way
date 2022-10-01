@@ -215,7 +215,7 @@ class Game():
                 
                 # hit the wizard
                 elif next_path_symbol == 'W':
-                    my_map.attack()
+                    my_map.attack(x,y-1)
                     my_map.map[x] = my_map.map[x][:y-1] + "M" + "P" + my_map.map[x][y+1:]
                     continue
 
@@ -302,7 +302,7 @@ class Game():
                 
                 # hit the wizard
                 elif next_path_symbol == 'W':
-                    my_map.attack()
+                    my_map.attack(x,y+1)
                     my_map.map[x] = my_map.map[x][:y] + "P" + "M" + my_map.map[x][y+2:]
                     continue
 
@@ -388,7 +388,7 @@ class Game():
                 
                 # hit the wizard
                 elif next_path_symbol == 'W':
-                    my_map.attack()
+                    my_map.attack(x-1,y)
                     my_map.map[x] = my_map.map[x][:y] + "P" + my_map.map[x][y+1:]
                     my_map.map[x - 1] = my_map.map[x-1][:y] + "M" + my_map.map[x-1][y+1:]
                     continue
@@ -478,7 +478,7 @@ class Game():
                 
                 # hit the wizard
                 elif next_path_symbol == 'W':
-                    my_map.attack()
+                    my_map.attack(x+1,y)
                     my_map.map[x] = my_map.map[x][:y] + "P" + my_map.map[x][y+1:]
                     my_map.map[x + 1] = my_map.map[x+1][:y] + "M" + my_map.map[x+1][y+1:]
                     continue
