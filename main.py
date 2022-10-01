@@ -2,6 +2,7 @@ import pygame
 from home_screen import HomeScreen
 from game import Game
 from winning_screen import WinningScreen
+from lore_page import LorePage
 
 # Constants
 WHITE = (0xFF, 0xFF, 0xFF)
@@ -35,6 +36,10 @@ class App():
         # Get the homescreen
         if (not is_quit):
             is_quit = HomeScreen(surface).mainloop()
+
+        # go to the lore page
+        if (not is_quit):
+            is_quit = LorePage(surface).mainloop()
 
         # start from level 1
         if (not is_quit):

@@ -16,10 +16,9 @@ class LorePage():
     Winning Screen (or End Screen)
     """
 
-    def __init__(self, screen, data):
+    def __init__(self, screen):
 
         self.screen = screen
-        self.data = data
         self.is_running = False
         self.endFont = pygame.font.SysFont("Rammetto One", 80, bold=True)
         self.textFont = pygame.font.SysFont("Rammetto One", 30, bold=False)
@@ -28,7 +27,7 @@ class LorePage():
     def draw(self):
         bg = pygame.image.load("./images/dragon_bg.jpg")
         self.screen.blit(bg,(0,0))
-        #pygame.draw.rect(self.screen, RECT_COLOR, pygame.Rect(195, 60, 600, 550))
+
         first_message = self.textFont.render("You have been kidnapped by an evil wizard for his experiment", 1, TEXT_COLOR)
         second_message = self.textFont.render("        You have been turned into a cube due to his magic ", 1, TEXT_COLOR)
         third_message = self.textFont.render("          You have been put into captivity into a dungeon",1,TEXT_COLOR)
@@ -55,18 +54,18 @@ class LorePage():
             pygame.time.delay(50)
 
             # events
-            mouse = pygame.mouse.get_pos()
             for ev in pygame.event.get():
 
                 if ev.type == pygame.QUIT:
                     pygame.quit()
+                    return True
 
                 # checks if a mouse is clicked
                 if ev.type == pygame.KEYDOWN:
                     if ev.key == pygame.K_RETURN:
                     # if the mouse is clicked on the
                     # button, go to the game page
-                        pygame.quit()
+                        self.is_running = False
 
             # draw
             self.screen.fill(BG_COLOR)
