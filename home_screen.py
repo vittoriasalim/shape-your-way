@@ -44,7 +44,7 @@ class HomeScreen():
 
     def mainloop(self):
 
-        go_to_game = False
+
         self.is_running = True
         while (self.is_running):
 
@@ -64,7 +64,7 @@ class HomeScreen():
                     # if the mouse is clicked on the
                     # button, go to the game page
                     if 450 <= mouse[0] <= 600 and 350 <= mouse[1] <= 400:
-                        go_to_game = True
+             
                         self.is_running = False
 
             # draw
@@ -72,33 +72,7 @@ class HomeScreen():
             self.draw()
             pygame.display.update()
 
-        if (go_to_game):
-            # start from level 1
-            self.data = parse.read_map(self.data[0]['path'])
-            Game(self.screen, self.data).mainloop()
 
-        pygame.quit()
+            
 
 
-if (__name__ == "__main__"):
-    # initialise the pygame
-    pygame.init()
-    press = False
-
-    print("Creating a new window")
-
-    # create the window
-    surface = pygame.display.set_mode((990, 660))
-    pygame.display.set_caption("Find Your Way Out")
-
-    # load the levels and data
-    levels = parse.parse_json()
-    data = parse.read_map(levels[0]['path'])
-
-    print("Successfully parsing data for level 2")
-
-    # main loop in homescreen
-    HomeScreen(surface, data).mainloop()
-
-    # quit the game properly
-    pygame.quit()

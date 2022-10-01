@@ -19,11 +19,12 @@ class Game():
     """
     Game Screen
     """
-    def __init__(self, screen, data) -> None:
+    def __init__(self, screen, data, levels) -> None:
         self.is_running = False
         self.screen = screen
         self.data = data
         self.cur_level = 0
+        self.levels = levels
         # font for level
         self.myfont = pygame.font.SysFont("Rammetto One",35,bold =True)
         self.endFont = pygame.font.SysFont("Rammetto One",60,bold =True)
@@ -58,7 +59,7 @@ class Game():
         # main loop
         press = False
         self.is_running = True
-        while self.is_running:
+        while True:
             
 
             # frame per second
@@ -107,7 +108,7 @@ class Game():
                     if self.cur_level == len(self.levels):
                         self.is_running = False
                         continue
-                    data = parse.read_map(levels[self.cur_level]['path'])
+                    data = parse.read_map(self.levels[self.cur_level]['path'])
                     my_map = draw.Map(data, self.screen)
                     # get the starting position of the player
                     current_position = my_map.get_starting_position()
@@ -242,7 +243,9 @@ class Game():
                     if self.cur_level == len(self.levels):
                         self.is_running = False
                         continue
+
                     data = parse.read_map(self.levels[self.cur_level]['path'])
+
                     my_map = draw.Map(data, self.screen)
                     # get the starting position of the player
                     current_position = my_map.get_starting_position()
@@ -310,10 +313,10 @@ class Game():
                     my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + my_map.map[x][y+1:]
                 
                     self.cur_level+=1
-                    if self.cur_level == len(levels):
+                    if self.cur_level == len(self.levels):
                         self.is_running = False
                         continue
-                    data = parse.read_map(levels[self.cur_level]['path'])
+                    data = parse.read_map(self.levels[self.cur_level]['path'])
                     my_map = draw.Map(data, self.screen)
                     # get the starting position of the player
                     current_position = my_map.get_starting_position()
@@ -431,7 +434,7 @@ if (__name__ == "__main__"):
     print("Successfully parsing data for level 1")
 
     # main loop in homescreen
-    Game(surface, data).mainloop()
+    Game(surface, data, levels).mainloop()
 
     # quit the game properly
     pygame.quit()
