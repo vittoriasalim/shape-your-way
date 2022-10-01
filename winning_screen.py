@@ -46,7 +46,7 @@ class WinningScreen():
         self.screen.blit(way_message,(100,300))
         self.screen.blit(enter_to_quit, (400, 380))
 
-    def mainloop(self):
+    def mainloop(self) -> bool:
 
         self.is_running = True
         while (self.is_running):

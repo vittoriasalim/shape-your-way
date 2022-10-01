@@ -112,7 +112,7 @@ class Game():
                     return False
         return True
 
-    def mainloop(self) -> None:
+    def mainloop(self) -> bool:
 
         # create the map
         my_map = draw.Map(self.data, self.screen,self.cur_level, self.levels)
@@ -432,7 +432,10 @@ class Game():
 
         # to the next game
         else:
-            Game(self.screen, self.cur_level + 1).mainloop()
+            is_quit = Game(self.screen, self.cur_level + 1).mainloop()
+            if (is_quit):
+                pygame.quit()
+                return True
 
 
 if (__name__ == "__main__"):

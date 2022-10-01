@@ -38,7 +38,7 @@ class HomeScreen():
             label_button = self.buttonFont.render("START", 1, BG_COLOR)
         self.screen.blit(label_button, (450, 350))
 
-    def mainloop(self):
+    def mainloop(self) -> bool:
 
         self.is_running = True
         while (self.is_running):
