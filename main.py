@@ -1,6 +1,7 @@
 import pygame
 from home_screen import HomeScreen
 from game import Game
+from tutorial import TutorialPage
 from winning_screen import WinningScreen
 from lore_page import LorePage
 # Constants
@@ -49,7 +50,8 @@ class App():
             pygame.mixer.music.load(GAME_MUSIC2)
             pygame.mixer.music.play(-1)
             is_quit = LorePage(surface).mainloop()
-
+        if (not is_quit):
+            is_quit =TutorialPage(surface).mainloop()
         # start from level 1
         if (not is_quit):
             is_quit = Game(surface, 1).mainloop()
