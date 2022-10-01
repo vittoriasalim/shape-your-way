@@ -15,7 +15,7 @@ MAIN_MENU_MUSIC = ("./sounds/Free Game Soundtrack by cactusdude - (hurry up).ogg
 MAIN_MENU_MUSIC2 = ("./sounds/sounds_8Bit Platformer Loop.ogg")
 GAME_MUSIC= ("./sounds/Dystopian.ogg")
 GAME_MUSIC2 = ("./sounds/Quantum Loop.ogg")
-WINNING_SCREEN_MUSIC = ("")
+WINNING_SCREEN_MUSIC = ("./sounds/8Bit Jingle Bells Loop.ogg")
 
 # Main App
 class App():
@@ -57,7 +57,10 @@ class App():
 
         # once the player passed all the game levels
         if (not is_quit):
+            pygame.mixer.music.load(WINNING_SCREEN_MUSIC)
+            pygame.mixer.music.play()
             is_quit = WinningScreen(surface).mainloop()
+
 
         # quit the game properly
         pygame.quit()
