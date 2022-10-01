@@ -4,7 +4,9 @@ import parse
 # The dimensions of the map is confirmed to be the 10x10
 ROW = 10
 COLUMN = 10
-
+pygame.mixer.init()
+WIZARD_ATTACK_SOUND = "./sounds/Retro Magic 06.wav"
+MOVEMENT_SOUND = "./sounds/Retro Impact Punch 07.wav"
 class Map:
     
     """
@@ -250,11 +252,15 @@ class Map:
     
     def move(self, direction):
         self.set_direction(direction)
+        pygame.mixer.music.load(MOVEMENT_SOUND)
+        pygame.mixer.music.play()
         
     def attack(self, i , j):
         self.wizard_attack = True
         self.time -= 5
         self.attack_position =(i,j)
+        pygame.mixer.music.load(WIZARD_ATTACK_SOUND)
+        pygame.mixer.music.play()
 
     def get_dice_position(self):
         """

@@ -14,7 +14,9 @@ RECT_COLOR = (233, 226, 246)
 SCREEN_WIDTH = 990
 SCREEN_HEIGHT = 660
 
+CLEAR_LEVEL_SOUND = "./sounds/Retro Success Melody 01 - sawtooth lead 1.wav"
 MAX_LEVEL = 5
+pygame.mixer.init()
 
 class Game():
     """
@@ -591,6 +593,7 @@ class Game():
                 print(f"\tPlayer's current position: {current_position}")
 
                 if (self.has_finished()):
+
                     print("PLAYER HAS PASSED ALL PATHS")
             
             
@@ -609,6 +612,9 @@ class Game():
 
         # to the next game
         else:
+            pygame.mixer.init()
+            pygame.mixer.music.load(CLEAR_LEVEL_SOUND)
+            pygame.mixer.music.play()
             is_quit = Game(self.screen, self.cur_level + 1).mainloop()
             if (is_quit):
                 pygame.quit()
