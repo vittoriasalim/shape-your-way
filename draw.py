@@ -13,7 +13,7 @@ class Map:
     - surface: the window of the game
     """
 
-    def __init__(self, data, surface: 'pygame.Surface'):
+    def __init__(self, data, surface, cur_level, levels):
         """
         Initialise the Map data structure.
         It requires the map data and the surface (or window)
@@ -27,7 +27,9 @@ class Map:
         self.surface = surface
         self.dice = pygame.image.load("./dice/dice.png")
         self.dice_position= "default" # default /default2 / right/ down/ up /left
-
+        self.time = levels[cur_level]['time']
+        self.tick = 0
+        self.myfont = pygame.font.SysFont("Rammetto One",35,bold =True)
     def read_data(self):
         """
         Set the sprite of the map in each tile (all the tiles)
@@ -35,8 +37,7 @@ class Map:
         for i in range (ROW):
             for j in range(COLUMN):
                 self.set_sprite(self.map[i][j],i,j)
-
-
+        
     def set_sprite(self, symbol, i: int, j: int):
         """
         Set the sprite and store it into the the map
@@ -48,6 +49,16 @@ class Map:
             i (_type_): row
             j (_type_): column
         """
+        clock = pygame.image.load("./images/clock.png")
+        label = self.myfont.render("{}".format(self.time), 1, (233,233,255,1))
+        self.surface.blit(label, (295, 100))
+        self.surface.blit(clock, (240, 96))
+        
+        self.tick+=1
+        if self.tick == 1600:
+            self.tick =0
+            self.time -=1
+        
 
         if symbol == 'W':
             if self.wizard_frame == 6:
@@ -95,7 +106,7 @@ class Map:
         elif symbol == 'N':
             sprite = pygame.image.load("./images/green-fail.png")
             self.surface.blit (sprite , ((j*62)+315-(i*27),(i*34)+150))
-
+           
     def set_direction_default(self,direction):
         if direction == "right" :
             self.dice =pygame.image.load("./dice/right.png")
@@ -202,3 +213,4 @@ class Map:
         Return the dice's position
         """
         return self.dice_position
+    
