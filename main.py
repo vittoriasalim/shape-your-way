@@ -43,8 +43,6 @@ class App():
             pygame.mixer.music.play()
             is_quit = HomeScreen(surface).mainloop()
 
-
-
         # go to the lore page
         if (not is_quit):
             pygame.mixer.music.load(GAME_MUSIC2)
