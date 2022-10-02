@@ -1,7 +1,7 @@
 # SHAPE YOUR WAY
 
 
-[![python-analysis](https://github.com/TollyH/pygame_maze/actions/workflows/python-analysis.yml/badge.svg?branch=raycasting&event=push)](https://github.com/vittoriasalim/shape-your-way/actions/workflows/python-analysis.yml)
+[![python-analysis](https://github.com/TollyH/pygame_maze/actions/workflows/python-analysis.yml/badge.svg?branch=raycasting&event=push)](https://github.com/vittoriasalim/shape-your-way)
 
 
 - [SHAPE YOUR WAY](#shape-your-way)
