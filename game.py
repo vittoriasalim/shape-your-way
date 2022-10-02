@@ -15,7 +15,7 @@ SCREEN_WIDTH = 990
 SCREEN_HEIGHT = 660
 TELEPORT_SOUND = "./sounds/Retro Gun Laser SingleShot 01.wav"
 CLEAR_LEVEL_SOUND = "./sounds/Retro Success Melody 01 - sawtooth lead 1.wav"
-MAX_LEVEL = 5
+MAX_LEVEL = 6
 pygame.mixer.init()
 
 class Game():
@@ -659,7 +659,7 @@ if (__name__ == "__main__"):
     pygame.display.set_caption("Shape Your Way")
 
     # main loop in homescreen
-    Game(surface, 5).mainloop()
+    Game(surface, 6).mainloop()
 
     # quit the game properly
     pygame.quit()
