@@ -20,6 +20,10 @@
         {
             "path":"./levels/level5.txt",
             "time":60
+        },
+        {
+            "path":"./levels/level6.txt",
+            "time":120
         }
     ]
 }
