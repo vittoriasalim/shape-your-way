@@ -44,8 +44,6 @@ class LorePage():
             self.screen.blit(enter_to_proceed,(730,600))
         # Create "Start" button
 
-        mouse = pygame.mouse.get_pos()
-
 
     def mainloop(self):
 

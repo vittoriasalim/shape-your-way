@@ -40,7 +40,6 @@ class App():
         print("Creating a new window")
 
         # create the window
-
         surface = pygame.display.set_mode((990,660))
         pygame.display.set_caption("Shape Your Way")
         pygame.display.set_icon(WIZARD_ICON)
