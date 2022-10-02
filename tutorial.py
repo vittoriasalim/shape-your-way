@@ -1,6 +1,7 @@
 import pygame
 import parse
 import time
+
 # Constants
 WHITE = (0xFF, 0xFF, 0xFF)
 
@@ -62,6 +63,9 @@ class TutorialPage():
             pygame.display.update()
 
 if (__name__ == "__main__"):
+
+    from lore_page import LorePage
+
     print("--------------------")
     print("Console for the game")
     print("--------------------")

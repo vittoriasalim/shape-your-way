@@ -18,8 +18,10 @@ SCREEN_HEIGHT = 660
 # sound effects
 TELEPORT_SOUND = "./sounds/Retro Gun Laser SingleShot 01.wav"
 CLEAR_LEVEL_SOUND = "./sounds/Retro Success Melody 01 - sawtooth lead 1.wav"
+
+
+# max level
 MAX_LEVEL = 6
-pygame.mixer.init()
 
 
 class Game():
@@ -256,7 +258,8 @@ class Game():
                     pygame.time.delay(200)
 
                     # reset the map
-                    my_map.map[x] = temp
+                    index = temp.find("P")
+                    my_map.map[x] = temp.replace("P", self.static_map[x][index])
 
                     # get the starting position and move the dice to the starting position
                     x = self.starting_position[0]
@@ -356,7 +359,8 @@ class Game():
                     pygame.time.delay(200)
 
                     # reset the map
-                    my_map.map[x] = temp
+                    index = temp.find("P")
+                    my_map.map[x] = temp.replace("P", self.static_map[x][index])
 
                     # get the starting position and move the dice to the starting position
                     x = self.starting_position[0]
@@ -662,5 +666,7 @@ if (__name__ == "__main__"):
     # main loop in homescreen
 
     Game(surface, 6).mainloop()
+
+
     # quit the game properly
     pygame.quit()
