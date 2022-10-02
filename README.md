@@ -7,6 +7,13 @@
 - [SHAPE YOUR WAY](#shape-your-way)
   - [Installation](#installation)
   - [About](#about)
+    - [Visual Image](#Visual-Image)
+  - [Player's movement](#Player's-movement)
+  - [Goal of the game](#Goal-of-the-game)
+  - [Color change of the tiles](#Color-change-of-the-tiles)
+  - [Additional-features](#Additional-features)
+  - [Dependencies](#Dependencies)
+  - [What's next](#What's next)
 
 
 ## INSTALLATION
