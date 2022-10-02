@@ -36,32 +36,28 @@ The following is the view of the dice:
             +---+
 
 
-### VISUAL IMAGE 
-![Initial Dice State](./dice/dice.png)
-- Initially, players will have their dice with "R" facing down (on the floor) and "G" facing up.
-- Each player can move RIGHT, LEFT, UP and DOWN with the keyboard buttons (RIGHT, LEFT, UP and DOWN).
-- **R** : stands for red tile <br>
-- **G** : stands for green tile. <br>
-
-
-
-<br>
+  ### VISUAL IMAGE 
+  ![Initial Dice State](./dice/dice.png)
+  - Initially, players will have their dice with "R" facing down (on the floor) and "G" facing up.
+  - Each player can move RIGHT, LEFT, UP and DOWN with the keyboard buttons (RIGHT, LEFT, UP and DOWN).
+  - **R** : stands for red tile <br>
+  - **G** : stands for green tile. 
 
 ## Player's Movement
 
-1. RIGHT movement
+1. **RIGHT** movement
 When the player moves <b>RIGHT</b>, the dice goes from: <br>
 ![Initial Dice State](./dice/dice.png) to ![Final Dice State](./dice/right.png)
 
-2. LEFT movement
+2. **LEFT** movement
 When the player moves <b>LEFT</b>, the dice goes from: <br>
 ![Initial Dice State](./dice/dice.png) to ![Final Dice State](./dice/left.png)
 
-3. UP movement
+3. **UP** movement
 When the player moves <b>UP</b>, the dice goes from: <br>
 ![Initial Dice State](./dice/dice.png) to ![Final Dice State](./dice/up.png)
 
-4. DOWN movement
+4. **DOWN** movement
 When the player moves <b>DOWN</b>, the dice goes from: <br>
 ![Initial Dice State](./dice/dice.png) to ![Final Dice State](./dice/down.png)
 
