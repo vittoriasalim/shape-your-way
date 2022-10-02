@@ -23,12 +23,12 @@
 It is a puzzle game where player has to complete a specific pattern given with the control of the dice. <br>
 The player has the ability to move up, down , left or right, according to the dice.
 
-### **VISUAL IMAGE :** <br> <br>
-![Initial Dice State](./dice/dice.png)
+### ****VISUAL IMAGE :****
 - Initially, players will have their dice with "R" facing down (on the floor) and "G" facing up.
 - Each player can move RIGHT, LEFT, UP and DOWN with the keyboard buttons (RIGHT, LEFT, UP and DOWN).
 - **R** : stands for red tile <br>
 - **G** : stands for green tile. <br>
+![Initial Dice State](./dice/dice.png)
 
 The following is the view of the dice:
 
