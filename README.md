@@ -78,23 +78,23 @@ The player can only win the level if the player:
 - passes through all the RED and GREEN colored tile within the time limit
 - able to get to the final tile
 
-For example, in level 1: <br>
+****For example, in level 1:**** <br>
 The map looks like <br>
 
 <img src="./introductory_images/image1.png" alt="map-level1" width="400"/>
-    - When the player moves LEFT twice, the dice will have the "G" color face down on the GREEN tile.
-    - This means that the player has passed the GREEN tiled floor. 
+- When the player moves LEFT twice, the dice will have the "G" color face down on the GREEN tile.
+- This means that the player has passed the GREEN tiled floor. 
 
 <img src="./introductory_images/image3.png" alt="map-level1-pass-green" width="400">
-    - When the player moves LEFT again, the tile will change to a deeper GREEN color.
-    - This indicates the player has passed the GREEN tiled floor. 
+- When the player moves LEFT again, the tile will change to a deeper GREEN color.
+- This indicates the player has passed the GREEN tiled floor. 
 
 <img src="./introductory_images/image4.png" alt="map-level1-pass-green-left" width="400">
-    - Now, the next step is to pass through all the RED and GREEN colored tiles in order to pass the level. 
-    - Like the image below. 
+- Now, the next step is to pass through all the RED and GREEN colored tiles in order to pass the level. 
+- Like the image below. 
 
 <img src="./introductory_images/image5.png" alt="map-level1-pass-all" width="400">
-    - The next step of the game is to get to the final tile which is colored like: 
+- The next step of the game is to get to the final tile which is colored like: 
 
 <img src="./images/end.png" alt="end-tile" width="200">
 
