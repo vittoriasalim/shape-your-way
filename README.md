@@ -20,10 +20,10 @@
 
 *Python 3.6 or greater is required.*
 
-1. Download the files by pressing the green "Code" button above, followed by "Download ZIP" — extracting all the files once the download is complete.
-   - Alternatively, if you have git installed, run `git clone https://github.com/vittoriasalim/shape-your-way` in a terminal to download the repository.
-2. Install PyGame with the command `pip3 install pygame` on Linux or `pip install pygame` on Windows.
-3. Run `main.py` to start the game.
+1. Download the game files by pressing "Code" button, then "Download ZIP" — it will extract all the files.
+   -  Alternatively , you cna run `git clone https://github.com/vittoriasalim/shape-your-way` in the terminal.
+2. Make sure to install PyGame with the command `pip3 install pygame` on Linux or `pip install pygame` on Windows.
+3. To start the game run `main.py` .
 
 ## ABOUT
 
