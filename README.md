@@ -43,9 +43,7 @@ The following is the view of the dice:
             | G |
             +---+
         ```
-
-
-
+        
 
 ## PLAYER'S MOVEMENT
 
