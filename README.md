@@ -54,19 +54,19 @@ The following is the view of the dice:
 
 ## PLAYER'S MOVEMENT
 
-1. **RIGHT** movement
+- **RIGHT** movement
 When the player moves <b>RIGHT</b>, the dice goes from: <br>
 ![Initial Dice State](./dice/dice.png) to ![Final Dice State](./dice/right.png)
 
-2. **LEFT** movement
+- **LEFT** movement
 When the player moves <b>LEFT</b>, the dice goes from: <br>
 ![Initial Dice State](./dice/dice.png) to ![Final Dice State](./dice/left.png)
 
-3. **UP** movement
+- **UP** movement
 When the player moves <b>UP</b>, the dice goes from: <br>
 ![Initial Dice State](./dice/dice.png) to ![Final Dice State](./dice/up.png)
 
-4. **DOWN** movement
+- **DOWN** movement
 When the player moves <b>DOWN</b>, the dice goes from: <br>
 ![Initial Dice State](./dice/dice.png) to ![Final Dice State](./dice/down.png)
 
