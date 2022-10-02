@@ -39,7 +39,7 @@ The player has the ability to move up, down , left or right, according to the di
 
 The following is the view of the dice:
 
-`
+``
     +---+
     |   |
 +---+---+---+
@@ -49,7 +49,7 @@ The following is the view of the dice:
     +---+
     | G |
     +---+
-`
+``
 
 
 ## PLAYER'S MOVEMENT
