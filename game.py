@@ -256,7 +256,8 @@ class Game():
                     pygame.time.delay(200)
 
                     # reset the map
-                    my_map.map[x] = temp
+                    index = temp.find("P")
+                    my_map.map[x] = temp.replace("P", self.static_map[x][index])
 
                     # get the starting position and move the dice to the starting position
                     x = self.starting_position[0]
@@ -356,7 +357,8 @@ class Game():
                     pygame.time.delay(200)
 
                     # reset the map
-                    my_map.map[x] = temp
+                    index = temp.find("P")
+                    my_map.map[x] = temp.replace("P", self.static_map[x][index])
 
                     # get the starting position and move the dice to the starting position
                     x = self.starting_position[0]
@@ -660,7 +662,7 @@ if (__name__ == "__main__"):
     pygame.display.set_caption("Shape Your Way")
 
     # main loop in homescreen
-    Game(surface, 1).mainloop()
+    Game(surface, 5).mainloop()
 
     # quit the game properly
     pygame.quit()
