@@ -36,12 +36,12 @@ The following is the view of the dice:
             +---+
 
 
-  ### VISUAL IMAGE 
-  ![Initial Dice State](./dice/dice.png)
+### VISUAL IMAGE  
   - Initially, players will have their dice with "R" facing down (on the floor) and "G" facing up.
   - Each player can move RIGHT, LEFT, UP and DOWN with the keyboard buttons (RIGHT, LEFT, UP and DOWN).
   - **R** : stands for red tile <br>
   - **G** : stands for green tile. 
+  ![Initial Dice State](./dice/dice.png)
 
 ## Player's Movement
 
