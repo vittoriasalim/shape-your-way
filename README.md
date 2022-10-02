@@ -89,9 +89,14 @@ the GREEN tile will change color. <br>
 ## Additional Features
 
 1. Wizard <br>
-<img src="./images/wizard_solo.png" alt="wizard" width="80"/>
+<img src="./images/wizard_solo.png" alt="wizard" width="80"> <br>
+When the player hits a tile with a wizard, the timer will be reduced by 5. <br>
+The player will still remain at the same position and the wizard will be gone.
 
-2. Teleport
+2. Reset <br>
+<img src="./images/teleport.png" alt="teleport" width="80"> <br>
+When the player hits this tile, the player's dice position will be reset to the initial starting position. <br>
+The dice will remain the same as when the player hits the tile.
 
 <br>
 
@@ -101,3 +106,5 @@ the GREEN tile will change color. <br>
 <br>
 
 ## What's next
+
+As the player progresses into higher levels, we plan to increase the size of the map. Initially, the size of the map is 10x10. We can also add in new features similar to the additional features, for example, the jump tile in which when player hits the tile, the dice will jump into different locations. There are many features that could be added which we think only our creativity limits us. Moreover, the map's user interface could also be improved by changing the design of the tiles, such as a fiery tile. We could also implement a new game mode where players have a maximum number of moves which increases the game difficulty. We could also implement a shop feature where players can buy different kinds of dice design.
