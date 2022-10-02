@@ -11,7 +11,7 @@ SCREEN_WIDTH = 990
 SCREEN_HEIGHT = 660
 
 
-class LorePage():
+class TutorialPage():
     """
     Winning Screen (or End Screen)
     """
@@ -25,24 +25,13 @@ class LorePage():
         self.buttonFont = pygame.font.SysFont("Rammetto One", 20, bold=True)
 
     def draw(self):
-        bg = pygame.image.load("./images/dragon_bg.jpg")
+        bg = pygame.image.load("./images/tutorial.jpg")
         self.screen.blit(bg,(0,0))
-
-        first_message = self.textFont.render("You have been kidnapped by an evil wizard for his experiment", 1, TEXT_COLOR)
-        second_message = self.textFont.render("        You have been turned into a cube due to his magic ", 1, TEXT_COLOR)
-        third_message = self.textFont.render("          You have been put into captivity into a dungeon",1,TEXT_COLOR)
-        fourth_message = self.textFont.render("Your only hope to survive is to make your way through his dungeon ", 1, TEXT_COLOR)
-        fifth_message = self.textFont.render("  You vow to return to your loved ones and turn back into human ",True,TEXT_COLOR)
-
         enter_to_proceed = self.buttonFont.render("Press ENTER to shape your way",True,TEXT_COLOR)
-        self.screen.blit(first_message,(200,150))
-        self.screen.blit(second_message, (200, 200))
-        self.screen.blit(third_message, (200, 250))
-        self.screen.blit(fourth_message,(200,300))
-        self.screen.blit(fifth_message,(200,350))
         if time.time() %1 >0.5:
             self.screen.blit(enter_to_proceed,(730,600))
-        # Create "Start" button
+
+    
 
 
     def mainloop(self):

@@ -4,9 +4,11 @@ import parse
 # The dimensions of the map is confirmed to be the 10x10
 ROW = 10
 COLUMN = 10
-pygame.mixer.init()
+
+# sound effects
 WIZARD_ATTACK_SOUND = "./sounds/Retro Magic 06.wav"
 MOVEMENT_SOUND = "./sounds/Retro Impact Punch 07.wav"
+
 class Map:
     
     """
@@ -25,6 +27,10 @@ class Map:
         :param data: 2d matrix (or a list of lists)
         :param surface: pygame.Surface
         """
+
+        # initialize the mixer
+        pygame.mixer.init()
+
         self.wizard_frame = 0
         self.cur_level = cur_level
         self.dice_frame = 1
@@ -252,15 +258,18 @@ class Map:
     
     def move(self, direction):
         self.set_direction(direction)
-        pygame.mixer.music.load(MOVEMENT_SOUND)
-        pygame.mixer.music.play()
+
+        # while playing background music, play the movement sound as well
+        pygame.mixer.Channel(0).play(pygame.mixer.Sound(MOVEMENT_SOUND), maxtime=500)
         
     def attack(self, i , j):
         self.wizard_attack = True
         self.time -= 5
         self.attack_position =(i,j)
-        pygame.mixer.music.load(WIZARD_ATTACK_SOUND)
-        pygame.mixer.music.play()
+        
+        # while playing background music, play wizard attack sound as well
+        pygame.mixer.Channel(1).play(pygame.mixer.Sound(WIZARD_ATTACK_SOUND), maxtime=500)
+        
 
     def get_dice_position(self):
         """

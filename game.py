@@ -6,17 +6,21 @@ import parse
 ROW = 10
 COL = 10
 
+# colors
 WHITE = (0xFF, 0xFF, 0xFF)
-
 BG_COLOR = (62, 61, 100)
 RECT_COLOR = (233, 226, 246)
 
+# window size
 SCREEN_WIDTH = 990
 SCREEN_HEIGHT = 660
+
+# sound effects
 TELEPORT_SOUND = "./sounds/Retro Gun Laser SingleShot 01.wav"
 CLEAR_LEVEL_SOUND = "./sounds/Retro Success Melody 01 - sawtooth lead 1.wav"
 MAX_LEVEL = 6
 pygame.mixer.init()
+
 
 class Game():
     """
@@ -46,7 +50,8 @@ class Game():
 
         # initialize the pygame
         pygame.init()
-        
+        pygame.mixer.init()
+ 
         self.is_running = False
         self.screen = screen
         self.cur_level = cur_level
@@ -233,14 +238,15 @@ class Game():
                 # hit the teleport
                 elif next_path_symbol == "T":
 
+                    # create temporary object
+                    temp = my_map.map[x]
 
                     # get the dice to the position
                     my_map.map[x] = my_map.map[x][:y-1] + "P" + self.static_map[x][y] + my_map.map[x][y+1:]
 
                     # do some animation of the dice
                     my_map.move("left")
-                    pygame.mixer.music.load(TELEPORT_SOUND)
-                    pygame.mixer.music.play()
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound(TELEPORT_SOUND), maxtime=500)
 
                     # update UI
                     self.update_ui(my_map)
@@ -250,7 +256,7 @@ class Game():
                     pygame.time.delay(200)
 
                     # reset the map
-                    my_map.map[x] = "".join(self.static_map[x])
+                    my_map.map[x] = temp
 
                     # get the starting position and move the dice to the starting position
                     x = self.starting_position[0]
@@ -332,14 +338,15 @@ class Game():
                 # hit the teleport
                 elif next_path_symbol == "T":
 
+                    # create temporary object
+                    temp = my_map.map[x]
 
                     # get the dice to the position
                     my_map.map[x] = my_map.map[x][:y] + self.static_map[x][y] + "P" + my_map.map[x][y+2:]
 
                     # move the dice to the right
                     my_map.move("right")
-                    pygame.mixer.music.load(TELEPORT_SOUND)
-                    pygame.mixer.music.play()
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound(TELEPORT_SOUND), maxtime=500)
 
                     # update UI
                     self.update_ui(my_map)
@@ -349,7 +356,7 @@ class Game():
                     pygame.time.delay(200)
 
                     # reset the map
-                    my_map.map[x] = "".join(self.static_map[x])
+                    my_map.map[x] = temp
 
                     # get the starting position and move the dice to the starting position
                     x = self.starting_position[0]
@@ -441,8 +448,7 @@ class Game():
 
                     # move up the dice
                     my_map.move("up")
-                    pygame.mixer.music.load(TELEPORT_SOUND)
-                    pygame.mixer.music.play()
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound(TELEPORT_SOUND), maxtime=500)
 
                     # update UI
                     self.update_ui(my_map)
@@ -550,8 +556,7 @@ class Game():
 
                     # move down the dice
                     my_map.move("down")
-                    pygame.mixer.music.load(TELEPORT_SOUND)
-                    pygame.mixer.music.play()
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound(TELEPORT_SOUND), maxtime=500)
 
                     # update UI
                     self.update_ui(my_map)
@@ -614,15 +619,11 @@ class Game():
                 print(f"\tPlayer's current position: {current_position}")
 
                 if (self.has_finished()):
-
                     print("PLAYER HAS PASSED ALL PATHS")
-            
+                
             
             # update user interface
             self.update_ui(my_map)
-            # self.screen.fill(BG_COLOR)
-            # label = self.myfont.render("LEVEL {} ".format(self.cur_level), 1, (233,233,255,1))
-            # self.screen.blit(label, (750, 100))
 
             # my_map.read_data()
             pygame.display.update()
@@ -633,9 +634,9 @@ class Game():
 
         # to the next game
         else:
-            pygame.mixer.init()
-            pygame.mixer.music.load(CLEAR_LEVEL_SOUND)
-            pygame.mixer.music.play()
+            # play background music and clear level sound at the same time
+            pygame.mixer.Channel(1).play(pygame.mixer.Sound(CLEAR_LEVEL_SOUND), maxtime=800)
+
             is_quit = Game(self.screen, self.cur_level + 1).mainloop()
             if (is_quit):
                 pygame.quit()
@@ -659,7 +660,7 @@ if (__name__ == "__main__"):
     pygame.display.set_caption("Shape Your Way")
 
     # main loop in homescreen
-    Game(surface, 6).mainloop()
 
+    Game(surface, 6).mainloop()
     # quit the game properly
     pygame.quit()
