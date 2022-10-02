@@ -21,11 +21,8 @@ CLEAR_LEVEL_SOUND = "./sounds/Retro Success Melody 01 - sawtooth lead 1.wav"
 MAX_LEVEL = 6
 pygame.mixer.init()
 
-<<<<<<< HEAD
 # max level
 MAX_LEVEL = 6
-=======
->>>>>>> 631d7bea61a32076bb9de7d6bda3dbf8577d18bc
 
 class Game():
     """
@@ -261,7 +258,8 @@ class Game():
                     pygame.time.delay(200)
 
                     # reset the map
-                    my_map.map[x] = temp
+                    index = temp.find("P")
+                    my_map.map[x] = temp.replace("P", self.static_map[x][index])
 
                     # get the starting position and move the dice to the starting position
                     x = self.starting_position[0]
@@ -361,7 +359,8 @@ class Game():
                     pygame.time.delay(200)
 
                     # reset the map
-                    my_map.map[x] = temp
+                    index = temp.find("P")
+                    my_map.map[x] = temp.replace("P", self.static_map[x][index])
 
                     # get the starting position and move the dice to the starting position
                     x = self.starting_position[0]
@@ -665,11 +664,7 @@ if (__name__ == "__main__"):
     pygame.display.set_caption("Shape Your Way")
 
     # main loop in homescreen
-<<<<<<< HEAD
     Game(surface, 6).mainloop()
-=======
->>>>>>> 631d7bea61a32076bb9de7d6bda3dbf8577d18bc
 
-    Game(surface, 6).mainloop()
     # quit the game properly
     pygame.quit()
