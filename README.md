@@ -1,29 +1,49 @@
-# Shape Your Way
+# SHAPE YOUR WAY
 
-## About
 
-It is a puzzle game where player has to complete the pattern given with the control of the dice. <br>
+[![python-analysis](https://github.com/TollyH/pygame_maze/actions/workflows/python-analysis.yml/badge.svg?branch=raycasting&event=push)](https://github.com/vittoriasalim/shape-your-way/actions/workflows/python-analysis.yml)
+
+
+- [SHAPE YOUR WAY](#shape-your-way)
+  - [Installation](#installation)
+  - [About](#about)
+
+
+## INSTALLATION
+
+*Python 3.6 or greater is required.*
+
+1. Download the files by pressing the green "Code" button above, followed by "Download ZIP" — extracting all the files once the download is complete.
+   - Alternatively, if you have git installed, run `git clone https://github.com/vittoriasalim/shape-your-way` in a terminal to download the repository.
+2. Install PyGame with the command `pip3 install pygame` on Linux or `pip install pygame` on Windows.
+3. Run `main.py` to start the game.
+
+## ABOUT
+
+It is a puzzle game where player has to complete a specific pattern given with the control of the dice. <br>
 The player has the ability to move up, down , left or right, according to the dice.
+The following is the view of the dice:
 
-Our current dice looks like this:
-```
-    +---+
-    |   |
-+---+---+---+
-|   | R |   |
-+---+---+---+
-    |   |
-    +---+
-    | G |
-    +---+
-```
-Visually:<br>
+        ```
+            +---+
+            |   |
+        +---+---+---+
+        |   | R |   |
+        +---+---+---+
+            |   |
+            +---+
+            | G |
+            +---+
+        ```
+
+VISUAL IMAGE : <br>
 ![Initial Dice State](./dice/dice.png)
+- Initially, players will have their dice with "R" facing down (on the floor) and "G" facing up.
+- Each player can move RIGHT, LEFT, UP and DOWN with the keyboard buttons (RIGHT, LEFT, UP and DOWN).
+- **R** : stands for red tile <br>
+- **G** : stands for green tile. <br>
 
-"R" stands for red color and "G" stands for green color. <br>
-Initially, players will have their dice with "R" facing down (on the floor) and "G" facing up.
 
-Each player can move RIGHT, LEFT, UP and DOWN with the keyboard buttons (RIGHT, LEFT, UP and DOWN).
 
 <br>
 
